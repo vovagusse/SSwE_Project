@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Текущие поставщики {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for supplier in suppliers %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('supplier', supplier_id=supplier['id']) }}">
+                        <b> 
+                            > {{ supplier['company_name'] }}
+                        </b>
+                    </a>
+                    <br>
+                    <span class="badge bg-success">{{ supplier['owner_name'] }}</span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">
+                        • Адрес поставщика: {{supplier['postal_code']}} {{ supplier['address'] }} 
+                    </h6>
+                    <p class="badge bg-warning">
+                        • Контактный номер: {{ supplier['phone_number'] }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

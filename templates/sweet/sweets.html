@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Сладости {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for sweet in sweets %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('sweet', sweet_id=sweet['id']) }}">>
+                        <b>{{ sweet['name'] }}</b>
+                    </a>
+                    <br>
+                    <span class="badge bg-success">
+                        <i class="fs-6 bi-piggy-bank"></i>
+                        {{ sweet['price'] }} ₽
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">
+                        • Производитель: 
+                        <strong>
+                            {{ sweet['manufacturer'] }}
+                        </strong>
+                        <br>
+                        • Страна производства: 
+                        <strong>
+                            {{ sweet['country'] }}
+                        </strong>
+                    </h6>
+                    <h6>
+                        <span class="badge bg-success">
+                            Произведено: {{ sweet['production_date'] }}
+                        </span>
+                    </h6>
+                    <h6>
+                        <span class="badge bg-warning">
+                            Годен до: {{ sweet['expiration_date'] }}
+                        </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

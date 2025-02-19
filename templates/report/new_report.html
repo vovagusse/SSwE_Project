@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Добавление нового отчёта {% endblock %}
+    </strong>
+</h2>
+
+<br>
+
+<form method="post" class="px-4">
+    <div class="row mb-3">
+        <label for="number-date" class="col-sm-3 col-form-label">Номер, дата отчёта</label>
+        <div class="col-sm-5">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="number" 
+                value="{{ request.form['number'] }}" 
+                placeholder="2024-1-ПП">
+        </div>
+        <div class="col-sm-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="date" 
+                value="{{ request.form['date'] }}" 
+                placeholder="01.01.2024">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="report_type" class="col-sm-3 col-form-label">Вид отчёта</label>
+        <div class="col-sm-8">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="report_type" 
+                value="{{ request.form['report_type'] }}" 
+                placeholder="Отчёт о количестве продаж за 3 квартал 2024">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="description" class="col-sm-3 col-form-label">Описание</label>
+        <div class="col-sm-8">
+            <textarea 
+                type="text" 
+                class="form-control" 
+                name="description" 
+                value="{{ request.form['description'] }}" 
+                placeholder="Квартальный отчёт за 3 квартал 2024 года о купле-продаже товаров у компании ООО ВКУС Кампани"
+                rows="5"
+                ></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="money_earned" class="col-sm-3 col-form-label">Чистая прибыль</label>
+        <div class="col-sm-8">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="money_earned" 
+                value="{{ request.form['money_earned'] }}" 
+                placeholder="50000">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="money_spent" class="col-sm-3 col-form-label">Чистые затраты</label>
+        <div class="col-sm-8">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="money_spent" 
+                value="{{ request.form['money_spent'] }}" 
+                placeholder="50000">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="employee" class="col-sm-3 col-form-label">Сотрудник</label>
+        <div class="col-sm-8">
+            <select class="form-select" name="employee">
+                <option value='-1'>Сотрудник...</option>
+                {% for e in employees %}
+                    <option value={{e.id}}>{{e.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><i class="bi-floppy"></i> Добавить отчёт</button>
+</form>
+
+{% endblock %}

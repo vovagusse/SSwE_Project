@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %}  Поставщик "{{ supplier['company_name'] }}" {% endblock %}
+    </strong>
+</h2>
+
+<span class="badge bg-warning">Руководитель компании: {{ supplier['owner_name'] }}</span>
+
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Позиция</th>
+            <th scope="col">Значение</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Адрес поставщика</th>
+            <td>{{ supplier['postal_code'] }} {{ supplier['address'] }}</th>
+        </tr>
+        <tr>
+            <td>Почтовый индекс</th>
+            <td>{{ supplier['postal_code'] }}</th>
+        </tr>
+        <tr>
+            <td>Контактный номер телефона поставщика</th>
+            <td>{{ supplier['phone_number'] }}</th>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-auto">
+        <a href="{{ url_for('edit_supplier', supplier_id=supplier['id'])}}">
+            <button type="submit" 
+                class="btn btn-info">
+            <i class="bi-pencil-square"></i> Изменить поставщика </button>
+        </a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('delete_supplier', supplier_id=supplier['id']) }}">
+            <button type="submit" class="btn btn-danger"><i class="bi-trash"></i> Удалить </button>
+        </a>
+    </div>
+</div>
+
+
+
+{% endblock %}

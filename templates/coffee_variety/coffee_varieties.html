@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Текущие виды кофе {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for coffee_variety in coffee_varieties %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('coffee_variety', coffee_variety_id=coffee_variety['id']) }}">
+                        <b>
+                            > Кофе {{ coffee_variety['name'] }}
+                        </b>
+                    </a>
+                    <br>
+                    <span class="badge bg-success">
+                        <i class="fs-6 bi-piggy-bank"></i>
+                        {{ coffee_variety['price'] }} ₽
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">
+                        • Производитель: 
+                        <strong>
+                            {{ coffee_variety['manufacturer'] }}
+                        </strong>
+                        <br>
+                        • Страна производства: 
+                        <strong>
+                            {{ coffee_variety['country'] }}
+                        </strong>
+                    </h6>
+                    <h6>
+                        <span class="badge bg-success">
+                            Произведено: {{ coffee_variety['production_date'] }}
+                        </span>
+                    </h6>
+                    <h6>
+                        <span class="badge bg-warning">
+                            Годен до: {{ coffee_variety['expiration_date'] }}
+                        </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

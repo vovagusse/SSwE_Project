@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="padding-left: calc(var(--bs-gutter-x) * .5);margin-bottom: 16px;">
+    <strong>
+        {% block title %} Сотрудники {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for employee in employees %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('employee', employee_id=employee['id']) }}">
+                        <b>
+                            > {{ employee['name'] }}
+                        </b>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h6><span class="badge bg-success">Должность: {{ employee['position'] }}
+                    </span></h6>
+                    <h6><span class="badge bg-primary">Отдел: {{ employee['department'] }}
+                    </span></h6>
+                    <h6 class="card-title">
+                        • Эл. почта: {{ employee['email'] }} 
+                        <br>
+                        • Номер телефона: {{ employee['phone_number'] }} 
+                    </h6>
+                    
+                    
+                    <!-- <p class="card-text">
+                        {{ employee['name'] }}
+                    </p> -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

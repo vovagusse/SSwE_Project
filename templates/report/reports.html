@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Текущие отчёты {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for report in reports %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('report', report_id=report['id']) }}">
+                        <b>
+                            > Отчёт №{{ report['number'] }} от {{ report['date'] }}
+                        </b>
+                    </a>
+                    <br>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title"> 
+                        <span class="badge bg-primary">Прибыль: {{ report['money_earned'] }} ₽
+                        </span>
+                        <span class="badge bg-danger">Затраты: {{ report['money_spent'] }} ₽
+                        </span>
+                    </h6>
+                    <p class="card-text">
+                        • {{ report['report_type'] }}
+                        <br>
+                        • <i>Подписал: {{ report['name'] }}</i>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Редактирование вида кофе {% endblock %}
+    </strong>
+</h2>
+
+<br>
+
+<form method="post" class="px-4">
+    <div class="row mb-3">
+        <label for="name" class="col-sm-3 col-form-label">Наименование</label>
+        <div class="col-sm-8">
+            <input type="text" 
+                class="form-control" 
+                name="name" 
+                value="{{ coffee_variety['name'] }}" 
+                placeholder="Кофе Арабика 1 кг">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="manufacturer" class="col-sm-3 col-form-label">Производитель</label>
+        <div class="col-sm-8">
+            <input type="text" 
+                class="form-control" 
+                name="manufacturer" 
+                value="{{ coffee_variety['manufacturer'] }}" 
+                placeholder="ООО Кофейная компания">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="country" class="col-sm-3 col-form-label">Страна производства</label>
+        <div class="col-sm-8">
+            <input type="text" 
+                class="form-control" 
+                name="country" 
+                value="{{ coffee_variety['country'] }}" 
+                placeholder="Испания">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="intensity-acidity-sweetness" class="col-sm-3 col-form-label">Насыщенность, кислотность, сладость кофе</label>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="intensity" 
+                value="{{ coffee_variety['intensity'] }}" 
+                placeholder="5">
+        </div>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="acidity" 
+                value="{{ coffee_variety['acidity'] }}" 
+                placeholder="3">
+        </div>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="sweetness" 
+                value="{{ coffee_variety['sweetness'] }}" 
+                placeholder="9">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="roast" class="col-sm-3 col-form-label">Обжарка</label>
+        <div class="col-sm-8">
+            <input type="text" 
+                class="form-control" 
+                name="roast" 
+                value="{{ coffee_variety['roast'] }}" 
+                placeholder="Коричная, Новоанглийская, и др.">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="dark_or_light_roast" class="col-sm-3 col-form-label">Тип обжарки</label>
+        <div class="col-sm-8">
+            <select class="form-select" name="dark_or_light_roast">
+                {% if coffee_variety['dark_or_light_roast'] == 0 %}
+                    <option value='0' selected>Тёмная</option>
+                    <option value='1'>Светлая</option>
+                {% else %}
+                    <option value='0'>Тёмная</option>
+                    <option value='1' selected>Светлая</option>
+                {% endif %}
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="weight" class="col-sm-3 col-form-label">Вес пачки</label>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="weight" 
+                value="{{ coffee_variety['weight'] }}" 
+                placeholder="1.5">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="price" class="col-sm-3 col-form-label">Цена</label>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="price" 
+                value="{{ coffee_variety['price'] }}" 
+                placeholder="2500">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="production_date" class="col-sm-3 col-form-label">Дата производства</label>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="production_date" 
+                value="{{ coffee_variety['production_date'] }}" 
+                placeholder="15.01.2024">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="expiration_date" class="col-sm-3 col-form-label">Срок годности</label>
+        <div class="col-sm-2">
+            <input type="text" 
+                class="form-control" 
+                name="expiration_date" 
+                value="{{ coffee_variety['expiration_date'] }}" 
+                placeholder="15.12.2024">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="supplier" class="col-sm-3 col-form-label">Поставщик</label>
+        <div class="col-sm-8">
+            <select class="form-select" name="supplier">
+                {% if coffee_variety['supplier_id'] == -1 %}
+                <option value='-1' selected>Поставщик...</option>
+                {% else %}
+                <option value='-1'>Поставщик...</option>
+                {% endif %}
+                {% for s in suppliers %}
+                    {% if coffee_variety['supplier_id'] == s['id'] %}
+                    <option value={{s.id}} selected>{{ s['company_name']}}</option>
+                    {% else %}
+                    <option value={{s.id}}>{{ s['company_name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="contract" class="col-sm-3 col-form-label">Договор</label>
+        <div class="col-sm-8">
+            <select class="form-select" name="contract">
+                {% if coffee_variety['contract_id'] == -1 %}
+                <option value='-1' selected>Договор...</option>
+                {% else %}
+                <option value='-1'>Договор...</option>
+                {% endif %}
+                {% for c in contracts %}
+                    {% if coffee_variety['contract_id'] == c['id'] %}
+                    <option value={{c.id}} selected>{{ c['number'] }} {{c['deal_type']}} - {{c['company_name']}}</option>
+                    {% else %}
+                    <option value={{c.id}}>{{ c['number'] }} {{c['deal_type']}} - {{c['company_name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="bi-file-earmark-binary"></i>Сохранить вид кофе</button>
+</form>
+
+{% endblock %}

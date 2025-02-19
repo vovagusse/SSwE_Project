@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>
+    <strong>
+        {% block title %} Текущие договоры {% endblock %}
+    </strong>
+</h2>
+
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for contract in contracts %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-2 border-primary">
+                <div class="card-header">
+                    <a href="{{ url_for('contract', contract_id=contract['id']) }}">
+                        <b>
+                            > Договор №{{ contract['number'] }} от {{ contract['date'] }}
+                        </b>
+                    </a>
+                    <br>
+                    <span class="badge bg-warning">{{ contract['deal_type'] }}</span>
+                    {% if contract['status']==1 %}
+                    <span class="badge bg-success"> Сделка активна </span>
+                    {% else %}
+                    <span class="badge bg-danger"> Сделка завершена </span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">
+                        • Адрес поставщика: {{ contract['address'] }} 
+                        <span class="badge bg-primary">{{ contract['total_cost'] }} ₽
+                        </span>
+                    </h6>
+                    <p class="card-text">
+                        <i>Подписал: {{ contract['name'] }} </i>    
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
