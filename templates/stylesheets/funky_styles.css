@@ -1,0 +1,22 @@
+.product-card {
+    transition: transform 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.price {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+.btn-buy {
+    background-color: #00ff77;
+    border: none;
+    padding: 10px 20px;
+    color: rgb(137, 49, 49);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-buy:hover {
+    background-color: #0056b3;
+}

@@ -17,9 +17,10 @@ def get_current_directory():
         p = p.replace("/", "\\")
     return p
 
-
+from utilities.my_private_key import awesome_shit
+"""This is the Flask web-server/application"""
 app = Flask(__name__)
-app.config['SECRET_KEY'] = b'my)secret)key'
+app.config['SECRET_KEY'] = awesome_shit
 MY_DB = 'database1.db'
 MY_DB = get_current_directory() + os.path.sep + MY_DB
 
@@ -29,9 +30,15 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+
+@app.route("/login")
+def login():
+    return render_template("login/login.html")
+
+
 @app.route('/')
 def index():
-    return redirect("/contracts")
+    return render_template("index.html")
 
 
 @app.errorhandler(404)
@@ -44,11 +51,7 @@ def main() -> None:
     # print()
     # print(f"Current directory: {d}")
     # print(MY_DB)
-    START_SERVER()
-
-
-def START_SERVER():
-    app.run(debug=True, port=8888)    
+    app.run(debug=True, port=8888)  
 
 
 if __name__ == "__main__":
