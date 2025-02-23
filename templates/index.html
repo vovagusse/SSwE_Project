@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="vertical-center">
+<!-- <div class="vertical-center">
     <div class="container">
         <div id="notfound" class="text-center">
             <br>
@@ -10,6 +10,92 @@
             <a class="btn btn-outline-dark" href="/login">Hiiiii</a>            
         </div>
     </div>
+</div> -->
+
+<!-- <div class="row">
+    <div class="col">
+        <div class="h3">
+            <b>
+                Магазин
+            </b>
+        </div>
+    </div>
+</div> -->
+
+<!-- upper part (navigation buttons) -->
+<nav class="store-nav mb-4">
+    <div class="nav nav-tabs">
+        {% for nav_tab in nav_tabs %}
+        {% if nav_tab['status']==1 %}
+            <button class="nav-link active" 
+                data-bs-toggle="tab" 
+                data-bs-target="#{{ nav_tab['id'] }}">
+                {{ nav_tab["tab_name"] }}
+            </button>
+        {% else %}
+            <button class="nav-link" 
+                data-bs-toggle="tab" 
+                data-bs-target="#{{ nav_tab['id'] }}">
+                {{ nav_tab["tab_name"] }}
+            </button>
+        {% endif %}
+        {% endfor %}
+        <!-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">Все программы</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#popular">Популярные</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#new">Новые поступления</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sales">Скидки</button> -->
+    </div>
+</nav>
+
+<!-- elements -->
+<div class="tab-content">
+    
+    {% for nav_tab in nav_tabs %}
+    {% if nav_tab['status']==1 %}
+    {% if nav_tab['id']=="all" %}
+    <div class="tab-pane fade show active" id="{{ nav_tab['id'] }}">
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ product['image'] }}" alt="{{ product['alt'] }}">
+                </div>
+                <div class="product-info" style="position:relative">
+                    <h2 class="product-title">
+                        {{ product['title'] }}
+                    </h2>
+                    <p class="product-description">
+                        {{ product['description'] }}
+                    </p>
+
+                    <!-- price (can have discount) -->
+                    {% if product['is_on_sale'] == 0 %}
+                        <div class="mt-auto product-price">{{ product["full_price"] }}</div>
+                    {% else %}
+                    <div class="mt-auto product-price">
+                        <!-- current price (no discount) -->
+                        {{ product["price"] }}
+                        <!-- full price -->
+                        <del class="product-price-on-sale">{{ product["full_price"] }}</del>
+                    </div>
+                    {% endif %}
+                    <button 
+                        class="mt-auto buy-button"
+                        >
+                        Купить сейчас
+                    </button>
+
+                </div>
+            </div>
+            {% endfor %}
+            <!-- Дополнительные карточки продуктов -->
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
 </div>
-          
+
+
 {% endblock %}

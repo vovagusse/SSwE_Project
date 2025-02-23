@@ -38,7 +38,97 @@ def login():
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    nav_tabs = (
+        {
+            "status":1,
+            "tab_name":"Все программы",
+            "id":"all"
+        },
+        {
+            "status":0,
+            "tab_name":"Популярные",
+            "id":"popular"
+        },
+        {
+            "status":0,
+            "tab_name":"Новые поступления",
+            "id":"new"
+        },
+        {
+            "status":0,
+            "tab_name":"Скидки",
+            "id":"on_sale"
+        },
+    )
+    products = (
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"Krita Pro",
+            "description":"Графический редактор, позволяющий воплотить художественные мечты в жизнь.",
+            "price":"2,990 ₽",
+            "full_price":"2,990 ₽",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":0
+        },
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"Inspire Pro",
+            "description":"Фоторедактор для изображений с большим количеством он-лайн шаблонов, шрифтов и кистей для создания профессиональных изображений",
+            "price":"2,990 ₽",
+            "full_price":"2,990 ₽",
+            "is_popular":1,
+            "is_new":0,
+            "is_on_sale":0
+        },
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"Muse Studio 2025 Professional",
+            "description":"DAW для реальных профессионалов со встроенными инструментами и эффектами",
+            "price":"2,990 ₽",
+            "full_price":"5,990 ₽",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":1
+        },
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"LibreOffice Commercial Edition",
+            "description":"Коммерческая лицензия на использование LibreOffice",
+            "price":"2,990 ₽",
+            "full_price":"2,990 ₽",
+            "is_popular":0,
+            "is_new":0,
+            "is_on_sale":0
+        },
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"Greeva",
+            "description":"Онлайн-доска для планирования и отслеживания выполнения задач в компании.",
+            "price":"2,990 ₽",
+            "full_price":"2,990 ₽",
+            "is_popular":0,
+            "is_new":1,
+            "is_on_sale":0
+        },
+        {
+            "image":"https://via.placeholder.com/400x300",
+            "alt":"Программа 1",
+            "title":"Epic VPN",
+            "description":"VPN-сервис для корпоративного сектора",
+            "price":"2,990 ₽",
+            "full_price":"2,990 ₽",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":0
+        },
+    )
+    return render_template("index.html", nav_tabs=nav_tabs, products=products)
 
 
 @app.errorhandler(404)

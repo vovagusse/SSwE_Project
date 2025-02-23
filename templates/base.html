@@ -22,12 +22,16 @@
     <link rel="stylesheet" href="./stylesheets/funky_styles.css" crossorigin="anonymous">
     <style>
         :root {
-            --primary-color: #00a4bd;
-            --secondary-color: #1a365d;
-            --accent-color: #ff4757;
+            --primary-color: #3035ba; 
+            --secondary-color: #5230c3;
+            --accent-color: #4834ff;
             --text-color: #2d3436;
+            --text-color-gray: rgb(163, 158, 193);
             --background-color: #f5f6fa;}
         body {
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
             background-color: var(--background-color);
             color: var(--text-color);
             font-family: 'Comic Sans MS', Tahoma, Geneva, Verdana, sans-serif;}
@@ -42,23 +46,30 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
-            padding: 2rem;}
+            padding: 2rem;
+        }
         .product-card {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border-color: var(--text-color);
+            box-shadow: 0 5px 5px rgba(35, 25, 65, 0.15);
             overflow: hidden;
-            transition: transform 0.3s ease;}
+            transition: transform 0.3s ease;
+        }
         .product-card:hover {
-            transform: translateY(-10px);}
+            transform: translateY(-10px);
+            background-color: rgb(248, 246, 255);
+            transform: scale(1.02);
+        }
         .product-image {
             height: 200px;
-            overflow: hidden;}
+            overflow: hidden;
+        }
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;}
+            transition: transform 0.4s ease;}
         .product-card:hover .product-image img {
             transform: scale(1.1);}
         .product-info {
@@ -71,6 +82,10 @@
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--accent-color);}
+        .product-price-on-sale {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color-gray);}
         .buy-button {
             background: var(--accent-color);
             border: none;
@@ -83,8 +98,10 @@
             margin-top: 1rem;
             width: 100%;}
         .buy-button:hover {
-            background: #ff6b81;
-            transform: translateY(-2px);}
+            background: #69f295;
+            transform: translateY(-2px);
+            transform: scale(1.05);
+        }
         .store-footer {
             background: var(--secondary-color);
             color: white;
@@ -123,115 +140,56 @@
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-end">
                     <div class="user-panel">
-                        <button class="btn btn-outline-light me-2">Корзина</button>
-                        <button class="btn btn-light">Личный кабинет</button>
+                        <button class="btn btn-outline-light me-2">
+                            <i class="bi bi-cart"></i>
+                            Корзина
+                        </button>
+                        <button class="btn btn-light">
+                            <i class="bi bi-person"></i>
+                            Личный кабинет
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- test -->
-    <main class="container mt-5">
-        <nav class="store-nav mb-4">
-            <div class="nav nav-tabs">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">Все программы</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#popular">Популярные</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#new">Новые поступления</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sales">Скидки</button>
-            </div>
-        </nav>
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="all">
-                <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/400x300" alt="Программа 1">
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title">Профессиональный редактор</h2>
-                            <p class="product-description">Мощный инструмент для редактирования документов и изображений</p>
-                            <div class="product-price">2,990 ₽</div>
-                            <button class="buy-button">Купить сейчас</button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/400x300" alt="Программа 1">
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title">Профессиональный редактор</h2>
-                            <p class="product-description">Мощный инструмент для редактирования документов и изображений</p>
-                            <div class="product-price">2,990 ₽</div>
-                            <button class="buy-button">Купить сейчас</button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/400x300" alt="Программа 1">
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title">Профессиональный редактор</h2>
-                            <p class="product-description">Мощный инструмент для редактирования документов и изображений</p>
-                            <div class="product-price">2,990 ₽</div>
-                            <button class="buy-button">Купить сейчас</button>
-                        </div>
-                    </div>
-                    <!-- Дополнительные карточки продуктов -->
-                </div>
-            </div>
-        </div>
-    </main>
-
-
-
-
-    <!-- main stuff (subject to change) -->
-    
-    <div class="container">
+    <main class="container mt-1">
         <div class="row">
-        <!-- <div class="row flex-nowrap"> -->
-            <!-- thing in the middle -->
             <div class="col py-3 overflow-auto">
                 <div style="padding-left: calc(var(--bs-gutter-x) * .5);
                 padding-right: calc(var(--bs-gutter-x) * .5);
                 margin-bottom: 16px;">
-                    {% for message in get_flashed_messages() %}
-                        <div class="alert alert-danger">{{ message }}</div>
-                    {% endfor %}
-                    {% block content %} {% endblock %}
-                </div>
+
+                {% block content %} {% endblock %}
+                            
             </div>
         </div>
-    </div>
-
-
+    </main>
     <footer class="store-footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <h5>О магазине</h5>
                     <ul>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Контакты</a></li>
-                        <li><a href="#">Помощь</a></li>
+                        <li><a href="#"><u>О нас</u></a></li>
+                        <li><a href="#"><u>Контакты</u></a></li>
+                        <li><a href="#"><u>Помощь</u></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Информация</h5>
                     <ul>
-                        <li><a href="#">Доставка</a></li>
-                        <li><a href="#">Оплата</a></li>
-                        <li><a href="#">Возврат</a></li>
+                        <li><a href="#"><u>Доставка</u></a></li>
+                        <li><a href="#"><u>Оплата</u></a></li>
+                        <li><a href="#"><u>Возврат</u></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Социальные сети</h5>
                     <ul>
-                        <li><a href="#">Вконтакте</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#"><u>Вконтакте</u></a></li>
+                        <li><a href="#"><u>Instagram</u></a></li>
+                        <li><a href="#"><u>Twitter</u></a></li>
                     </ul>
                 </div>
             </div>
