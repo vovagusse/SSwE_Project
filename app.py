@@ -7,6 +7,113 @@ from pprint import pprint
 # from docx import Document
 import datetime
 
+user = {
+    "name":"admin",
+    "is_authenticated":0
+}
+nav_tabs = (
+        {
+            "status":1,
+            "tab_name":"Все программы",
+            "id":"all"
+        },
+        {
+            "status":0,
+            "tab_name":"Популярные",
+            "id":"popular"
+        },
+        {
+            "status":0,
+            "tab_name":"Новые поступления",
+            "id":"new"
+        },
+        {
+            "status":0,
+            "tab_name":"Скидки",
+            "id":"on_sale"
+        },
+    )
+products = (
+        {
+            "product_id":1,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Krita Pro",
+            "description":"Графический редактор, позволяющий воплотить художественные мечты в жизнь.",
+            "price":"2,990",
+            "full_price":"2,990",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":0
+        },
+        {
+            "product_id":2,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Inspire Pro",
+            "description":"Фоторедактор для изображений с большим количеством он-лайн шаблонов, шрифтов и кистей для создания профессиональных изображений",
+            "price":"2,990",
+            "full_price":"2,990",
+            "is_popular":1,
+            "is_new":0,
+            "is_on_sale":0
+        },
+        {
+            "product_id":3,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Muse Studio 2025 Professional",
+            "description":"DAW для реальных профессионалов со встроенными инструментами и эффектами",
+            "price":"2,990",
+            "full_price":"5,990",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":1
+        },
+        {
+            "product_id":4,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"LibreOffice Commercial Edition",
+            "description":"Коммерческая лицензия на использование LibreOffice",
+            "price":"2,990",
+            "full_price":"2,990",
+            "is_popular":0,
+            "is_new":0,
+            "is_on_sale":0
+        },
+        {
+            "product_id":5,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Greeva",
+            "description":"Онлайн-доска для планирования и отслеживания выполнения задач в компании.",
+            "price":"2,990",
+            "full_price":"2,990",
+            "is_popular":0,
+            "is_new":1,
+            "is_on_sale":0
+        },
+        {
+            "product_id":6,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Epic VPN",
+            "description":"VPN-сервис для корпоративного сектора",
+            "price":"2,990",
+            "full_price":"2,990",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":0
+        },
+        {
+            "product_id":7,
+            "image":"https://via.placeholder.com/400x300",
+            "title":"Epic VPN Pro",
+            "description":"Профессиональная версия VPN-сервиса для корпоративного сектора",
+            "price":"5,999",
+            "full_price":"10,990",
+            "is_popular":1,
+            "is_new":1,
+            "is_on_sale":0
+        },
+    )
+    
+
 
 def get_current_directory():
     p = os.path.dirname(sys.argv[0])
@@ -31,103 +138,40 @@ def get_db_connection():
     return conn
 
 
-@app.route("/login")
+@app.route("/login/")
 def login():
-    return render_template("login/login.html")
+    return render_template("login/login.html", current_user=user)
+
+
+def search_in_products(product_id):
+    for prod in products:
+        if prod["product_id"] == product_id:
+            return prod
+
+@app.route("/register/")
+def register():
+    return render_template("login/register.html", current_user=user)
+
+
+@app.route("/product/<int:product_id>")
+def product(product_id: int):
+    prod = search_in_products(product_id)
+    return render_template("product.html", product=prod, current_user=user)
+
+
+@app.route("/add_to_cart")
+def add_to_cart():
+    return redirect("/")
+
+
+@app.route("/cart")
+def cart():
+    return redirect("/")
 
 
 @app.route('/')
 def index():
-    nav_tabs = (
-        {
-            "status":1,
-            "tab_name":"Все программы",
-            "id":"all"
-        },
-        {
-            "status":0,
-            "tab_name":"Популярные",
-            "id":"popular"
-        },
-        {
-            "status":0,
-            "tab_name":"Новые поступления",
-            "id":"new"
-        },
-        {
-            "status":0,
-            "tab_name":"Скидки",
-            "id":"on_sale"
-        },
-    )
-    products = (
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"Krita Pro",
-            "description":"Графический редактор, позволяющий воплотить художественные мечты в жизнь.",
-            "price":"2,990 ₽",
-            "full_price":"2,990 ₽",
-            "is_popular":1,
-            "is_new":1,
-            "is_on_sale":0
-        },
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"Inspire Pro",
-            "description":"Фоторедактор для изображений с большим количеством он-лайн шаблонов, шрифтов и кистей для создания профессиональных изображений",
-            "price":"2,990 ₽",
-            "full_price":"2,990 ₽",
-            "is_popular":1,
-            "is_new":0,
-            "is_on_sale":0
-        },
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"Muse Studio 2025 Professional",
-            "description":"DAW для реальных профессионалов со встроенными инструментами и эффектами",
-            "price":"2,990 ₽",
-            "full_price":"5,990 ₽",
-            "is_popular":1,
-            "is_new":1,
-            "is_on_sale":1
-        },
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"LibreOffice Commercial Edition",
-            "description":"Коммерческая лицензия на использование LibreOffice",
-            "price":"2,990 ₽",
-            "full_price":"2,990 ₽",
-            "is_popular":0,
-            "is_new":0,
-            "is_on_sale":0
-        },
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"Greeva",
-            "description":"Онлайн-доска для планирования и отслеживания выполнения задач в компании.",
-            "price":"2,990 ₽",
-            "full_price":"2,990 ₽",
-            "is_popular":0,
-            "is_new":1,
-            "is_on_sale":0
-        },
-        {
-            "image":"https://via.placeholder.com/400x300",
-            "alt":"Программа 1",
-            "title":"Epic VPN",
-            "description":"VPN-сервис для корпоративного сектора",
-            "price":"2,990 ₽",
-            "full_price":"2,990 ₽",
-            "is_popular":1,
-            "is_new":1,
-            "is_on_sale":0
-        },
-    )
+    # fake data (not by query from db)
     return render_template("index.html", nav_tabs=nav_tabs, products=products)
 
 

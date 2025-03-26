@@ -1,30 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- <div class="vertical-center">
-    <div class="container">
-        <div id="notfound" class="text-center">
-            <br>
-            <h1>😉</h1>
-            <h1>Домашняя страница</h1>
-            <a class="btn btn-outline-dark" href="/login">Hiiiii</a>            
-        </div>
-    </div>
-</div> -->
 
-<!-- <div class="row">
-    <div class="col">
-        <div class="h3">
-            <b>
-                Магазин
-            </b>
-        </div>
-    </div>
-</div> -->
 
 <!-- upper part (navigation buttons) -->
-<nav class="store-nav mb-4">
-    <div class="nav nav-tabs">
+<nav class="store-nav nav-pills mb-4">
+    <div class="nav nav-tabs nav-justified mb-3">
         {% for nav_tab in nav_tabs %}
         {% if nav_tab['status']==1 %}
             <button class="nav-link active" 
@@ -40,6 +21,7 @@
             </button>
         {% endif %}
         {% endfor %}
+
         <!-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">Все программы</button>
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#popular">Популярные</button>
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#new">Новые поступления</button>
@@ -47,53 +29,176 @@
     </div>
 </nav>
 
-<!-- elements -->
-<div class="tab-content">
-    
-    {% for nav_tab in nav_tabs %}
-    {% if nav_tab['status']==1 %}
-    {% if nav_tab['id']=="all" %}
-    <div class="tab-pane fade show active" id="{{ nav_tab['id'] }}">
-        <div class="product-grid">
-            {% for product in products %}
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="{{ product['image'] }}" alt="{{ product['alt'] }}">
-                </div>
-                <div class="product-info" style="position:relative">
-                    <h2 class="product-title">
-                        {{ product['title'] }}
-                    </h2>
-                    <p class="product-description">
-                        {{ product['description'] }}
-                    </p>
 
-                    <!-- price (can have discount) -->
-                    {% if product['is_on_sale'] == 0 %}
-                        <div class="mt-auto product-price">{{ product["full_price"] }}</div>
-                    {% else %}
-                    <div class="mt-auto product-price">
-                        <!-- current price (no discount) -->
-                        {{ product["price"] }}
-                        <!-- full price -->
-                        <del class="product-price-on-sale">{{ product["full_price"] }}</del>
+
+<!-- elements -->
+<div class="tab-content ">
+
+{% for nav_tab in nav_tabs %}
+    <!-- Все продукты -->
+    {% if nav_tab['id'] == "all"     %}
+        <!-- all cards -->
+        <div class="tab-pane fade show active" id="all">
+            <div class="product-grid">
+                {% for product in products %}
+
+                <!-- one card -->
+                <div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+                        </div>
+                        <div class="product-info" style="position:relative">
+                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
+                                <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
+                            </a>
+                            <p class="product-description">{{ product['description'] }}</p>
+                            <!-- price (can have discount) -->
+                            {% if 
+                                product['price'].replace(',', '')|int 
+                                >= product['full_price'].replace(',', '')|int 
+                            %}
+                                <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
+                            {% elif 
+                                product['price'].replace(',', '')|int 
+                                < product['full_price'].replace(',', '')|int 
+                            %}
+                                <div class="mt-auto product-price"> 
+                                    {{ product["price"] }} ₽
+                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
+                                </div>
+                            {% endif %}
+                            <button class="mt-auto buy-button">Купить сейчас</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <!-- Только популярные -->
+    {% if nav_tab['id'] == 'popular' %}
+        <!-- all cards -->
+        <div class="tab-pane fade" id="popular">
+            <div class="product-grid">
+                {% for product in products %}
+                    {% if product['is_popular']|int == 1 %}
+                    
+                    <!-- one card -->
+                    <div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+                            </div>
+                            <div class="product-info" style="position:relative">
+                                <a href="{{ url_for('product', product_id=product['product_id']) }}">
+                                    <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
+                                </a>
+                                <p class="product-description">{{ product['description'] }}</p>
+                                <!-- price (can have discount) -->
+                                {% if 
+                                    product['price'].replace(',', '')|int 
+                                    >= product['full_price'].replace(',', '')|int 
+                                %}
+                                    <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
+                                {% elif 
+                                    product['price'].replace(',', '')|int 
+                                    < product['full_price'].replace(',', '')|int 
+                                %}
+                                    <div class="mt-auto product-price"> 
+                                        {{ product["price"] }} ₽
+                                        <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
+                                    </div>
+                                {% endif %}
+                                <button class="mt-auto buy-button">Купить сейчас</button>
+                            </div>
+                        </div>
                     </div>
                     {% endif %}
-                    <button 
-                        class="mt-auto buy-button"
-                        >
-                        Купить сейчас
-                    </button>
-
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-            <!-- Дополнительные карточки продуктов -->
         </div>
-    </div>
     {% endif %}
+    <!-- Только новые -->
+    {% if nav_tab['id'] == 'new'     %}
+        <!-- all cards -->
+        <div class="tab-pane fade" id="new">
+            <div class="product-grid">
+                {% for product in products %}
+                    {% if product['is_new']|int == 1 %}
+
+                    <!-- one card -->
+                    <div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+                            </div>
+                            <div class="product-info" style="position:relative">
+                                <a href="{{ url_for('product', product_id=product['product_id']) }}">
+                                    <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
+                                </a>
+                                <p class="product-description">{{ product['description'] }}</p>
+                                <!-- price (can have discount) -->
+                                {% if 
+                                    product['price'].replace(',', '')|int 
+                                    >= product['full_price'].replace(',', '')|int 
+                                %}
+                                    <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
+                                {% elif 
+                                    product['price'].replace(',', '')|int 
+                                    < product['full_price'].replace(',', '')|int 
+                                %}
+                                    <div class="mt-auto product-price"> 
+                                        {{ product["price"] }} ₽
+                                        <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
+                                    </div>
+                                {% endif %}
+                                <button class="mt-auto buy-button">Купить сейчас</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
-    {% endfor %}
+    <!-- Только по скидке -->
+    {% if nav_tab['id'] == 'on_sale' %}
+        <!-- all cards -->
+        <div class="tab-pane fade show" id="on_sale">
+            <div class="product-grid">
+                {% for product in products %}
+                    {% if 
+                        product['price'].replace(',', '')|int 
+                        < product['full_price'].replace(',', '')|int 
+                    %}
+
+                    <!-- one card -->
+                    <div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+                            </div>
+                            <div class="product-info" style="position:relative">
+                                <a href="{{ url_for('product', product_id=product['product_id']) }}">
+                                    <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
+                                </a>
+                                <p class="product-description">{{ product['description'] }}</p>
+                                <!-- price (always have discount) -->
+                                <div class="mt-auto product-price"> 
+                                    {{ product["price"] }} ₽
+                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
+                                </div>
+                                <button class="mt-auto buy-button">Купить сейчас</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
 
 </div>
 

@@ -1,16 +1,21 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
+
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             <div class="product-images">
                 <div class="main-image">
-                    <img src="{{ product.image_urls[0] | default('static/images/no-image.jpg') }}" 
+                    <div class="cool-image">
+                    <img src="{{ product.image | default('static/images/no-image.jpg') }}" 
                          alt="{{ product.title }}" 
-                         class="img-fluid">
+                         class="img-fluid"
+                         style="cool-image{border: solid 3px var(--secondary-color);
+                   border-radius: 5px;}">
+                    </div>
                 </div>
-                {% if product.image_urls | length > 1 %}
+                <!-- {% if product.image_urls | length > 1 %}
                 <div class="additional-images mt-3">
                     {% for image_url in product.image_urls[1:] %}
                     <img src="{{ image_url }}" 
@@ -18,14 +23,14 @@
                          class="img-thumbnail img-fluid">
                     {% endfor %}
                 </div>
-                {% endif %}
+                {% endif %} -->
             </div>
         </div>
         
         <div class="col-md-6">
             <div class="product-info">
                 <h1>{{ product.title }}</h1>
-                <p class="price">{{ product.price | format_currency }}</p>
+                <p class="price">{{ product.price }}</p>
                 
                 <div class="product-description mt-4">
                     <h3>Описание</h3>
@@ -34,20 +39,20 @@
                 
                 <div class="product-actions mt-4">
                     {% if current_user.is_authenticated %}
-                    <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                    <!-- <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}"> -->
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="fas fa-cart-plus"></i> В корзину
                         </button>
-                    </form>
+                    <!-- </form> -->
                     {% else %}
                     <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">
                         <i class="fas fa-cart-plus"></i> В корзину
                     </a>
                     {% endif %}
                     
-                    <a href="{{ url_for('cart.index') }}" class="btn btn-outline-primary btn-lg">
+                    <!-- <a href="{{ url_for('cart') }}" class="btn btn-outline-primary btn-lg"> -->
                         <i class="fas fa-shopping-cart"></i> Корзина
-                    </a>
+                    <!-- </a> -->
                 </div>
             </div>
         </div>
