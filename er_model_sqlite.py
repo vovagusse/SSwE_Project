@@ -44,6 +44,24 @@ class Video(Model):
     class Meta:
         database = db
 
+class File(Model):
+    file_id = AutoField()
+    file_uri = TextField()
+    id_product = ForeignKeyField(
+        Product, backref="product_id") 
+    class Meta:
+        database = db
+
+
+class Video(Model):
+    video_id = AutoField()
+    video_uri = TextField(
+        default="https://via.placeholder.com/400x300")
+    id_product = ForeignKeyField(
+        Product, backref="product_id") 
+    class Meta:
+        database = db
+
 
 class User(Model):
     user_id = AutoField()
