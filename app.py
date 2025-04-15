@@ -43,6 +43,13 @@ def register():
 
 @app.route("/product/<int:product_id>")
 def product(product_id: int):
+    """Returns a web page with information about a product.
+
+    :param product_id: primary key of product in database
+    :type product_id: int
+    :return: string web page that was generated using Flask and Jinja
+    :rtype: str
+    """
     p = get_product(product_id)
     p = p.__dict__["__data__"]
     pprint(p)
