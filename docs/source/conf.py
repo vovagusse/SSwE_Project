@@ -1,3 +1,10 @@
+import sys
+import os
+from pathlib import Path
+p = os.path.abspath('../..')
+sys.path.insert(0, p)
+# sys.path.insert(0, str(Path('..', 'src').resolve()))
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -14,7 +21,9 @@ release = 'хз'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = [
+    "sphinx.ext.autodoc"
+]
 
 templates_path = ['_templates']
 exclude_patterns = []

@@ -32,8 +32,289 @@
 
           <div class="body" role="main">
             
-  <section id="er-model-sqlite-module">
-<h1>er_model_sqlite module<a class="headerlink" href="#er-model-sqlite-module" title="Ссылка на этот заголовок">¶</a></h1>
+  <section id="module-er_model_sqlite">
+<span id="er-model-sqlite-module"></span><h1>er_model_sqlite module<a class="headerlink" href="#module-er_model_sqlite" title="Ссылка на этот заголовок">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.AuthSession">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">AuthSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.AuthSession" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.AuthSession.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.AuthSession.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">AuthSessionDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.AuthSession.auth_id">
+<span class="sig-name descname"><span class="pre">auth_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">AuthSession.auth_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.AuthSession.auth_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.AuthSession.id_user">
+<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">AuthSession.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.AuthSession.id_user" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.AuthSession.id_user_id">
+<span class="sig-name descname"><span class="pre">id_user_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">AuthSession.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.AuthSession.id_user_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.Developer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">Developer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.Developer" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Developer.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.Developer.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">DeveloperDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Developer.developer_id">
+<span class="sig-name descname"><span class="pre">developer_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Developer.developer_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Developer.developer_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Developer.id_user">
+<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Developer.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Developer.id_user" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Developer.id_user_id">
+<span class="sig-name descname"><span class="pre">id_user_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Developer.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Developer.id_user_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.File">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.File" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.File.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.File.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">FileDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.File.file_id">
+<span class="sig-name descname"><span class="pre">file_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">File.file_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.File.file_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.File.file_uri">
+<span class="sig-name descname"><span class="pre">file_uri</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">File.file_uri&gt;</span></em><a class="headerlink" href="#er_model_sqlite.File.file_uri" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.File.id_product">
+<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">File.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.File.id_product" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.File.id_product_id">
+<span class="sig-name descname"><span class="pre">id_product_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">File.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.File.id_product_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.Image">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.Image" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Image.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.Image.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">ImageDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Image.id_product">
+<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Image.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Image.id_product" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Image.id_product_id">
+<span class="sig-name descname"><span class="pre">id_product_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Image.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Image.id_product_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Image.image_id">
+<span class="sig-name descname"><span class="pre">image_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Image.image_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Image.image_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Image.image_uri">
+<span class="sig-name descname"><span class="pre">image_uri</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">Image.image_uri&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Image.image_uri" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.Product">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.Product" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.Product.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">Product.description&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.description" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.full_price">
+<span class="sig-name descname"><span class="pre">full_price</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">Product.full_price&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.full_price" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.is_new">
+<span class="sig-name descname"><span class="pre">is_new</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;BooleanField:</span> <span class="pre">Product.is_new&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.is_new" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.is_popular">
+<span class="sig-name descname"><span class="pre">is_popular</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;BooleanField:</span> <span class="pre">Product.is_popular&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.is_popular" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.price">
+<span class="sig-name descname"><span class="pre">price</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">Product.price&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.price" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.product_id">
+<span class="sig-name descname"><span class="pre">product_id</span></span><a class="headerlink" href="#er_model_sqlite.Product.product_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Product.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">Product.title&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Product.title" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">Purchased</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.Purchased" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.Purchased.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">PurchasedDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.cost_of_purchase">
+<span class="sig-name descname"><span class="pre">cost_of_purchase</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">Purchased.cost_of_purchase&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.cost_of_purchase" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.id_product">
+<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Purchased.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.id_product" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.id_product_id">
+<span class="sig-name descname"><span class="pre">id_product_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Purchased.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.id_product_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.id_user">
+<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Purchased.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.id_user" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.id_user_id">
+<span class="sig-name descname"><span class="pre">id_user_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Purchased.id_user&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.id_user_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.purchase_id">
+<span class="sig-name descname"><span class="pre">purchase_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Purchased.purchase_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.purchase_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Purchased.time_of_purchase">
+<span class="sig-name descname"><span class="pre">time_of_purchase</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DateTimeField:</span> <span class="pre">Purchased.time_of_purchase&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Purchased.time_of_purchase" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.User">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.User" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.User.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">UserDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.full_name">
+<span class="sig-name descname"><span class="pre">full_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">User.full_name&gt;</span></em><a class="headerlink" href="#er_model_sqlite.User.full_name" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.mail">
+<span class="sig-name descname"><span class="pre">mail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">User.mail&gt;</span></em><a class="headerlink" href="#er_model_sqlite.User.mail" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">User.password&gt;</span></em><a class="headerlink" href="#er_model_sqlite.User.password" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#er_model_sqlite.User.user_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.User.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">User.username&gt;</span></em><a class="headerlink" href="#er_model_sqlite.User.username" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="er_model_sqlite.Video">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">er_model_sqlite.</span></span><span class="sig-name descname"><span class="pre">Video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#er_model_sqlite.Video" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Video.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#er_model_sqlite.Video.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">VideoDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Video.id_product">
+<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Video.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Video.id_product" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Video.id_product_id">
+<span class="sig-name descname"><span class="pre">id_product_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Video.id_product&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Video.id_product_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Video.video_id">
+<span class="sig-name descname"><span class="pre">video_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Video.video_id&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Video.video_id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="er_model_sqlite.Video.video_uri">
+<span class="sig-name descname"><span class="pre">video_uri</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">Video.video_uri&gt;</span></em><a class="headerlink" href="#er_model_sqlite.Video.video_uri" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
