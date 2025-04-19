@@ -1,20 +1,12 @@
-Сервис онлайн оплпты программных средств documentation
-======================================================
+Сервис онлайн оплаты ПС
+=======================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-
-.. automodule:: app
-   :members:
-
-.. automodule:: utilities.get_current_directory
-   :members:
-
+   :caption: Навигация
    
-
-Ниже представлены основные разделы документации проекта:
+   app
+   get_current_directory
 
 Основные разделы
 ================
