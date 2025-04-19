@@ -3,3 +3,4 @@ __pycache__/**
 database.db
 utilities/my_private_key.py
 utilities/__pycache__/**
+docs/build

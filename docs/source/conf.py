@@ -8,7 +8,7 @@
 
 
 
-project = 'Сервис онлайн оплпты программных средств'
+project = 'Сервис онлайн оплаты ПС'
 copyright = '2025, Алымов А.О., Левданская Н.А., Ковалёв Н.Д., Гончаров А.А.'
 author = 'Алымов А.О., Левданская Н.А., Ковалёв Н.Д., Гончаров А.А.'
 
@@ -29,7 +29,14 @@ language = 'ru_RU'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+
+'''Установленные темы:
+furo [pip install furo]
+sphinx_rtd_theme [pip install sphinx-rtd-theme]
+alabaster [скачана по умолчанию вместе с Sphinx]
+sphinx_book_theme [pip install sphinx-book-theme]
+'''
+html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
 
 
