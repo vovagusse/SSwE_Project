@@ -1,6 +1,6 @@
-__pycache__/**
+software_shop_webapp/__pycache__/**
 # README.md
-database.db
+software_shop_webapp/utilities/my_private_key.py
 utilities/my_private_key.py
-utilities/__pycache__/**
-docs/build
+software_shop_webapp/utilities/__pycache__/**
+tracebacks.py
