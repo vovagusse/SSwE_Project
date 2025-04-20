@@ -1,9 +1,9 @@
 from flask import render_template, redirect, request, flash, send_from_directory
 from werkzeug.exceptions import abort
-from utilities.get_current_directory import *
-from utilities.mock_data import *
 from software_shop_webapp import db, app
-from utilities.mock_data import *
+from software_shop_webapp.utilities.get_current_directory import *
+from software_shop_webapp.utilities.mock_data import *
+from software_shop_webapp.utilities.mock_data import *
 
 @app.route("/login/")
 def login() -> str:

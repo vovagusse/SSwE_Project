@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Модуль get_current_directory.py &#8212; документация Сервис онлайн оплаты ПС </title>
+    <title>Модуль app.py &#8212; документация Сервис онлайн оплаты ПС </title>
   
   
   
@@ -40,10 +40,11 @@
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'get_current_directory';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'app';</script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="prev" title="Модуль models.py" href="models.html" />
+    <link rel="next" title="Модуль get_current_directory.py" href="get_current_directory.html" />
+    <link rel="prev" title="Сервис онлайн оплаты ПС" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru-RU"/>
   </head>
@@ -149,16 +150,10 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Навигация</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="init.html">Модуль __init__.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Модуль app.py</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="routes.html">Модуль routes.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="models.html">Модуль models.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Модуль get_current_directory.py</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="get_current_directory.html">Модуль get_current_directory.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
 </ul>
@@ -215,7 +210,7 @@
       
       
       
-      <li><a href="_sources/get_current_directory.rst" target="_blank"
+      <li><a href="_sources/app.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Скачать исходный файл"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -299,7 +294,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Модуль get_current_directory.py</h1>
+    <h1>Модуль app.py</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -309,7 +304,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities.get_current_directory.get_current_directory"><code class="docutils literal notranslate"><span class="pre">get_current_directory()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -321,26 +320,84 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="get-current-directory-py">
-<h1>Модуль get_current_directory.py<a class="headerlink" href="#get-current-directory-py" title="Ссылка на этот заголовок">#</a></h1>
+  <section id="app-py">
+<h1>Модуль app.py<a class="headerlink" href="#app-py" title="Ссылка на этот заголовок">#</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<dl class="py function" id="module-utilities.get_current_directory">
-<dt class="sig sig-object py" id="utilities.get_current_directory.get_current_directory">
-<span class="sig-prename descclassname"><span class="pre">utilities.get_current_directory.</span></span><span class="sig-name descname"><span class="pre">get_current_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilities.get_current_directory.get_current_directory" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция возвращает директорию/путь, в
-котором лежит скрипт .py, который вызывает данную функцию.
-Эта функция более точно ищет то место, где находится
-скрипт и не обращает внимания на то, в какой директории
-находится пользователь в терминале (а именно эта директория
-берётся за основу как «относительный путь» по
-умолчанию, что не всегда хорошо).</p>
+<dl class="py data" id="module-app">
+<dt class="sig sig-object py" id="app.db">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">db</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;peewee.SqliteDatabase</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#app.db" title="Ссылка на это определение">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.index">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#app.index" title="Ссылка на это определение">#</a></dt>
+<dd><p>Домашняя страница сайта.
+На ней отрисовывается список доступных
+на текущий момент продуктов и
+пользовательские опции, по типу входа,
+регистрации, выбора продукта, и др.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>веб-страница в формате HTML</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.internal_server_error">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">internal_server_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.internal_server_error" title="Ссылка на это определение">#</a></dt>
+<dd><p>Данная функция вызывается в случае, если
+что-то непонятное случилось с сервером.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>custom_filepath</strong> (<em>str</em><em>, </em><em>optional</em>) – путь до файла (если нужно узнать путь до директории конкретного скрипта), по умолчанию - None</p>
+<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>путь до файла, откуда была вызвана данная функция</p>
+<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(str, int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.page_not_found">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">page_not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.page_not_found" title="Ссылка на это определение">#</a></dt>
+<dd><p>Данная функция вызывается в случае, если
+данной страницы не существует. Возвращает HTML-
+разметку страницы, где пользователю будет написано, что
+такой страницы не существует.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(str, int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.product">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#app.product" title="Ссылка на это определение">#</a></dt>
+<dd><p>Генерирует веб-страницу с продуктом на основе
+его первичного целочисленного ключа id.
+Возвращает собранную на основе шаблона
+страничку при помощи Jinja.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>product_id</strong> (<em>int</em>) – первичный ключ программного продукта в базе данных</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>веб-страница</p>
 </dd>
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -362,13 +419,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="models.html"
+       href="index.html"
        title="предыдущая страница">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">назад</p>
-        <p class="prev-next-title">Модуль models.py</p>
+        <p class="prev-next-title">Сервис онлайн оплаты ПС</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="get_current_directory.html"
+       title="следующая страница">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">вперёд</p>
+        <p class="prev-next-title">Модуль get_current_directory.py</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -386,7 +452,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities.get_current_directory.get_current_directory"><code class="docutils literal notranslate"><span class="pre">get_current_directory()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
 </ul>
   </nav></div>
 
