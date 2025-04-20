@@ -3,7 +3,6 @@ import os
 import sys
 from flask_sqlalchemy import SQLAlchemy
 from software_shop_webapp.utilities.mock_data import *
-# from software_shop_webapp.utilities.get_current_directory import *
 from software_shop_webapp.utilities.my_private_key import awesome_shit
 
 

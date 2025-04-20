@@ -42,10 +42,14 @@ html_static_path = ['_static']
 
 import os
 import sys
+from pathlib import Path
 
 p = os.path.abspath('../..')
 print(f"\n\n\nPATH: {p}\n\n\n")
 
-sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('../../software_shop_webapp'))
-print(sys.path[0])
+sys.path.insert(0, 
+                str(Path("..", 
+                         "..", 
+                         "software_shop_webapp").resolve()
+                    )
+                )

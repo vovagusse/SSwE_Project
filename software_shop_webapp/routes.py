@@ -1,9 +1,10 @@
 from flask import render_template, redirect, request, flash, send_from_directory
 from werkzeug.exceptions import abort
 from software_shop_webapp import db, app
-from software_shop_webapp.utilities.get_current_directory import *
-from software_shop_webapp.utilities.mock_data import *
-from software_shop_webapp.utilities.mock_data import *
+from utilities.get_current_directory import *
+from utilities.mock_data import *
+from utilities.mock_data import *
+
 
 @app.route("/login/")
 def login() -> str:
@@ -27,9 +28,10 @@ def product(product_id: int) -> str:
     :return: веб-страница
     :rtype: str
     """
+    p = {}
+    
     # p = get_product(product_id)
     # p = p.__dict__["__data__"]
-    p = {}
     return render_template("product.html", product=p, current_user=user)
 
 
@@ -54,8 +56,8 @@ def index() -> str:
     :return: веб-страница в формате HTML
     :rtype: str
     """
-    # query = Product.select().dicts()
     query = dict()
+    # query = Product.select().dicts()
     return render_template("index.html", nav_tabs=nav_tabs, products=query)
 
 
