@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин ПО</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3035ba; 
+            --secondary-color: #5230c3;
+            --accent-color: #4834ff;
+            --text-color: #2d3436;
+            --text-color-gray: rgb(163, 158, 193);
+            --background-color: #f5f6fa;}
+        cool-image{border: solid 3px var(--secondary-color);
+                   border-radius: 5px;
+        }
+        body {
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: Tahoma, Geneva, Verdana, sans-serif;}
+        </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,19 +39,32 @@
                         <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
                     </li>
                 </ul>
-                <div class="d-flex">
+                <div class="d-flex ">
                     {% if current_user.is_authenticated %}
                         <span class="nav-link text-light me-2">Привет, {{ current_user.username }}</span>
                         <a href="{{ url_for('logout') }}" class="nav-link text-light">Выйти</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}" class="nav-link text-light">Войти</a>
-                        <a href="{{ url_for('register') }}" class="nav-link text-light">Регистрация</a>
+                        <button class="btn btn-primary w-100" style="margin: 8px;"> 
+                            <a href="{{ url_for('login_page') }}" class="nav-link text-light">Войти</a>
+                        </button>
+                        <button class="btn btn-primary w-100" style="margin: 8px;"> 
+                            <a href="{{ url_for('register_page') }}" class="nav-link text-light">Регистрация</a>
+                        </button>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
     
+    <!-- {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {%for message in messages%}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %} -->
     <div class="container">
                 <!-- templates/login.html -->
         <div class="container mt-5">
@@ -40,7 +72,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title text-center">Вход</h3>
+                            <h1 class="card-title text-center">Вход</h1>
                         </div>
                         <div class="card-body">
                             {% with messages = get_flashed_messages() %}
@@ -50,18 +82,21 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endwith %}
-                            
+
+                            <!-- FORM!!!! -->
                             <form method="POST">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Имя пользователя</label>
-                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <label for="login" class="form-label">Логин <b style="color:red">*</b></label>
+                                    <input type="text" class="form-control" id="login" name="login" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Пароль</label>
+                                    <label for="password" class="form-label">Пароль <b style="color:red">*</b></label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Войти</button>
+                                <button type="submit" class="btn btn-primary w-100" value="Login">Войти</button>
                             </form>
+                            <!-- END OF FORM!!! -->
+
                         </div>
                     </div>
                 </div>

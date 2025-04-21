@@ -1,18 +1,58 @@
-from flask import render_template, redirect, request, flash, send_from_directory
+from flask import render_template, redirect, request, flash, send_from_directory, url_for
+from flask_login import login_user, login_required, logout_user
 from werkzeug.exceptions import abort
+from werkzeug.security import check_password_hash, generate_password_hash
 from software_shop_webapp import db, app
 from software_shop_webapp.utilities.get_current_directory import *
-from software_shop_webapp.utilities.mock_data import *
-from software_shop_webapp.utilities.mock_data import *
+from software_shop_webapp.utilities.mock_data import nav_tabs, user
+from software_shop_webapp.models import User
 
 
-@app.route("/login/")
-def login() -> str:
-    return render_template("login/login.html", current_user=user)
+@app.route("/login/", methods=["GET", "POST"])
+def login_page() -> str:
+    f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
+    f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
+    if f_login and f_password:
+        current_user: User = User.query.filter_by(login=f_login).first()            
+        if current_user and check_password_hash(current_user.password, password=f_password):
+            login_user(current_user)
+            next_page = request.args.get("next")
+            return redirect(url_for('index'))
+        else:
+            flash("Логин или пароль введены неправильно")
+    else:
+        flash("Пожалуйста, запоолните логин и пароль")
+    return render_template("login/login.html", user=user)
 
 
-@app.route("/register/")
-def register() -> str:
+@app.route("/logout/", methods=["GET", "POST"])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
+
+
+@app.route("/register/", methods=["GET", "POST"])
+def register_page() -> str:
+    f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
+    f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
+    f_password2 = request.form.get("password2") #stands for Form Password (Password taken from the Form)
+    if request.method=="POST":
+        if not (f_login or f_password or f_password2):
+            print("(!) [register] - 1")
+            flash("Пожалуйста, заполните все поля!")
+        elif f_password != f_password2:
+            print("(!) [register] - 2")
+            flash("Пароли в полях не совпадают!")
+        else:
+            print("(!) [register] - 3")
+            # Everything is good!!!
+            hash_pwd = generate_password_hash(f_password)
+            new_user = User(login=f_login, password=hash_pwd)
+            db.session.add(new_user)
+            db.session.commit()
+            
+            return redirect(url_for("login_page"))
     return render_template("login/register.html", current_user=user)
 
 
@@ -41,6 +81,7 @@ def add_to_cart() -> str:
 
 
 @app.route("/cart")
+@login_required
 def cart() -> str:
     return redirect("/")
 
@@ -86,3 +127,10 @@ def internal_server_error(e):
     :rtype: tuple(str, int)
     """
     return "Внутренняя неизвестная ошибка сервера.", 500
+
+
+@app.after_request
+def redirect_to_signin(response):
+    if response.status_code == 401:
+        return redirect(url_for('login_page') + "?next=" + request.url)
+    return response

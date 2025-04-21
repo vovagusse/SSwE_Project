@@ -1,8 +1,9 @@
-from software_shop_webapp import db
+from software_shop_webapp import db, login_manager
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
 import datetime
 from typing import List
+from flask_login import UserMixin
 
 
 class Product(db.Model):
@@ -55,16 +56,19 @@ class Video(db.Model):
     id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id")) 
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "user"
     
     user_id:   Mapped[int] = mapped_column(primary_key=True, 
                                            nullable=False, 
                                            autoincrement=True)
-    full_name: Mapped[str] = mapped_column(nullable=False) #Полное ФИО
-    username:  Mapped[str] = mapped_column() #Псевдоним или отображаемое другим пользователям имя
-    mail:      Mapped[str] = mapped_column(nullable=False) #Адрес почты (Логин)
+    login:     Mapped[str] = mapped_column(unique=True, nullable=False) #Логин
     password:  Mapped[str] = mapped_column(nullable=False) #Пароль
+    #Остальные данные
+    full_name: Mapped[str] = mapped_column(nullable=True) #Полное ФИО
+    username:  Mapped[str] = mapped_column(nullable=True) #Псевдоним или отображаемое другим пользователям имя
+    def get_id(self):
+        return self.user_id
 
 
 class Developer(db.Model):
@@ -75,16 +79,6 @@ class Developer(db.Model):
                                               autoincrement=True)
     id_user:      Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
                                               nullable=False) 
-
-
-class AuthSession(db.Model):
-    __tablename__ = "authsession"
-    
-    auth_id: Mapped[int] = mapped_column(primary_key=True, 
-                                         nullable=False, 
-                                         autoincrement=True)
-    id_user: Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
-                                         nullable=False) 
 
 
 class Purchased(db.Model):
@@ -99,3 +93,8 @@ class Purchased(db.Model):
         default=lambda: datetime.datetime.now()
     )
     cost_of_purchase: Mapped[float] = mapped_column(nullable=False)
+
+
+@login_manager.user_loader
+def load_user(user_id: int):
+    return User.query.get(user_id)
