@@ -19,7 +19,6 @@ from software_shop_webapp import models, routes
 from software_shop_webapp.models import User
 
 with app.app_context():
-    # User.__table__.drop(db.engine)
     db.create_all()
     
 

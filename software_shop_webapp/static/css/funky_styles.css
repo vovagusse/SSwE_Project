@@ -5,7 +5,7 @@
     --text-color: #2d3436;
     --text-color-gray: rgb(163, 158, 193);
     --background-color: #f5f6fa;}
-cool-image{border: solid 3px var(--secondary-color);
+    cool-image{border: solid 3px var(--secondary-color);
            border-radius: 5px;
 }
 body {
@@ -18,10 +18,16 @@ body {
 .store-header {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 2rem 0;}
+    padding: 1rem 1rem;
+}
 .store-header h1 {
     font-size: 3rem;
-    font-weight: 600;}
+    font-weight: 600;
+    color:white;
+}
+.store-header p {
+    color:white;
+}
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -71,20 +77,19 @@ body {
     border: none;
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
     width: 100%;}
-    .btn {
-        background: var(--accent-color);
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 1rem;
-    }
+.btn {
+    background: var(--accent-color);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 .buy-button:hover {
     background: #69f295;
     transform: translateY(-2px);

@@ -19,129 +19,8 @@
         rel="stylesheet" 
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
-    <link rel="stylesheet" href="funky_styles.css" crossorigin="anonymous">
-    <style>
-        :root {
-            --primary-color: #3035ba; 
-            --secondary-color: #5230c3;
-            --accent-color: #4834ff;
-            --text-color: #2d3436;
-            --text-color-gray: rgb(163, 158, 193);
-            --background-color: #f5f6fa;}
-            cool-image{border: solid 3px var(--secondary-color);
-                   border-radius: 5px;
-        }
-        body {
-            min-height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-family:  Tahoma, Geneva, Verdana, sans-serif;}
-        .store-header {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 1rem;
-        }
-        .store-header h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            color:white;
-        }
-        .store-header p {
-            color:white;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            border-color: var(--text-color);
-            box-shadow: 0 5px 5px rgba(35, 25, 65, 0.15);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            background-color: rgb(248, 246, 255);
-            transform: scale(1.02);
-        }
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;}
-        .product-card:hover .product-image img {
-            transform: scale(1.1);}
-        .product-info {
-            padding: 1.5rem;}
-        .product-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);}
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--accent-color);}
-        .product-price-on-sale {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-color-gray);}
-        .buy-button {
-            background: var(--accent-color);
-            border: none;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            width: 100%;}
-        .btn {
-            background: var(--accent-color);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .buy-button:hover {
-            background: #69f295;
-            transform: translateY(-2px);
-            transform: scale(1.05);
-        }
-        .store-footer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 2rem 0;}
-        .store-footer ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;}
-        .store-footer li {
-            margin-bottom: 0.5rem;}
-        .store-footer a {
-            color: white;
-            text-decoration: none;}
-        .store-footer a:hover {
-            color: var(--accent-color);}
-        @media (max-width: 768px) {
-            .store-header h1 {
-                font-size: 2rem;}
-            
-            .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 1rem;
-                padding: 1rem;}}
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/funky_styles.css')}}">
+
     <title>{% block title %} {% endblock %}</title>
 </head>
 
@@ -150,11 +29,11 @@
     <nav class="store-header navbar navbar-expand-lg bg-body-tertiary flex-column">
         <div class="container-fluid m-0 mx-2 p-0">
             <!-- Brand -->
-            <div class="col-sm">
-                <a class="navbar-brand" href="{{url_for('index')}}">
+            <div class="col-sm m-0 p-2">
+                <a class="navbar-brand m-0 p-0" href="{{url_for('index')}}">
                     <!-- <div class="col-md-6 mx-3"> -->
-                        <h1>Магазин ПС</h1>
-                        <p>Онлайн сервис оплаты программных средств</p> 
+                        <h1 class="p-0 m-0">{{self.title()}}</h1>
+                        <p class="p-0 m-0">{{self.subtitle()}}</p> 
                     <!-- </div> -->
                 </a>
             </div>
@@ -163,8 +42,8 @@
             
             <!-- Mobile toggler buttons container -->
             <div class="d-flex">
-                <!-- Mobile search button -->
-                <button class="btn btn-outline-light navbar-toggler mx-1 py-2 px-3 d-lg-none"
+                <!-- Mobile toggler search button -->
+                <button class="btn btn-outline-light navbar-toggler  d-lg-none"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarSearch"
@@ -174,8 +53,8 @@
                     <i class="bi bi-search" style="font-size:x-large;"></i>
                 </button>
                 
-                <!-- Mobile nav button -->
-                <button class="btn btn-outline-light navbar-toggler mx-0 py-2 d-lg-none"
+                <!-- Mobile toggler nav button -->
+                <button class="btn btn-outline-light navbar-toggler d-lg-none"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
@@ -189,24 +68,24 @@
             
             <!-- Mobile search form -->
             <div class="collapse navbar-collapse d-lg-none" id="navbarSearch">
-                <form class="d-flex w-100 mt-2 p-0 d-lg-none">
-                    <input class="form-control me-2 d-lg-none" type="search" placeholder="Поиск" aria-label="Поиск">
+                <form class="d-flex w-100 d-lg-none">
+                    <input class="form-control d-lg-none" type="search" placeholder="Поиск" aria-label="Поиск">
                     <button class="btn btn-outline-light d-lg-none" type="submit">Поиск</button>
                 </form>
             </div>
             
             <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Desktop search -->
-                <form class="d-flex ms-auto me-2 w-auto d-none d-lg-flex">
-                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                    <button class="btn btn-outline-light" type="submit">Поиск</button>
-                </form>
-
                 <ul class="navbar-nav ms-auto mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li> -->
+
+                    <!-- Desktop search -->
+                    <form class="d-flex ms-auto m-1 w-auto d-none d-lg-flex">
+                        <div class="input-group" role="group">
+                        <input class="form-control me" type="search" placeholder="Поиск" aria-label="Поиск">
+                        <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+
                     <a href="{{url_for('index')}}" class="btn btn-outline-light m-1" role="button">
                         <i class="bi bi-house"></i>
                         Домашняя страница
@@ -215,6 +94,7 @@
                         <i class="bi bi-cart"></i>
                         Корзина
                     </button>
+                    {% if current_user.is_authenticated %}
                     <button class="btn btn-outline-light m-1" 
                         role="button" 
                         data-bs-toggle="dropdown" 
@@ -222,18 +102,37 @@
                         <i class="bi bi-person"></i>
                         Личный кабинет
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+                        <a class="dropdown-item" href="{{url_for('account')}}">
+                            <li>
+                                <i class="bi bi-gear"></i>
+                                Аккаунт
+                            </li>
+                        </a>
+                        <li><a class="dropdown-item" href="{{url_for('account_settings')}}">
+                            <i class="bi bi-gear"></i>
+                            Настройки аккаунта
+                        </a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item"
+                            href="{{url_for('logout')}}">
+                            <i class="bi bi-box-arrow-in-left"></i>
+                            Выйти из аккаунта
+                        </a></li>
                         </ul>
                     </button>
+                    {% else %}
+                    <a href="{{url_for('login_page')}}" class="btn btn-outline-light m-1" role="button">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Войти
+                    </a>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     
-    <main class="container-fluid mt-1">
+    <main class="container-fluid mt-0">
         <div class="row">
             <div class="col">
                 <!-- <div style="padding-left: calc(var(--bs-gutter-x) * .5);

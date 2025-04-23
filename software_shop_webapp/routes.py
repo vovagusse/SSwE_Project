@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, flash, send_from_directory, url_for
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from software_shop_webapp import db, app
@@ -13,16 +13,17 @@ from software_shop_webapp.model_queries import *
 def login_page() -> str:
     f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
     f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
-    if f_login and f_password:
-        current_user: User = User.query.filter_by(login=f_login).first()            
-        if current_user and check_password_hash(current_user.password, password=f_password):
-            login_user(current_user)
-            next_page = request.args.get("next")
-            return redirect(url_for('index'))
+    if (request.method == "POST"):
+        if f_login and f_password:
+            f_user: User = User.query.filter_by(login=f_login).first()            
+            if f_user and check_password_hash(f_user.password, password=f_password):
+                login_user(f_user)
+                next_page = request.args.get("next")
+                return redirect(url_for('index'))
+            else:
+                flash("Логин или пароль введены неправильно")
         else:
-            flash("Логин или пароль введены неправильно")
-    else:
-        flash("Пожалуйста, запоолните логин и пароль")
+            flash("Пожалуйста, заполните логин и пароль")
     return render_template("login/login.html", user=user)
 
 
@@ -31,6 +32,89 @@ def login_page() -> str:
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+
+@app.route("/account/")
+@login_required
+def account():
+    return render_template("account/account.html", current_user=current_user)
+
+
+@app.route("/account_settings/", methods=("GET", "POST", "DELETE"))
+@login_required
+def account_settings():
+    if request.method == 'POST':
+        if 'delete_account' in request.form:
+            db.session.delete(current_user)
+            db.session.commit()
+            logout_user()  # Выходим из системы
+            flash('Ваш аккаунт успешно удален', 'success')
+            return redirect(url_for('index'))
+        elif 'edit_profile' in request.form:
+            # Получаем данные из формы
+            full_name = request.form.get('full_name', '').strip()
+            username = request.form.get('username', '').strip()
+            
+            # Словарь для хранения ошибок
+            form_errors = {}
+            
+            # Валидация полей
+            if not full_name:
+                form_errors['full_name'] = 'Полное имя не может быть пустым'
+            elif len(full_name) > 100:
+                form_errors['full_name'] = 'Полное имя не может быть длиннее 100 символов'
+                
+            if not username:
+                form_errors['login'] = 'Имя пользователя не может быть пустым'
+            elif len(username) > 50:
+                form_errors['login'] = 'Имя пользователя не может быть длиннее 50 символов'
+                
+            # Проверка уникальности имени пользователя
+            if username and username != current_user.username:
+                if User.query.filter_by(username=username).first():
+                    form_errors['username'] = 'Это имя пользователя уже занято'
+            
+            # Если есть ошибки, передаем их в шаблон
+            if form_errors:
+                return render_template("account/account_settings.html", 
+                                    current_user=current_user, 
+                                    form_errors=form_errors,
+                                    message=None)
+            
+            # Обновляем данные пользователя
+            current_user.full_name = full_name
+            current_user.username = username
+            db.session.commit()
+            
+            # Флеш-сообщение об успехе
+            flash('Профиль успешно обновлен', 'success')
+            return redirect(url_for('account'))  
+        elif 'change_password' in request.form:
+            old_password = request.form.get('old_password')
+            new_password = request.form.get('new_password')
+            confirm_password = request.form.get('confirm_password')
+            
+            if not check_password_hash(current_user.password, old_password):
+                flash('Неверный текущий пароль', 'error')
+                return render_template('account/account_settings.html', 
+                                     form_errors={},
+                                     message=None)
+            
+            if new_password != confirm_password:
+                flash('Новые пароли не совпадают', 'error')
+                return render_template('account/account_settings.html', 
+                                     form_errors={},
+                                     message=None)
+            
+            current_user.password = generate_password_hash(new_password)
+            db.session.commit()
+            flash('Пароль успешно изменен', 'success')
+            return redirect(url_for('account', user_id=current_user.user_id))
+    # GET запрос - просто показываем форму    
+    return render_template("account/account_settings.html", 
+                           current_user=current_user, 
+                           form_errors={}, 
+                           message=None)
 
 
 @app.route("/register/", methods=["GET", "POST"])
@@ -51,7 +135,7 @@ def register_page() -> str:
             db.session.commit()
             
             return redirect(url_for("login_page"))
-    return render_template("login/register.html", current_user=user)
+    return render_template("login/register.html", current_user=current_user)
 
 
 @app.route("/product/<int:product_id>")
@@ -67,21 +151,16 @@ def product(product_id: int) -> str:
     :rtype: str
     """
     p = {}
-    
+    cur = current_user
     p = get_product(product_id)
     # p = p.__dict__["__data__"]
-    return render_template("product.html", product=p, current_user=user)
+    return render_template("product.html", product=p, current_user=cur)
 
 
 @app.route("/add_to_cart")
 @login_required
 def add_to_cart() -> str:
     return redirect("/")
-
-@app.route("/account/<int:user_id>")
-@login_required
-def account_page(user_id: int) -> str:
-    return render_template("/account/account.html")
 
 
 @app.route("/cart")
@@ -105,9 +184,11 @@ def index() -> str:
     :return: веб-страница в формате HTML
     :rtype: str
     """
+    cur = current_user
+    
     query = dict()
     query = get_products()
-    return render_template("index.html", nav_tabs=nav_tabs, products=query)
+    return render_template("index.html", nav_tabs=nav_tabs, products=query, current_user=cur)
 
 
 @app.errorhandler(404)
