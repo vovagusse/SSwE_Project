@@ -2,10 +2,9 @@
 {% block content %}
 
 
-
 <!-- upper part (navigation buttons) -->
-<nav class="store-nav nav-pills mb-4">
-    <div class="nav nav-tabs nav-justified mb-3">
+<nav class="store-nav nav-tabs mt-2">
+    <div class="nav nav-underlined nav-justified">
         {% for nav_tab in nav_tabs %}
         {% if nav_tab['status']==1 %}
             <button class="nav-link active" 

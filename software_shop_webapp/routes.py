@@ -6,6 +6,7 @@ from software_shop_webapp import db, app
 from software_shop_webapp.utilities.get_current_directory import *
 from software_shop_webapp.utilities.mock_data import nav_tabs, user
 from software_shop_webapp.models import User
+from software_shop_webapp.model_queries import *
 
 
 @app.route("/login/", methods=["GET", "POST"])
@@ -39,13 +40,10 @@ def register_page() -> str:
     f_password2 = request.form.get("password2") #stands for Form Password (Password taken from the Form)
     if request.method=="POST":
         if not (f_login or f_password or f_password2):
-            print("(!) [register] - 1")
             flash("Пожалуйста, заполните все поля!")
         elif f_password != f_password2:
-            print("(!) [register] - 2")
             flash("Пароли в полях не совпадают!")
         else:
-            print("(!) [register] - 3")
             # Everything is good!!!
             hash_pwd = generate_password_hash(f_password)
             new_user = User(login=f_login, password=hash_pwd)
@@ -70,20 +68,30 @@ def product(product_id: int) -> str:
     """
     p = {}
     
-    # p = get_product(product_id)
+    p = get_product(product_id)
     # p = p.__dict__["__data__"]
     return render_template("product.html", product=p, current_user=user)
 
 
 @app.route("/add_to_cart")
+@login_required
 def add_to_cart() -> str:
     return redirect("/")
+
+@app.route("/account/<int:user_id>")
+@login_required
+def account_page(user_id: int) -> str:
+    return render_template("/account/account.html")
 
 
 @app.route("/cart")
 @login_required
 def cart() -> str:
     return redirect("/")
+
+@app.route("/products")
+def products():
+    return redirect(url_for('index'))
 
 
 @app.route('/')
@@ -98,7 +106,7 @@ def index() -> str:
     :rtype: str
     """
     query = dict()
-    # query = Product.select().dicts()
+    query = get_products()
     return render_template("index.html", nav_tabs=nav_tabs, products=query)
 
 
