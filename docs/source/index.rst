@@ -5,6 +5,7 @@
    :maxdepth: 2
    :caption: Навигация
    
+   modules
    init
    routes
    models

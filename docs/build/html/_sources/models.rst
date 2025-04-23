@@ -5,6 +5,7 @@
    :maxdepth: 2
 
 
-.. automodule:: models
+.. automodule:: software_shop_webapp.models
    :members:
-
+   :undoc-members:
+   :show-inheritance:

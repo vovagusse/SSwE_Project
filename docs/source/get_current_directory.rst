@@ -5,5 +5,7 @@
    :maxdepth: 2
 
 
-.. automodule:: utilities.get_current_directory
+.. automodule:: software_shop_webapp.utilities.get_current_directory
    :members:
+   :undoc-members:
+   :show-inheritance:

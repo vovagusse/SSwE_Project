@@ -23,8 +23,5 @@ with app.app_context():
     
 
     
-# def main() -> None:
-app.run(debug=True, port=8888)  
 
-# if __name__ == "__main__":
-# main()
+# app.run(debug=True, port=8888)  
