@@ -10,3 +10,4 @@ software_shop_webapp/utilities
 software_shop_webapp/utilities/__pycache__
 software_shop_webapp/utilities/my_private_key
 tracebacks.py
+utilities
