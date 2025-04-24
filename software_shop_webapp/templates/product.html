@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %} Магазин ПС {% endblock %}
+{% block subtitle %} {{product.title}} {%endblock%}
+{% block content %}
+
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-images">
+                <div class="main-image">
+                    <div class="cool-image">
+                    <img src="{{ product.image | default('static/images/no-image.jpg') }}" 
+                         alt="{{ product.title }}" 
+                         class="img-fluid"
+                         style="cool-image{border: solid 3px var(--secondary-color);
+                   border-radius: 5px;}">
+                    </div>
+                </div>
+                <!-- {% if product.image_urls | length > 1 %}
+                <div class="additional-images mt-3">
+                    {% for image_url in product.image_urls[1:] %}
+                    <img src="{{ image_url }}" 
+                         alt="{{ product.title }}" 
+                         class="img-thumbnail img-fluid">
+                    {% endfor %}
+                </div>
+                {% endif %} -->
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="product-info">
+                <h1><strong>
+                    {{product.title}}
+                </strong></h1>
+                {% if 
+                    product['price'].replace(',', '')|int 
+                    >= product['full_price'].replace(',', '')|int 
+                %}
+                    <div class="mt-auto product-price">Цена: {{ product["full_price"] }} ₽</div>
+                {% elif 
+                    product['price'].replace(',', '')|int 
+                    < product['full_price'].replace(',', '')|int 
+                %}
+                    <div class="mt-auto product-price"> 
+                        Цена: {{ product["price"] }} ₽
+                        <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
+                    </div>
+                {% endif %}
+                
+                <div class="product-description mt-4">
+                    <h3>
+                        <i>
+                            Описание:
+                        </i>
+                    </h3>
+                    <p>{{ product.description }}</p>
+                </div>
+                
+                <div class="product-actions mt-4">
+                    {% if current_user.is_authenticated %}
+                    <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                        <button type="submit" class="btn btn-info">
+                            <i class="bi bi-cart-plus"></i> Добавить в корзину
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{{ url_for('login_page') }}" class="btn btn-info">
+                        <i class="bi bi-cart-plus"></i> Добавить в корзину
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

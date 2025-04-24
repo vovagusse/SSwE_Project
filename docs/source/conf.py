@@ -6,6 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os
+import sys
+# from pathlib import Path
+# p = os.path.abspath('../..')
+sys.path.insert(0, os.path.abspath("../../"))                     #Those two lines do
+sys.path.insert(0, os.path.abspath("../../software_shop_webapp")) #Some Fucking Magic
 
 
 project = 'Сервис онлайн оплаты ПС'
@@ -24,6 +30,15 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
+
+autodoc_default_options = {
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,  # Важно для переменных без документации
+    'show-inheritance': True,
+}
+autoclass_content = 'both'  # Включает и docstring, и doc-комментарии
+
 language = 'ru_RU'
 
 # -- Options for HTML output -------------------------------------------------
@@ -38,8 +53,3 @@ sphinx_book_theme [pip install sphinx-book-theme]
 '''
 html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
-
-
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../..'))
