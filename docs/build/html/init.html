@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Модуль __init__.py &#8212; документация Сервис онлайн оплаты ПС </title>
+    <title>Модуль __init__.py - инициализация сервера приложений &#8212; документация Сервис онлайн оплаты ПС </title>
   
   
   
@@ -43,7 +43,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'init';</script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Модуль routes.py" href="routes.html" />
+    <link rel="next" title="Модуль routes.py - маппинги сервера приложений" href="routes.html" />
     <link rel="prev" title="Все модули" href="modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru-RU"/>
@@ -150,17 +150,19 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Навигация</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Все модули</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Модуль __init__.py</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Все модули</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="routes.html">Модуль routes.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="models.html">Модуль models.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="routes.html">Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="get_current_directory.html">Модуль get_current_directory.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="models.html">Модуль <code class="docutils literal notranslate"><span class="pre">models.py</span></code> - физическая модель базы данных</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="get_current_directory.html">Модуль <code class="docutils literal notranslate"><span class="pre">utilities.get_current_directory.py</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
 </ul>
@@ -288,7 +290,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -299,11 +303,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Модуль __init__.py</h1>
+    <h1>Модуль __init__.py - инициализация сервера приложений</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Содержание </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Краткое описание</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Описание функций модуля</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -314,12 +327,18 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="init-py">
-<h1>Модуль __init__.py<a class="headerlink" href="#init-py" title="Ссылка на этот заголовок">#</a></h1>
+<h1>Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений<a class="headerlink" href="#init-py" title="Ссылка на этот заголовок">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="id1">
+<h2>Краткое описание<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">#</a></h2>
 <p>Данный модуль создаёт нужные для сервера приложений объекты класса Flask, SQLAlchemy,
 конфигурирует некоторые другие вещи, создаёт все недостающие таблицы в БД, а также
 запускает сам сервер приложений.</p>
-<div class="toctree-wrapper compound">
-</div>
+</section>
+<section id="id2">
+<h2>Описание функций модуля<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">#</a></h2>
+</section>
 </section>
 
 
@@ -347,7 +366,7 @@ document.write(`
        title="следующая страница">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">вперёд</p>
-        <p class="prev-next-title">Модуль routes.py</p>
+        <p class="prev-next-title">Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -357,6 +376,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Содержание
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Краткое описание</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Описание функций модуля</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -1,29 +1,34 @@
 Все модули
 ==========
 
-Модуль routes.py - маппинги сервера приложений
-----------------------------------------------
-
-.. automodule:: software_shop_webapp.routes
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Модуль models.py - физическая модель базы данных
-------------------------------------------------
-
-.. automodule:: software_shop_webapp.models
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. toctree::
+   :maxdepth: 2
+   :hidden:
 
 
 
-Модуль utilities.get_current_directory.py
------------------------------------------
+Модуль ``__init__.py`` - инициализация сервера приложений
+------------------------------------------------------------
 
-.. automodule:: software_shop_webapp.utilities.get_current_directory
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Читать документацию: :doc:`init`
+
+
+
+Модуль ``routes.py`` - маппинги сервера приложений
+------------------------------------------------------------
+
+Читать документацию: :doc:`routes`
+
+
+
+Модуль ``models.py`` - физическая модель базы данных
+------------------------------------------------------------
+
+Читать документацию: :doc:`models`
+
+
+
+Модуль ``utilities.get_current_directory.py``
+------------------------------------------------------------
+
+Читать документацию: :doc:`get_current_directory`

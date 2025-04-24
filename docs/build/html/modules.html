@@ -43,7 +43,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Модуль __init__.py" href="init.html" />
+    <link rel="next" title="Модуль __init__.py - инициализация сервера приложений" href="init.html" />
     <link rel="prev" title="Сервис онлайн оплаты ПС" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru-RU"/>
@@ -150,17 +150,19 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Навигация</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Все модули</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="init.html">Модуль __init__.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Все модули</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="routes.html">Модуль routes.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="init.html">Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="models.html">Модуль models.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="routes.html">Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="get_current_directory.html">Модуль get_current_directory.py</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="models.html">Модуль <code class="docutils literal notranslate"><span class="pre">models.py</span></code> - физическая модель базы данных</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="get_current_directory.html">Модуль <code class="docutils literal notranslate"><span class="pre">utilities.get_current_directory.py</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
 </ul>
@@ -311,91 +313,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.routes">Модуль routes.py - маппинги сервера приложений</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account"><code class="docutils literal notranslate"><span class="pre">account()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account_settings"><code class="docutils literal notranslate"><span class="pre">account_settings()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.add_to_cart"><code class="docutils literal notranslate"><span class="pre">add_to_cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.cart"><code class="docutils literal notranslate"><span class="pre">cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.login_page"><code class="docutils literal notranslate"><span class="pre">login_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.products"><code class="docutils literal notranslate"><span class="pre">products()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.redirect_to_signin"><code class="docutils literal notranslate"><span class="pre">redirect_to_signin()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.register_page"><code class="docutils literal notranslate"><span class="pre">register_page()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.models">Модуль models.py - физическая модель базы данных</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer"><code class="docutils literal notranslate"><span class="pre">Developer</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.developer_id"><code class="docutils literal notranslate"><span class="pre">Developer.developer_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.id_user"><code class="docutils literal notranslate"><span class="pre">Developer.id_user</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.query"><code class="docutils literal notranslate"><span class="pre">Developer.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.file_id"><code class="docutils literal notranslate"><span class="pre">File.file_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.file_uri"><code class="docutils literal notranslate"><span class="pre">File.file_uri</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.id_product"><code class="docutils literal notranslate"><span class="pre">File.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.query"><code class="docutils literal notranslate"><span class="pre">File.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.id_product"><code class="docutils literal notranslate"><span class="pre">Image.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_id"><code class="docutils literal notranslate"><span class="pre">Image.image_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_uri"><code class="docutils literal notranslate"><span class="pre">Image.image_uri</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.query"><code class="docutils literal notranslate"><span class="pre">Image.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product"><code class="docutils literal notranslate"><span class="pre">Product</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.description"><code class="docutils literal notranslate"><span class="pre">Product.description</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.files"><code class="docutils literal notranslate"><span class="pre">Product.files</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.full_price"><code class="docutils literal notranslate"><span class="pre">Product.full_price</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.images"><code class="docutils literal notranslate"><span class="pre">Product.images</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.is_new"><code class="docutils literal notranslate"><span class="pre">Product.is_new</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.is_popular"><code class="docutils literal notranslate"><span class="pre">Product.is_popular</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.price"><code class="docutils literal notranslate"><span class="pre">Product.price</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.product_id"><code class="docutils literal notranslate"><span class="pre">Product.product_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.purchases"><code class="docutils literal notranslate"><span class="pre">Product.purchases</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.query"><code class="docutils literal notranslate"><span class="pre">Product.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.title"><code class="docutils literal notranslate"><span class="pre">Product.title</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.videos"><code class="docutils literal notranslate"><span class="pre">Product.videos</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased"><code class="docutils literal notranslate"><span class="pre">Purchased</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.cost_of_purchase"><code class="docutils literal notranslate"><span class="pre">Purchased.cost_of_purchase</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.id_product"><code class="docutils literal notranslate"><span class="pre">Purchased.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.id_user"><code class="docutils literal notranslate"><span class="pre">Purchased.id_user</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.purchase_id"><code class="docutils literal notranslate"><span class="pre">Purchased.purchase_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.query"><code class="docutils literal notranslate"><span class="pre">Purchased.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.time_of_purchase"><code class="docutils literal notranslate"><span class="pre">Purchased.time_of_purchase</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.full_name"><code class="docutils literal notranslate"><span class="pre">User.full_name</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.get_id"><code class="docutils literal notranslate"><span class="pre">User.get_id()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.login"><code class="docutils literal notranslate"><span class="pre">User.login</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.query"><code class="docutils literal notranslate"><span class="pre">User.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.user_id"><code class="docutils literal notranslate"><span class="pre">User.user_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video"><code class="docutils literal notranslate"><span class="pre">Video</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.id_product"><code class="docutils literal notranslate"><span class="pre">Video.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.query"><code class="docutils literal notranslate"><span class="pre">Video.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.video_id"><code class="docutils literal notranslate"><span class="pre">Video.video_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.video_uri"><code class="docutils literal notranslate"><span class="pre">Video.video_uri</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.load_user"><code class="docutils literal notranslate"><span class="pre">load_user()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.utilities.get_current_directory">Модуль utilities.get_current_directory.py</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.utilities.get_current_directory.get_current_directory"><code class="docutils literal notranslate"><span class="pre">get_current_directory()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-py">Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#routes-py">Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-py">Модуль <code class="docutils literal notranslate"><span class="pre">models.py</span></code> - физическая модель базы данных</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities-get-current-directory-py">Модуль <code class="docutils literal notranslate"><span class="pre">utilities.get_current_directory.py</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -409,454 +330,23 @@ document.write(`
                   
   <section id="id1">
 <h1>Все модули<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">#</a></h1>
-<section id="module-software_shop_webapp.routes">
-<span id="routes-py"></span><h2>Модуль routes.py - маппинги сервера приложений<a class="headerlink" href="#module-software_shop_webapp.routes" title="Ссылка на этот заголовок">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.account">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.account" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.account_settings">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">account_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.account_settings" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.add_to_cart">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">add_to_cart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.add_to_cart" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.cart">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">cart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.cart" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.index">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.index" title="Ссылка на это определение">#</a></dt>
-<dd><p>Домашняя страница сайта.
-На ней отрисовывается список доступных
-на текущий момент продуктов и
-пользовательские опции, по типу входа,
-регистрации, выбора продукта, и др.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>веб-страница в формате HTML</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.internal_server_error">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">internal_server_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.internal_server_error" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция вызывается в случае, если
-что-то непонятное случилось с сервером.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple(str, int)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.login_page">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">login_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.login_page" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.logout">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.logout" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.page_not_found">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">page_not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.page_not_found" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция вызывается в случае, если
-данной страницы не существует. Возвращает HTML-
-разметку страницы, где пользователю будет написано, что
-такой страницы не существует.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple(str, int)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.product">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.product" title="Ссылка на это определение">#</a></dt>
-<dd><p>Генерирует веб-страницу с продуктом на основе
-его первичного целочисленного ключа id.
-Возвращает собранную на основе шаблона
-страничку при помощи Jinja.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>product_id</strong> (<em>int</em>) – первичный ключ программного продукта в базе данных</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.products">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">products</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.products" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.redirect_to_signin">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">redirect_to_signin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.redirect_to_signin" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.register_page">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">register_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.register_page" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
+<div class="toctree-wrapper compound">
+</div>
+<section id="init-py">
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений<a class="headerlink" href="#init-py" title="Ссылка на этот заголовок">#</a></h2>
+<p>Читать документацию: <a class="reference internal" href="init.html"><span class="doc">Модуль __init__.py - инициализация сервера приложений</span></a></p>
 </section>
-<section id="module-software_shop_webapp.models">
-<span id="models-py"></span><h2>Модуль models.py - физическая модель базы данных<a class="headerlink" href="#module-software_shop_webapp.models" title="Ссылка на этот заголовок">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Developer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Developer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Developer" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Developer.developer_id">
-<span class="sig-name descname"><span class="pre">developer_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Developer.developer_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Developer.id_user">
-<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Developer.id_user" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Developer.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Developer.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.File">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.File" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.File.file_id">
-<span class="sig-name descname"><span class="pre">file_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.File.file_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.File.file_uri">
-<span class="sig-name descname"><span class="pre">file_uri</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.File.file_uri" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.File.id_product">
-<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.File.id_product" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.File.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.File.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Image">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Image" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Image.id_product">
-<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Image.id_product" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Image.image_id">
-<span class="sig-name descname"><span class="pre">image_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Image.image_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Image.image_uri">
-<span class="sig-name descname"><span class="pre">image_uri</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Image.image_uri" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Image.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Image.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Product" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.description" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.files">
-<span class="sig-name descname"><span class="pre">files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.File" title="software_shop_webapp.models.File"><span class="pre">File</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.files" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.full_price">
-<span class="sig-name descname"><span class="pre">full_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.full_price" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.images">
-<span class="sig-name descname"><span class="pre">images</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.Image" title="software_shop_webapp.models.Image"><span class="pre">Image</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.images" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.is_new">
-<span class="sig-name descname"><span class="pre">is_new</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.is_new" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.is_popular">
-<span class="sig-name descname"><span class="pre">is_popular</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.is_popular" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.price">
-<span class="sig-name descname"><span class="pre">price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.price" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.product_id">
-<span class="sig-name descname"><span class="pre">product_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.product_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.purchases">
-<span class="sig-name descname"><span class="pre">purchases</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.Purchased" title="software_shop_webapp.models.Purchased"><span class="pre">Purchased</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.purchases" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.title">
-<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.title" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Product.videos">
-<span class="sig-name descname"><span class="pre">videos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.Video" title="software_shop_webapp.models.Video"><span class="pre">Video</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Product.videos" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Purchased</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Purchased" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.cost_of_purchase">
-<span class="sig-name descname"><span class="pre">cost_of_purchase</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.cost_of_purchase" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.id_product">
-<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.id_product" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.id_user">
-<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.id_user" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.purchase_id">
-<span class="sig-name descname"><span class="pre">purchase_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.purchase_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Purchased.time_of_purchase">
-<span class="sig-name descname"><span class="pre">time_of_purchase</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Purchased.time_of_purchase" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.User" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.full_name">
-<span class="sig-name descname"><span class="pre">full_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.full_name" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.get_id">
-<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.User.get_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.login">
-<span class="sig-name descname"><span class="pre">login</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.login" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.password">
-<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.password" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.user_id">
-<span class="sig-name descname"><span class="pre">user_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.user_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.User.username">
-<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.User.username" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Video">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Video" title="Ссылка на это определение">#</a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Video.id_product">
-<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Video.id_product" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Video.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Video.query" title="Ссылка на это определение">#</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Предупреждение</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Video.video_id">
-<span class="sig-name descname"><span class="pre">video_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Video.video_id" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="software_shop_webapp.models.Video.video_uri">
-<span class="sig-name descname"><span class="pre">video_uri</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Video.video_uri" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.models.load_user">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">load_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.load_user" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
+<section id="routes-py">
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений<a class="headerlink" href="#routes-py" title="Ссылка на этот заголовок">#</a></h2>
+<p>Читать документацию: <a class="reference internal" href="routes.html"><span class="doc">Модуль routes.py - маппинги сервера приложений</span></a></p>
 </section>
-<section id="module-software_shop_webapp.utilities.get_current_directory">
-<span id="utilities-get-current-directory-py"></span><h2>Модуль utilities.get_current_directory.py<a class="headerlink" href="#module-software_shop_webapp.utilities.get_current_directory" title="Ссылка на этот заголовок">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.utilities.get_current_directory.get_current_directory">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.utilities.get_current_directory.</span></span><span class="sig-name descname"><span class="pre">get_current_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.utilities.get_current_directory.get_current_directory" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция возвращает директорию/путь, в
-котором лежит скрипт .py, который вызывает данную функцию.
-Эта функция более точно ищет то место, где находится
-скрипт и не обращает внимания на то, в какой директории
-находится пользователь в терминале (а именно эта директория
-берётся за основу как «относительный путь» по
-умолчанию, что не всегда хорошо).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>custom_filepath</strong> (<em>str</em><em>, </em><em>optional</em>) – путь до файла (если нужно узнать путь до директории конкретного скрипта), по умолчанию - None</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>путь до файла, откуда была вызвана данная функция</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="models-py">
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">models.py</span></code> - физическая модель базы данных<a class="headerlink" href="#models-py" title="Ссылка на этот заголовок">#</a></h2>
+<p>Читать документацию: <a class="reference internal" href="models.html"><span class="doc">Модуль models.py - физическая модель базы данных</span></a></p>
+</section>
+<section id="utilities-get-current-directory-py">
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">utilities.get_current_directory.py</span></code><a class="headerlink" href="#utilities-get-current-directory-py" title="Ссылка на этот заголовок">#</a></h2>
+<p>Читать документацию: <a class="reference internal" href="get_current_directory.html"><span class="doc">Модуль utilities.get_current_directory.py</span></a></p>
 </section>
 </section>
 
@@ -885,7 +375,7 @@ customized per-model by overriding <code class="xref py py-attr docutils literal
        title="следующая страница">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">вперёд</p>
-        <p class="prev-next-title">Модуль __init__.py</p>
+        <p class="prev-next-title">Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -905,91 +395,10 @@ customized per-model by overriding <code class="xref py py-attr docutils literal
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.routes">Модуль routes.py - маппинги сервера приложений</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account"><code class="docutils literal notranslate"><span class="pre">account()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account_settings"><code class="docutils literal notranslate"><span class="pre">account_settings()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.add_to_cart"><code class="docutils literal notranslate"><span class="pre">add_to_cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.cart"><code class="docutils literal notranslate"><span class="pre">cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.login_page"><code class="docutils literal notranslate"><span class="pre">login_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.products"><code class="docutils literal notranslate"><span class="pre">products()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.redirect_to_signin"><code class="docutils literal notranslate"><span class="pre">redirect_to_signin()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.register_page"><code class="docutils literal notranslate"><span class="pre">register_page()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.models">Модуль models.py - физическая модель базы данных</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer"><code class="docutils literal notranslate"><span class="pre">Developer</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.developer_id"><code class="docutils literal notranslate"><span class="pre">Developer.developer_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.id_user"><code class="docutils literal notranslate"><span class="pre">Developer.id_user</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Developer.query"><code class="docutils literal notranslate"><span class="pre">Developer.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.file_id"><code class="docutils literal notranslate"><span class="pre">File.file_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.file_uri"><code class="docutils literal notranslate"><span class="pre">File.file_uri</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.id_product"><code class="docutils literal notranslate"><span class="pre">File.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.File.query"><code class="docutils literal notranslate"><span class="pre">File.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.id_product"><code class="docutils literal notranslate"><span class="pre">Image.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_id"><code class="docutils literal notranslate"><span class="pre">Image.image_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_uri"><code class="docutils literal notranslate"><span class="pre">Image.image_uri</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.query"><code class="docutils literal notranslate"><span class="pre">Image.query</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product"><code class="docutils literal notranslate"><span class="pre">Product</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.description"><code class="docutils literal notranslate"><span class="pre">Product.description</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.files"><code class="docutils literal notranslate"><span class="pre">Product.files</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.full_price"><code class="docutils literal notranslate"><span class="pre">Product.full_price</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.images"><code class="docutils literal notranslate"><span class="pre">Product.images</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.is_new"><code class="docutils literal notranslate"><span class="pre">Product.is_new</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.is_popular"><code class="docutils literal notranslate"><span class="pre">Product.is_popular</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.price"><code class="docutils literal notranslate"><span class="pre">Product.price</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.product_id"><code class="docutils literal notranslate"><span class="pre">Product.product_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.purchases"><code class="docutils literal notranslate"><span class="pre">Product.purchases</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.query"><code class="docutils literal notranslate"><span class="pre">Product.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.title"><code class="docutils literal notranslate"><span class="pre">Product.title</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.videos"><code class="docutils literal notranslate"><span class="pre">Product.videos</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased"><code class="docutils literal notranslate"><span class="pre">Purchased</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.cost_of_purchase"><code class="docutils literal notranslate"><span class="pre">Purchased.cost_of_purchase</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.id_product"><code class="docutils literal notranslate"><span class="pre">Purchased.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.id_user"><code class="docutils literal notranslate"><span class="pre">Purchased.id_user</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.purchase_id"><code class="docutils literal notranslate"><span class="pre">Purchased.purchase_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.query"><code class="docutils literal notranslate"><span class="pre">Purchased.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Purchased.time_of_purchase"><code class="docutils literal notranslate"><span class="pre">Purchased.time_of_purchase</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.full_name"><code class="docutils literal notranslate"><span class="pre">User.full_name</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.get_id"><code class="docutils literal notranslate"><span class="pre">User.get_id()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.login"><code class="docutils literal notranslate"><span class="pre">User.login</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.query"><code class="docutils literal notranslate"><span class="pre">User.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.user_id"><code class="docutils literal notranslate"><span class="pre">User.user_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video"><code class="docutils literal notranslate"><span class="pre">Video</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.id_product"><code class="docutils literal notranslate"><span class="pre">Video.id_product</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.query"><code class="docutils literal notranslate"><span class="pre">Video.query</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.video_id"><code class="docutils literal notranslate"><span class="pre">Video.video_id</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Video.video_uri"><code class="docutils literal notranslate"><span class="pre">Video.video_uri</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.load_user"><code class="docutils literal notranslate"><span class="pre">load_user()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.utilities.get_current_directory">Модуль utilities.get_current_directory.py</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.utilities.get_current_directory.get_current_directory"><code class="docutils literal notranslate"><span class="pre">get_current_directory()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-py">Модуль <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - инициализация сервера приложений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#routes-py">Модуль <code class="docutils literal notranslate"><span class="pre">routes.py</span></code> - маппинги сервера приложений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-py">Модуль <code class="docutils literal notranslate"><span class="pre">models.py</span></code> - физическая модель базы данных</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities-get-current-directory-py">Модуль <code class="docutils literal notranslate"><span class="pre">utilities.get_current_directory.py</span></code></a></li>
 </ul>
   </nav></div>
 

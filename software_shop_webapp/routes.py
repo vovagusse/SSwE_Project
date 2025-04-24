@@ -7,6 +7,7 @@ from software_shop_webapp.utilities.get_current_directory import *
 from software_shop_webapp.utilities.mock_data import nav_tabs, user
 from software_shop_webapp.models import User
 from software_shop_webapp.model_queries import *
+import flask
 
 
 @app.route("/login/", methods=["GET", "POST"])
@@ -30,6 +31,12 @@ def login_page() -> str:
 @app.route("/logout/", methods=["GET", "POST"])
 @login_required
 def logout():
+    """Производит выход из аккаунта для текушего
+    пользователя и перенаправляет на домашнюю страницу
+
+    :return: вызов функции ``redirect(url_for("index"))``
+    :rtype: Response
+    """
     logout_user()
     return redirect(url_for("index"))
 
@@ -43,6 +50,15 @@ def account():
 @app.route("/account_settings/", methods=("GET", "POST", "DELETE"))
 @login_required
 def account_settings():
+    """Позволяет поменять данные на аккаунте, а именно:
+    * Поменять отображаемое имя пользователя
+    * Поменять ФИО пользователя
+    * Поменять пароль аккаунта
+    * Удалить аккаунт
+
+    :return: Возвращает либо страницу ``account_settings.html`` в случае захода на страницу или ошибки при выполнении функции, либо перенаправляет на страницу ``account.html``
+    :rtype: str | Response
+    """
     if request.method == 'POST':
         if 'delete_account' in request.form:
             db.session.delete(current_user)
@@ -119,6 +135,12 @@ def account_settings():
 
 @app.route("/register/", methods=["GET", "POST"])
 def register_page() -> str:
+    """Обрабатывает форму регистрации нового 
+    аккаунта и создаёт новую учётную запись.
+
+    :return: при ошибке или первом посещении страницы возвращает на ``register.html`` или перенаправляет на страницу входа ``login.html``
+    :rtype: str | Response
+    """
     f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
     f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
     f_password2 = request.form.get("password2") #stands for Form Password (Password taken from the Form)
@@ -159,17 +181,17 @@ def product(product_id: int) -> str:
 
 @app.route("/add_to_cart")
 @login_required
-def add_to_cart() -> str:
+def add_to_cart() -> flask.Response:
     return redirect("/")
 
 
 @app.route("/cart")
 @login_required
-def cart() -> str:
+def cart() -> flask.Response:
     return redirect("/")
 
 @app.route("/products")
-def products():
+def products() -> flask.Response:
     return redirect(url_for('index'))
 
 
@@ -220,6 +242,16 @@ def internal_server_error(e):
 
 @app.after_request
 def redirect_to_signin(response):
+    """Перенаправляет на страницу входа в аккаунт, при
+    этом сохраняя ту страницу, на которую пользователь 
+    должен был попасть, если бы пользователь вошёл до этого.
+
+    :param response: хранит в себе код статуса и ответ от сервера.
+    :type response: ???
+    :return: перенаправляет на страницу ``login.html`` либо просто показывает ответ
+    :rtype: Response | ??? 
+    """
+    print(type(response))
     if response.status_code == 401:
         return redirect(url_for('login_page') + "?next=" + request.url)
     return response

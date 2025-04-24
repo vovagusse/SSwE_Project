@@ -1,5 +1,5 @@
-Модуль get_current_directory.py
-=========================================================
+Модуль ``utilities.get_current_directory.py``
+=============================================
 
 .. toctree::
    :maxdepth: 2

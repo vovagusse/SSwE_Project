@@ -30,6 +30,15 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
+
+autodoc_default_options = {
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,  # Важно для переменных без документации
+    'show-inheritance': True,
+}
+autoclass_content = 'both'  # Включает и docstring, и doc-комментарии
+
 language = 'ru_RU'
 
 # -- Options for HTML output -------------------------------------------------
