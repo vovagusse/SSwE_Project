@@ -16,3 +16,7 @@
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Репозиторий GitHub
+------------------
+Ссылка: https://github.com/vovagusse/SSwE_Project
