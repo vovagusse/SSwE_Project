@@ -11,3 +11,5 @@ software_shop_webapp/utilities/__pycache__
 software_shop_webapp/utilities/my_private_key
 tracebacks.py
 utilities
+__pycache__
+__pycache__/**
