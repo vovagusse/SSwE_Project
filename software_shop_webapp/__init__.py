@@ -24,4 +24,4 @@ with app.app_context():
     db.create_all() #: В этой строке создаются все таблицы
 
 
-# app.run(debug=True, port=8888)  
+app.run(debug=True, port=8888)  
