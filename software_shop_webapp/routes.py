@@ -190,11 +190,26 @@ def add_to_cart() -> str:
     return redirect(url_for("product", product_id=product_id))
 
 
-@app.route("/cart")
+@app.route("/cart", methods=["GET", "POST"])
 @login_required
 def cart() -> flask.Response:
     products = get_products_in_cart(current_user.user_id)
+    if request.method == "POST":
+        print(request.args)
+        # delete_product_from_cart()
     return render_template("shopping_cart/cart.html", products=products)
+
+
+@app.route("/delete_from_cart", methods=["DELETE", "POST"])
+@login_required
+def delete_from_cart() -> flask.Response:
+    # products = get_products_in_cart(current_user.user_id)
+    if request.method == "POST":
+        prod_id = request.args['product_id']
+        print(prod_id)
+        delete_product_from_cart(product_id=prod_id, user_id=current_user.user_id)
+    return redirect(url_for("cart"))
+
 
 @app.route("/products")
 def products() -> flask.Response:
@@ -257,7 +272,6 @@ def redirect_to_signin(response):
     :return: перенаправляет на страницу ``login.html`` либо просто показывает ответ
     :rtype: Response | ??? 
     """
-    print(type(response))
     if response.status_code == 401:
         return redirect(url_for('login_page') + "?next=" + request.url)
     return response

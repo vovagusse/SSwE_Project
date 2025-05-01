@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}Магазин ПС{% endblock %}
+{% block subtitle %} Корзина {%endblock%}
+{% block content %}
+    <section class="h-100 h-custom" style="background-color: #f8fafc;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <!-- Список продуктов -->
+                                <div class="col-lg-7">
+                                    <h5 class="mb-3">
+                                        <a href="{{ url_for('main.index') }}" class="text-body">
+                                            <i class="fas fa-long-arrow-alt-left me-2"></i> 
+                                            Продолжить покупки
+                                        </a>
+                                    </h5>
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                            <p class="mb-1">Корзина</p>
+                                            <p class="mb-0">Товаров в корзине: {{ products|length }}</p>
+                                        </div>
+                                    </div>
+
+                                    {% if products %}
+                                        {% for p in products %}
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div>
+                                                            <img 
+                                                                src="{{ p[0].image_url or '/static/default-product.jpg' }}"
+                                                                class="img-fluid rounded-3" 
+                                                                alt="Товар" 
+                                                                style="width: 120px;"
+                                                            >
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <h5>{{ p[0].title }}</h5>
+                                                            <p class="small mb-0">{{ p[0].description }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div style="width: 100px;">
+                                                            <input 
+                                                                type="number" 
+                                                                class="form-control form-control-sm" 
+                                                                value="{{ p[1] }}" 
+                                                                min="1"
+                                                                onchange="updateQuantity(this.value, '{{ p[0].id }}')"
+                                                            >
+                                                        </div>
+                                                        <div style="width: 150px;">
+                                                            <h5 class="mb-0">{{ p[0].full_price }} ₽</h5>
+                                                        </div>
+                                                        <a 
+                                                            href="{{ url_for('cart.remove_item', product_id=p[0].id) }}" 
+                                                            style="color: #cecece;"
+                                                        >
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="text-center py-5">
+                                            <h3>Корзина пуста</h3>
+                                            <p class="lead">Добавьте товары для покупки</p>
+                                            <a href="{{ url_for('main.index') }}" class="btn btn-primary mt-3">
+                                                Вернуться к покупкам
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+
+                                <!-- Сумма заказа -->
+                                <div class="col-lg-5">
+                                    <div class="card bg-primary text-white rounded-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <h5 class="mb-0">Итого:</h5>
+                                                <span id="total-price">{{ total_price }} ₽</span>
+                                            </div>
+
+                                            <hr class="my-4">
+
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-info btn-block btn-lg"
+                                                onclick="checkout()"
+                                            >
+                                                <div class="d-flex justify-content-between">
+                                                    <span>{{ total_price }} ₽</span>
+                                                    <span>Оформить заказ <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateQuantity(quantity, productId) {
+            fetch('{{ url_for("cart.update_quantity") }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: parseInt(quantity)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-price').textContent = `${data.total_price} ₽`;
+            });
+        }
+
+        function checkout() {
+            alert('Спасибо за заказ!');
+            // Здесь должна быть логика оформления заказа
+        }
+    </script>
+{% endblock %}

@@ -1,4 +1,5 @@
 from sqlalchemy import select, insert, delete
+from sqlalchemy.exc import IntegrityError
 from software_shop_webapp.models import *
 from software_shop_webapp import db
 import pprint
@@ -19,33 +20,27 @@ def get_products_in_cart(user_id: int) -> list[Product]:
         )
     sth = db.session.execute(q)
     obj = sth.all()
-    # print()
-    # print()
-    # print(obj.product_id, obj.title, obj.description, sep="\n")
-    print()
-    print("sth.all():")
-    print(obj)
-    print()
-    print()
     return obj
 
 def add_product_to_cart(user_id: int, product_id: int) -> None:
-    q = insert(
-            Cart
-        ).values(
-            id_product=product_id,
-            id_user=user_id
-        )
-    db.session.execute(q)
-    db.session.commit()
-
+    try:
+        q = insert(
+                Cart
+            ).values(
+                id_product=product_id,
+                id_user=user_id
+            )
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print(":(")
 
 def delete_product_from_cart(user_id: int, product_id: int) -> None:
     q = delete(
             Cart
         ).where(
-            id_product=product_id,
-            id_user=user_id
+            Cart.id_product==product_id,
+            Cart.id_user==user_id
         )
     db.session.execute(q)
     db.session.commit()

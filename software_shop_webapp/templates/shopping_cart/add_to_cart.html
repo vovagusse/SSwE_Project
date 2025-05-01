@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Магазин ПС{% endblock %}
+{% block subtitle %} Онлайн сервис оплаты программных средств {%endblock%}
+{% block content %}
+
+<h1> 
+    <b>
+    hi this is shopping cart
+    </b>
+</h1>
+
+
+<div class="m-2">
+    {{ added_product.product_id }}
+</div>
+<br>
+<div class="m-2">
+    {{ added_product.title }}
+</div>
+<br>
+<div class="m-2">
+    {{ added_product.description }}
+</div>
+<br>
+<div class="m-2">
+    {{ added_product.price }}
+</div>
+<br>
+<div class="m-2">
+    {{ added_product.full_price }}
+</div>
+
+<div class="row-cols-auto">
+    <div class="col"> 
+        <form action="{{url_for('add_to_cart')}}" method="POST">
+            <button class="btn btn-outline-light" type="submit">
+                Добавить в корзину?
+            </button>
+        </form>
+        <button class="btn btn-outline-light">
+            Назад
+        </button>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Магазин ПС{% endblock %}
+{% block subtitle %} Корзина {%endblock%}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        {% if products %}
+            {% for p in products %}
+            <div class="col-12 mb-3">
+                <div class="product-card">
+                    <!-- верхняя часть карточки с названием и кнопочками -->
+                    <div class="d-flex align-items-center p-3">
+                        <div class="flex-grow-1">
+                            <h3 class="product-title mb-1">
+                                <strong>
+                                    {{ p[0].title }}
+                                </strong>
+                            </h3>
+                            <!-- price (can have discount) -->
+                            {% if p[0].price.replace(',', '')|int  >= p[0].full_price.replace(',', '')|int %}
+                            <div class="mt-auto product-price">
+                                {{ p[0].full_price }} ₽
+                            </div>
+                            {% elif  p[0].price.replace(',', '')|int < p[0].full_price.replace(',', '')|int %}
+                            <div class="mt-auto product-price">
+                                {{ p[0].price }} ₽
+                                <del class="product-price-on-sale">
+                                    {{ p[0].full_price }} ₽
+                                </del>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ms-auto d-flex align-items-center gap-2">
+                            <!-- кнопка удаления товара из корзины -->
+                            <form method="POST" action="{{url_for('delete_from_cart', product_id=p[0].product_id)}}">
+                                <button class="btn btn-outline-danger" type="submit">
+                                    <i class="bi bi-trash"></i>
+                                    Удалить
+                                </button>
+                            </form>
+                            <!-- кнопка раскрытия всякой информации о товаре -->
+                            <button class="btn btn-outline-secondary d-lg-none d-md-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#{{ 'details-' + (p[0].product_id|string) }}"
+                                    aria-expanded="false"
+                                    aria-controls="{{ 'details-' + (p[0].product_id|string) }}">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- контейнер с расркытием всякой инфы о товаре -->
+                    <div class="collapse d-md-block" id="{{ 'details-' + (p[0].product_id|string) }}">
+                        <div class="bg-gradient-to-r from-secondary to-accent rounded-lg p-3 mb-3">
+                            <p class="mb-0 text-black font-medium">
+                                <b>Описание:</b> {{ p[0].description }}</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <a class="btn p-2 justify-content-between" href="{{url_for('product', product_id=p[0].product_id)}}">Перейти на страницу продукта</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center py-5">
+                <h3>Корзина пуста</h3>
+                <p class="lead">Добавьте товары для покупки</p>
+                <a href="{{ url_for('main.index') }}" class="btn" style="width: 200px;">
+                    Вернуться к покупкам
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% if products %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card bg-white text-black rounded-3 fixed-bottom w-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="mb-0" style="color:var(--text-color)">Итого:</h5>
+                        <span class="fs-4">{{ total_price }} ₽</span>
+                    </div>
+                    <button class="btn btn-info" type="button" style="width: 100%;">
+                        Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
