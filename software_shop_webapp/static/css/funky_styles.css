@@ -60,10 +60,15 @@ body {
 }
 .product-card:hover .product-image img {
     transform: scale(1.1);
+    display: flex;
+    height: 100%;
 }
 .product-info {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
+
 .product-title {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
@@ -122,42 +127,51 @@ body {
 .store-footer a:hover {
     color: var(--accent-color);
 }
+/* мобильная раскладочка */
 @media (max-width: 768px) {
+    :root{
+        font-size:medium;
+    }
     .store-header h1 {
         font-size: 2rem;
     }
+    .store-header p{
+        font-size: 0.75rem;
+    }
     .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(1);
         gap: 1rem;
         padding: 1rem;
     }
+    .nav-link {
+        font-size: 0.875rem;
+        padding: 0.375rem 0.75rem;
+    }
+    .store-nav {
+        -ms-overflow-style: none;
+        overflow: auto;
+    }
 }
 
+/* Для планшетов (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-  }
-  
-  /* Tooltip text */
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    top: 100%; /* Position the tooltip above the text */
-    left: 50%;
-    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+.store-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.store-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-link {
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+}

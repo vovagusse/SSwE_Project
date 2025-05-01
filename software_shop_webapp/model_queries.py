@@ -11,16 +11,14 @@ def get_products() -> list[Product]:
 
 
 def get_products_in_cart(user_id: int) -> list[Product]:
-    q = select(
+    a = Product.query.select_from(
             Product
         ).join(
             Cart, Product.product_id == Cart.id_product
         ).where(
             Cart.id_user == user_id
-        )
-    sth = db.session.execute(q)
-    obj = sth.all()
-    return obj
+        ).all()
+    return a
 
 def add_product_to_cart(user_id: int, product_id: int) -> None:
     try:
@@ -40,6 +38,16 @@ def delete_product_from_cart(user_id: int, product_id: int) -> None:
             Cart
         ).where(
             Cart.id_product==product_id,
+            Cart.id_user==user_id
+        )
+    db.session.execute(q)
+    db.session.commit()
+
+
+def delete_all_products_from_cart(user_id: int) -> None:
+    q = delete(
+            Cart
+        ).where(
             Cart.id_user==user_id
         )
     db.session.execute(q)

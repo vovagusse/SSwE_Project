@@ -107,44 +107,45 @@
                         Домашняя страница
                     </a>
                     {% if current_user.is_authenticated %}
-
-                    <a class="btn btn-outline-light m-1" href="{{url_for('cart')}}">
+                    <!-- Личный кабинет -->
+                    <div class="dropdown m-1">
+                        <button class="btn btn-outline-light col-12" 
+                            role="button" 
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person"></i>
+                            Личный кабинет
+                        </button>
+                        <ul class="dropdown-menu rounded-3 mt-2">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('account')}}"  role="button">
+                                    <i class="bi bi-person"></i>
+                                    Аккаунт
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('account_settings')}}"  role="button">
+                                    <i class="bi bi-gear"></i>
+                                    Настройки аккаунта
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('logout')}}"  role="button">        
+                                    <i class="bi bi-box-arrow-in-left"></i>
+                                    Выйти из аккаунта
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Корзина -->
+                    <a class="btn btn-outline-light m-1" href="{{url_for('cart')}}" role="button">
                         <i class="bi bi-cart"></i>
                         Корзина
                     </a>
                     
-                    <button class="btn btn-outline-light m-1" 
-                        role="button" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false">
-                        <i class="bi bi-person"></i>
-                        Личный кабинет
-                    </button>
-                    <ul class="dropdown-menu">
-                    <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
-                    <li>
-                        <a class="dropdown-item" href="{{url_for('account')}}"  role="button">
-                            <i class="bi bi-person"></i>
-                            Аккаунт
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{url_for('account_settings')}}"  role="button">
-                            <i class="bi bi-gear"></i>
-                            Настройки аккаунта
-                        </a>
-                    </li>
-                    
-                    <li><hr class="dropdown-divider"></li>
-
-                    <li>
-                        <a class="dropdown-item" href="{{url_for('logout')}}"  role="button">        
-                            <i class="bi bi-box-arrow-in-left"></i>
-                            Выйти из аккаунта
-                        </a>
-                    </li>
-                    </ul>
                     {% else %}
+                    <!-- Если мол в аккаунт пользователь не зашёл то тогда вот -->
                     <a href="{{url_for('login_page')}}" class="btn btn-outline-light m-1" role="button">
                         <i class="bi bi-box-arrow-in-right"></i>
                         Войти

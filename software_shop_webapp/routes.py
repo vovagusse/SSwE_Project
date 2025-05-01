@@ -179,25 +179,33 @@ def product(product_id: int) -> str:
 @app.route("/add_to_cart", methods=["GET", "POST"])
 @login_required
 def add_to_cart() -> str:
-    product_id: int = request.args.get('product_id', None)
-    added_product: Product = get_product(product_id)
-    
+    product_id: int = request.args.get('product_id', None)   
+    next = request.args['next']
     if request.method == "POST":
         add_product_to_cart(
             user_id=current_user.user_id,
             product_id=product_id)
-        return redirect(url_for("cart"))
-    return redirect(url_for("product", product_id=product_id))
+    if next:
+        return redirect(url_for(next))
+    return redirect(url_for("cart"))
 
 
 @app.route("/cart", methods=["GET", "POST"])
 @login_required
 def cart() -> flask.Response:
     products = get_products_in_cart(current_user.user_id)
+    fix_price = lambda x: int(x.replace(",", ""))
+    summa = sum(fix_price(i.price) for i in products)
+    full_summa = sum(fix_price(i.full_price) for i in products)
     if request.method == "POST":
-        print(request.args)
-        # delete_product_from_cart()
-    return render_template("shopping_cart/cart.html", products=products)
+        action = request.form.get("action")
+        if action == "clear_cart":
+            delete_all_products_from_cart(current_user.user_id)
+            return redirect(url_for("cart"))
+        if action == "proceed_purchase":
+            print("\n (!) [proceed_purchase] button clicked\n")
+        
+    return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
 
 
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])
@@ -206,7 +214,6 @@ def delete_from_cart() -> flask.Response:
     # products = get_products_in_cart(current_user.user_id)
     if request.method == "POST":
         prod_id = request.args['product_id']
-        print(prod_id)
         delete_product_from_cart(product_id=prod_id, user_id=current_user.user_id)
     return redirect(url_for("cart"))
 
@@ -216,7 +223,7 @@ def products() -> flask.Response:
     return redirect(url_for('index'))
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index() -> str:
     """Домашняя страница сайта. 
     На ней отрисовывается список доступных
@@ -226,12 +233,12 @@ def index() -> str:
 
     :return: веб-страница в формате HTML
     :rtype: str
-    """
-    cur = current_user
-    
-    query = dict()
+    """    
     query = get_products()
-    return render_template("index.html", nav_tabs=nav_tabs, products=query, current_user=cur)
+    return render_template("index.html", 
+                           nav_tabs=nav_tabs, 
+                           products=query, 
+                           current_user=current_user)
 
 
 @app.errorhandler(404)

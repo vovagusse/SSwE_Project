@@ -2,7 +2,7 @@
 {% block title %}Магазин ПС{% endblock %}
 {% block subtitle %} Корзина {%endblock%}
 {% block content %}
-<div class="container py-5">
+<div class="container py-3">
     <div class="row">
         <!-- карточки продуктов -->
         {% if products %}
@@ -14,27 +14,27 @@
                         <div class="flex-grow-1">
                             <h3 class="product-title mb-1">
                                 <strong>
-                                    {{ p[0].title }}
+                                    {{ p.title }}
                                 </strong>
                             </h3>
                             <!-- price (can have discount) -->
-                            {% if p[0].price.replace(',', '')|int  >= p[0].full_price.replace(',', '')|int %}
+                            {% if p.price.replace(',', '')|int  >= p.full_price.replace(',', '')|int %}
                             <div class="mt-auto product-price">
-                                {{ p[0].full_price }} ₽
+                                {{ p.full_price }} ₽
                             </div>
-                            {% elif  p[0].price.replace(',', '')|int < p[0].full_price.replace(',', '')|int %}
+                            {% elif  p.price.replace(',', '')|int < p.full_price.replace(',', '')|int %}
                             <div class="mt-auto product-price">
-                                {{ p[0].price }} ₽
+                                {{ p.price }} ₽
                                 <del class="product-price-on-sale">
-                                    {{ p[0].full_price }} ₽
+                                    {{ p.full_price }} ₽
                                 </del>
                             </div>
                             {% endif %}
                         </div>
                         <div class="ms-auto d-flex align-items-center gap-2">
                             <!-- кнопка удаления товара из корзины -->
-                            <form method="POST" action="{{url_for('delete_from_cart', product_id=p[0].product_id)}}">
-                                <button class="btn btn-outline-danger" type="submit">
+                            <form method="POST" action="{{url_for('delete_from_cart', product_id=p.product_id)}}">
+                                <button class="btn btn-outline-danger px-2 " type="submit">
                                     <i class="bi bi-trash"></i>
                                     Удалить
                                 </button>
@@ -42,21 +42,25 @@
                             <!-- кнопка раскрытия всякой информации о товаре -->
                             <button class="btn btn-outline-secondary d-lg-none d-md-block" type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#{{ 'details-' + (p[0].product_id|string) }}"
+                                    data-bs-target="#{{ 'details-' + (p.product_id|string) }}"
                                     aria-expanded="false"
-                                    aria-controls="{{ 'details-' + (p[0].product_id|string) }}">
+                                    aria-controls="{{ 'details-' + (p.product_id|string) }}">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
                     </div>
                     <!-- контейнер с расркытием всякой инфы о товаре -->
-                    <div class="collapse d-md-block" id="{{ 'details-' + (p[0].product_id|string) }}">
-                        <div class="bg-gradient-to-r from-secondary to-accent rounded-lg p-3 mb-3">
-                            <p class="mb-0 text-black font-medium">
-                                <b>Описание:</b> {{ p[0].description }}</p>
-                        </div>
+                    <div class="collapse d-lg-block pt-0" id="{{ 'details-' + (p.product_id|string) }}">
+                        <!-- <div class="bg-gradient-to-r from-secondary to-accent rounded-lg p-3"> -->
+                            <p class="px-3 mb-2 text-black font-medium">
+                                <b>Описание:</b> {{ p.description }}</p>
+                        <!-- </div> -->
                         <div class="px-3 pb-3">
-                            <a class="btn p-2 justify-content-between" href="{{url_for('product', product_id=p[0].product_id)}}">Перейти на страницу продукта</a>
+                            <a class="btn btn-outline-info px-3 justify-content-between" 
+                            href="{{url_for('product', product_id=p.product_id)}}">
+                                <i class="bi bi-eye"></i>
+                                Перейти на страницу продукта
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -66,32 +70,56 @@
             <div class="text-center py-5">
                 <h3>Корзина пуста</h3>
                 <p class="lead">Добавьте товары для покупки</p>
-                <a href="{{ url_for('main.index') }}" class="btn" style="width: 200px;">
+                <a href="{{ url_for('products') }}" class="btn" style="width: 200px;">
                     Вернуться к покупкам
                 </a>
             </div>
         {% endif %}
     </div>
     {% if products %}
-    <div class="row mt-4">
+    <div class=""></div>
+    <div class="row mt-2">
         <div class="col-12">
-            <div class="product-card p-3 bg-white text-black rounded-3 w-100">
+            <div class="product-card p-3 bg-white text-black w-100">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="mb-0" style="color:var(--text-color)">
+                    <div class="d-flex justify-content-between align-items-center mb-0">
+                        <h4 class="mb-0" style="color:var(--text-color)">
+                            <strong>
                             Итого:
-                        </h5>
-                        <span class="fs-4">{{ total_price }} ₽</span>
+                            </strong>
+                        </h4>
+                        <form action="{{url_for('cart')}}" method="POST">
+                            <span class="fs-4">
+                                <div class="col">
+                                    <button class="btn btn-danger m-1 m-auto" 
+                                        type="submit"
+                                        name="action"
+                                        value="clear_cart">
+                                        <i class="bi bi-trash"></i>
+                                        Очистить корзину
+                                    </button>
+                                    <button class="btn btn-info m-1 m-auto" 
+                                        type="submit"
+                                        name="action"
+                                        value="proceed_purchase">
+                                        <i class="bi bi-cart-check"></i>
+                                        Оформить заказ
+                                    </button>
+                                </div>
+                            </span>
+                        </form>
                     </div>
-                    <div class="col">
-                        <button class="btn btn-danger m-1 m-auto" type="button">
-                            <i class="bi bi-trash"></i>
-                            Очистить корзину
-                        </button>
-                        <button class="btn btn-info m-1 m-auto" type="button">
-                            Оформить заказ
-                        </button>
-                    </div>
+                    <span class="fs-4">
+                        <!-- сумма короче -->
+                        {% if summa >= full_summa %}
+                            <div class="mt-auto product-price">{{ full_summa }} ₽</div>
+                        {% elif summa < full_summa %}
+                            <div class="mt-auto product-price">
+                                {{ summa }} ₽
+                                <del class="product-price-on-sale">{{ full_summa }} ₽</del>
+                            </div>
+                        {% endif %}
+                    </span>
                 </div>
             </div>
         </div>

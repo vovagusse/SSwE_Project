@@ -3,33 +3,28 @@
 {% block subtitle %} Онлайн сервис оплаты программных средств {%endblock%}
 {% block content %}
 
+{% from 'components/product_card.html' import product_card %}
 
-<!-- upper part (navigation buttons) -->
+<!-- верхние кнопки вкладок -->
 <nav class="store-nav nav-tabs mt-2">
     <div class="nav nav-underlined nav-justified">
         {% for nav_tab in nav_tabs %}
         {% if nav_tab['status']==1 %}
-            <button class="nav-link active" 
-                data-bs-toggle="tab" 
+        <button class="nav-link active d-inline-block text-truncate"
+                data-bs-toggle="tab"
                 data-bs-target="#{{ nav_tab['id'] }}">
-                {{ nav_tab["tab_name"] }}
-            </button>
+            {{ nav_tab["tab_name"] }}
+        </button>
         {% else %}
-            <button class="nav-link" 
-                data-bs-toggle="tab" 
+        <button class="nav-link d-inline-block text-truncate"
+                data-bs-toggle="tab"
                 data-bs-target="#{{ nav_tab['id'] }}">
-                {{ nav_tab["tab_name"] }}
-            </button>
+            {{ nav_tab["tab_name"] }}
+        </button>
         {% endif %}
         {% endfor %}
-
-        <!-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">Все программы</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#popular">Популярные</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#new">Новые поступления</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sales">Скидки</button> -->
     </div>
 </nav>
-
 
 
 <!-- elements -->
@@ -44,41 +39,7 @@
                 {% for product in products %}
 
                 <!-- one card -->
-                <div>
-                    <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
-                        </div>
-                        <div class="product-info" style="position:relative">
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
-                            </a>
-                            <p class="product-description">{{ product['description'] }}</p>
-                            <!-- price (can have discount) -->
-                            {% if 
-                                product['price'].replace(',', '')|int 
-                                >= product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
-                            {% elif 
-                                product['price'].replace(',', '')|int 
-                                < product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price"> 
-                                    {{ product["price"] }} ₽
-                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
-                                </div>
-                            {% endif %}
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <button class="mt-auto buy-button">
-                                    Купить сейчас
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    </a>
-                </div>
+                {{ product_card(product) }}
                 <!-- end of card -->
                 
                 {% endfor %}
@@ -92,43 +53,11 @@
             <div class="product-grid">
                 {% for product in products %}
                     {% if product['is_popular']|int == 1 %}
+
                     <!-- one card -->
-                <div>
-                    <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
-                        </div>
-                        <div class="product-info" style="position:relative">
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
-                            </a>
-                            <p class="product-description">{{ product['description'] }}</p>
-                            <!-- price (can have discount) -->
-                            {% if 
-                                product['price'].replace(',', '')|int 
-                                >= product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
-                            {% elif 
-                                product['price'].replace(',', '')|int 
-                                < product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price"> 
-                                    {{ product["price"] }} ₽
-                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
-                                </div>
-                            {% endif %}
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <button class="mt-auto buy-button">
-                                    Купить сейчас
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- end of card -->
+                    {{ product_card(product) }}
+                    <!-- end of card -->
+
                     {% endif %}
                 {% endfor %}
             </div>
@@ -143,42 +72,9 @@
                     {% if product['is_new']|int == 1 %}
 
                     <!-- one card -->
-                <div>
-                    <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
-                        </div>
-                        <div class="product-info" style="position:relative">
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
-                            </a>
-                            <p class="product-description">{{ product['description'] }}</p>
-                            <!-- price (can have discount) -->
-                            {% if 
-                                product['price'].replace(',', '')|int 
-                                >= product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
-                            {% elif 
-                                product['price'].replace(',', '')|int 
-                                < product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price"> 
-                                    {{ product["price"] }} ₽
-                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
-                                </div>
-                            {% endif %}
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <button class="mt-auto buy-button">
-                                    Купить сейчас
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- end of card -->
+                    {{ product_card(product) }}
+                    <!-- end of card -->
+
                     {% endif %}
                 {% endfor %}
             </div>
@@ -190,48 +86,12 @@
         <div class="tab-pane fade show" id="on_sale">
             <div class="product-grid">
                 {% for product in products %}
-                    {% if 
-                        product['price'].replace(',', '')|int 
-                        < product['full_price'].replace(',', '')|int 
-                    %}
+                    {% if (product['price'].replace(',', '')|int) < (product['full_price'].replace(',', '')|int) %}
 
                     <!-- one card -->
-                <div>
-                    <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
-                        </div>
-                        <div class="product-info" style="position:relative">
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <h2 class="product-title"> <b>{{ product['title'] }}</b> </h2>
-                            </a>
-                            <p class="product-description">{{ product['description'] }}</p>
-                            <!-- price (can have discount) -->
-                            {% if 
-                                product['price'].replace(',', '')|int 
-                                >= product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
-                            {% elif 
-                                product['price'].replace(',', '')|int 
-                                < product['full_price'].replace(',', '')|int 
-                            %}
-                                <div class="mt-auto product-price"> 
-                                    {{ product["price"] }} ₽
-                                    <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
-                                </div>
-                            {% endif %}
-                            <a href="{{ url_for('product', product_id=product['product_id']) }}">
-                                <button class="mt-auto buy-button">
-                                    Купить сейчас
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- end of card -->
+                    {{ product_card(product) }}
+                    <!-- end of card -->
+
                     {% endif %}
                 {% endfor %}
             </div>
