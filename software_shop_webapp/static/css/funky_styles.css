@@ -2,9 +2,9 @@
     --primary-color: #3035ba; 
     --secondary-color: #5230c3;
     --accent-color: #4834ff;
-    --text-color: #2d3436;
-    --text-color-gray: rgb(163, 158, 193);
-    --background-color: #f5f6fa;}
+    --text-color: #26242d;
+    --text-color-gray: rgb(132, 128, 159);
+    --background-color: #eceef8;}
     cool-image{border: solid 3px var(--secondary-color);
            border-radius: 5px;
 }
@@ -14,7 +14,8 @@ body {
     grid-template-rows: auto 1fr auto;
     background-color: var(--background-color);
     color: var(--text-color);
-    font-family:  Tahoma, Geneva, Verdana, sans-serif;}
+    font-family:  Tahoma, Geneva, Verdana, sans-serif;
+}
 .store-header {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
@@ -55,23 +56,29 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;}
+    transition: transform 0.4s ease;
+}
 .product-card:hover .product-image img {
-    transform: scale(1.1);}
+    transform: scale(1.1);
+}
 .product-info {
-    padding: 1.5rem;}
+    padding: 1.5rem;
+}
 .product-title {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);}
+    color: var(--primary-color);
+}
 .product-price {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--accent-color);}
+    color: var(--accent-color);
+}
 .product-price-on-sale {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-color-gray);}
+    color: var(--text-color-gray);
+}
 .buy-button {
     background: var(--accent-color);
     border: none;
@@ -82,7 +89,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
-    width: 100%;}
+    width: 100%;
+}
 .btn {
     background: var(--accent-color);
     color: white;
@@ -102,19 +110,25 @@ body {
 .store-footer ul {
     list-style: none;
     padding: 0;
-    margin: 0;}
+    margin: 0;
+}
 .store-footer li {
-    margin-bottom: 0.5rem;}
+    margin-bottom: 0.5rem;
+}
 .store-footer a {
     color: white;
-    text-decoration: none;}
+    text-decoration: none;
+}
 .store-footer a:hover {
-    color: var(--accent-color);}
+    color: var(--accent-color);
+}
 @media (max-width: 768px) {
     .store-header h1 {
-        font-size: 2rem;}
-    
+        font-size: 2rem;
+    }
     .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1rem;
-        padding: 1rem;}}
+        padding: 1rem;
+    }
+}

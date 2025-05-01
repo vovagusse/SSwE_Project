@@ -172,23 +172,29 @@ def product(product_id: int) -> str:
     :return: веб-страница
     :rtype: str
     """
-    p = {}
-    cur = current_user
     p = get_product(product_id)
-    # p = p.__dict__["__data__"]
-    return render_template("product.html", product=p, current_user=cur)
+    return render_template("product.html", product=p, current_user=current_user)
 
 
-@app.route("/add_to_cart")
+@app.route("/add_to_cart", methods=["GET", "POST"])
 @login_required
-def add_to_cart() -> flask.Response:
-    return redirect("/")
+def add_to_cart() -> str:
+    product_id: int = request.args.get('product_id', None)
+    added_product: Product = get_product(product_id)
+    
+    if request.method == "POST":
+        add_product_to_cart(
+            user_id=current_user.user_id,
+            product_id=product_id)
+        return redirect(url_for("cart"))
+    return redirect(url_for("product", product_id=product_id))
 
 
 @app.route("/cart")
 @login_required
 def cart() -> flask.Response:
-    return redirect("/")
+    products = get_products_in_cart(current_user.user_id)
+    return render_template("shopping_cart/cart.html", products=products)
 
 @app.route("/products")
 def products() -> flask.Response:

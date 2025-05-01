@@ -60,7 +60,7 @@
                 
                 <div class="product-actions mt-4">
                     {% if current_user.is_authenticated %}
-                    <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                    <form method="POST" action="{{ url_for('add_to_cart', product_id=product.product_id) }}">
                         <button type="submit" class="btn btn-info">
                             <i class="bi bi-cart-plus"></i> Добавить в корзину
                         </button>

@@ -22,6 +22,16 @@ class Product(db.Model):
     purchases:  Mapped[List["Purchased"]] = relationship()
 
 
+class Cart(db.Model):
+    __tablename__ = "cart"
+    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id"), 
+                                            nullable=False, 
+                                            primary_key=True)
+    id_user:    Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
+                                            nullable=False,
+                                            primary_key=True) 
+    users:      Mapped[List["User"]] = relationship()
+    products:   Mapped[List["Product"]] = relationship()
 
 class Image(db.Model):
     __tablename__ = "image"
