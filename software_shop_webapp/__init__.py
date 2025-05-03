@@ -29,4 +29,5 @@ s.connect(("8.8.8.8", 80))
 this_machine = s.getsockname()[0]
 s.close()
 print(f"my ip: {this_machine}")
+
 app.run(debug=True, host=this_machine,port=8888)  
