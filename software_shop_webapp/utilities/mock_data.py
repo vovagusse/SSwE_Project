@@ -87,12 +87,6 @@ products = (
     )
 
 
-user = {
-    "name":"admin",
-    "is_authenticated":0
-}
-
-
 nav_tabs = (
         {
             "status":1,

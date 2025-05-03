@@ -12,6 +12,11 @@ import flask
 
 @app.route("/login/", methods=["GET", "POST"])
 def login_page() -> str:
+    """Страница авторизации пользователя.
+
+    :return: Веб-страница авторизации
+    :rtype: str
+    """
     f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
     f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
     if (request.method == "POST"):
@@ -20,12 +25,14 @@ def login_page() -> str:
             if f_user and check_password_hash(f_user.password, password=f_password):
                 login_user(f_user)
                 next_page = request.args.get("next")
+                if (next_page):
+                    return redirect(url_for(next_page))
                 return redirect(url_for('index'))
             else:
                 flash("Логин или пароль введены неправильно")
         else:
             flash("Пожалуйста, заполните логин и пароль")
-    return render_template("login/login.html", user=user)
+    return render_template("login/login.html")
 
 
 @app.route("/logout/", methods=["GET", "POST"])
@@ -163,7 +170,7 @@ def register_page() -> str:
 @app.route("/product/<int:product_id>")
 def product(product_id: int) -> str:
     """Генерирует веб-страницу с продуктом на основе 
-    его первичного целочисленного ключа id. 
+    его первичного целочисленного ключа ``product_id``. 
     Возвращает собранную на основе шаблона
     страничку при помощи Jinja.
 
@@ -179,8 +186,17 @@ def product(product_id: int) -> str:
 @app.route("/add_to_cart", methods=["GET", "POST"])
 @login_required
 def add_to_cart() -> str:
+    """Данная функция обрабатывает операцию добавления товара в корзину. 
+    Требует авторизации. В URL такой страницы присутствует параметр 
+    next, который хранит страницу, куда нужно перенаправить после этой 
+    операции, а также содержит аргумент ``product_id``, который содержит 
+    идентификатор товара, который нужно добавить в корзину.
+
+    :return: веб-страница в формате HTML
+    :rtype: str
+    """
     product_id: int = request.args.get('product_id', None)   
-    next = request.args['next']
+    next = request.args.get('next', None)
     if request.method == "POST":
         add_product_to_cart(
             user_id=current_user.user_id,
@@ -192,7 +208,13 @@ def add_to_cart() -> str:
 
 @app.route("/cart", methods=["GET", "POST"])
 @login_required
-def cart() -> flask.Response:
+def cart() -> str:
+    """Веб-странциа корзины. Позволяет как посмотреть товары, так и 
+    удалить их из корзины.
+
+    :return: веб-страница корзины
+    :rtype: str
+    """
     products = get_products_in_cart(current_user.user_id)
     fix_price = lambda x: int(x.replace(",", ""))
     summa = sum(fix_price(i.price) for i in products)
@@ -204,6 +226,7 @@ def cart() -> flask.Response:
             return redirect(url_for("cart"))
         if action == "proceed_purchase":
             print("\n (!) [proceed_purchase] button clicked\n")
+            return redirect(url_for("cart"))
         
     return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
 
@@ -211,6 +234,12 @@ def cart() -> flask.Response:
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])
 @login_required
 def delete_from_cart() -> flask.Response:
+    """Данный URL соответствует удалению товара из корзины с 
+    аргументом ``product_id``.
+
+    :return: Ответ от сервера приложений Flask
+    :rtype: flask.Response
+    """
     # products = get_products_in_cart(current_user.user_id)
     if request.method == "POST":
         prod_id = request.args['product_id']

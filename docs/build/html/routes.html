@@ -314,22 +314,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Краткое описание</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.routes">Описание функций модуля</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.login_page"><code class="docutils literal notranslate"><span class="pre">login_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account"><code class="docutils literal notranslate"><span class="pre">account()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account_settings"><code class="docutils literal notranslate"><span class="pre">account_settings()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.register_page"><code class="docutils literal notranslate"><span class="pre">register_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.add_to_cart"><code class="docutils literal notranslate"><span class="pre">add_to_cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.cart"><code class="docutils literal notranslate"><span class="pre">cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.products"><code class="docutils literal notranslate"><span class="pre">products()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.redirect_to_signin"><code class="docutils literal notranslate"><span class="pre">redirect_to_signin()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Описание функций модуля</a></li>
 </ul>
             </nav>
         </div>
@@ -357,176 +342,8 @@ document.write(`
 протокола HTTP).</p>
 <p>В этом модуле также используются некоторые переменные и объекты, созданные в <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>.</p>
 </section>
-<section id="module-software_shop_webapp.routes">
-<span id="id2"></span><h2>Описание функций модуля<a class="headerlink" href="#module-software_shop_webapp.routes" title="Ссылка на этот заголовок">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.login_page">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">login_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.login_page" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.logout">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.logout" title="Ссылка на это определение">#</a></dt>
-<dd><p>Производит выход из аккаунта для текушего
-пользователя и перенаправляет на домашнюю страницу</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>вызов функции <code class="docutils literal notranslate"><span class="pre">redirect(url_for(&quot;index&quot;))</span></code></p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>Response</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.account">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.account" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.account_settings">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">account_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.account_settings" title="Ссылка на это определение">#</a></dt>
-<dd><p>Позволяет поменять данные на аккаунте, а именно:
-* Поменять отображаемое имя пользователя
-* Поменять ФИО пользователя
-* Поменять пароль аккаунта
-* Удалить аккаунт</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Возвращает либо страницу <code class="docutils literal notranslate"><span class="pre">account_settings.html</span></code> в случае захода на страницу или ошибки при выполнении функции, либо перенаправляет на страницу <code class="docutils literal notranslate"><span class="pre">account.html</span></code></p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>str | Response</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.register_page">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">register_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.register_page" title="Ссылка на это определение">#</a></dt>
-<dd><p>Обрабатывает форму регистрации нового
-аккаунта и создаёт новую учётную запись.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>при ошибке или первом посещении страницы возвращает на <code class="docutils literal notranslate"><span class="pre">register.html</span></code> или перенаправляет на страницу входа <code class="docutils literal notranslate"><span class="pre">login.html</span></code></p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>str | Response</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.product">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.product" title="Ссылка на это определение">#</a></dt>
-<dd><p>Генерирует веб-страницу с продуктом на основе
-его первичного целочисленного ключа id.
-Возвращает собранную на основе шаблона
-страничку при помощи Jinja.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>product_id</strong> (<em>int</em>) – первичный ключ программного продукта в базе данных</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.add_to_cart">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">add_to_cart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.add_to_cart" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.cart">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">cart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.cart" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.products">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">products</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.products" title="Ссылка на это определение">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.index">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#software_shop_webapp.routes.index" title="Ссылка на это определение">#</a></dt>
-<dd><p>Домашняя страница сайта.
-На ней отрисовывается список доступных
-на текущий момент продуктов и
-пользовательские опции, по типу входа,
-регистрации, выбора продукта, и др.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>веб-страница в формате HTML</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.page_not_found">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">page_not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.page_not_found" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция вызывается в случае, если
-данной страницы не существует. Возвращает HTML-
-разметку страницы, где пользователю будет написано, что
-такой страницы не существует.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple(str, int)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.internal_server_error">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">internal_server_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.internal_server_error" title="Ссылка на это определение">#</a></dt>
-<dd><p>Данная функция вызывается в случае, если
-что-то непонятное случилось с сервером.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>e</strong> (<em>_type_</em>) – ошибка, которая возникает</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>веб-страница с информацией об ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple(str, int)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="software_shop_webapp.routes.redirect_to_signin">
-<span class="sig-prename descclassname"><span class="pre">software_shop_webapp.routes.</span></span><span class="sig-name descname"><span class="pre">redirect_to_signin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.routes.redirect_to_signin" title="Ссылка на это определение">#</a></dt>
-<dd><p>Перенаправляет на страницу входа в аккаунт, при
-этом сохраняя ту страницу, на которую пользователь
-должен был попасть, если бы пользователь вошёл до этого.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>response</strong> – хранит в себе код статуса и ответ от сервера.</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>перенаправляет на страницу <code class="docutils literal notranslate"><span class="pre">login.html</span></code> либо просто показывает ответ</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Response | ???</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="id2">
+<h2>Описание функций модуля<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">#</a></h2>
 </section>
 </section>
 
@@ -576,22 +393,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Краткое описание</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-software_shop_webapp.routes">Описание функций модуля</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.login_page"><code class="docutils literal notranslate"><span class="pre">login_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account"><code class="docutils literal notranslate"><span class="pre">account()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.account_settings"><code class="docutils literal notranslate"><span class="pre">account_settings()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.register_page"><code class="docutils literal notranslate"><span class="pre">register_page()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.add_to_cart"><code class="docutils literal notranslate"><span class="pre">add_to_cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.cart"><code class="docutils literal notranslate"><span class="pre">cart()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.products"><code class="docutils literal notranslate"><span class="pre">products()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.internal_server_error"><code class="docutils literal notranslate"><span class="pre">internal_server_error()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.routes.redirect_to_signin"><code class="docutils literal notranslate"><span class="pre">redirect_to_signin()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Описание функций модуля</a></li>
 </ul>
   </nav></div>
 

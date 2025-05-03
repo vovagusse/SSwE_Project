@@ -330,6 +330,14 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.__init__"><code class="docutils literal notranslate"><span class="pre">Product.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart"><code class="docutils literal notranslate"><span class="pre">Cart</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.id_product"><code class="docutils literal notranslate"><span class="pre">Cart.id_product</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.id_user"><code class="docutils literal notranslate"><span class="pre">Cart.id_user</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.users"><code class="docutils literal notranslate"><span class="pre">Cart.users</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.products"><code class="docutils literal notranslate"><span class="pre">Cart.products</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.__init__"><code class="docutils literal notranslate"><span class="pre">Cart.__init__()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_id"><code class="docutils literal notranslate"><span class="pre">Image.image_id</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image.image_uri"><code class="docutils literal notranslate"><span class="pre">Image.image_uri</span></code></a></li>
@@ -477,6 +485,49 @@ for example, any mapped columns or relationships.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="software_shop_webapp.models.Product.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Product.__init__" title="Ссылка на это определение">#</a></dt>
+<dd><p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">software_shop_webapp.models.</span></span><span class="sig-name descname"><span class="pre">Cart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Cart" title="Ссылка на это определение">#</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart.id_product">
+<span class="sig-name descname"><span class="pre">id_product</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Cart.id_product" title="Ссылка на это определение">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart.id_user">
+<span class="sig-name descname"><span class="pre">id_user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Cart.id_user" title="Ссылка на это определение">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart.users">
+<span class="sig-name descname"><span class="pre">users</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.User" title="software_shop_webapp.models.User"><span class="pre">User</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Cart.users" title="Ссылка на это определение">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart.products">
+<span class="sig-name descname"><span class="pre">products</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#software_shop_webapp.models.Product" title="software_shop_webapp.models.Product"><span class="pre">Product</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#software_shop_webapp.models.Cart.products" title="Ссылка на это определение">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="software_shop_webapp.models.Cart.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#software_shop_webapp.models.Cart.__init__" title="Ссылка на это определение">#</a></dt>
 <dd><p>A simple constructor that allows initialization from kwargs.</p>
 <p>Sets attributes on the constructed instance using the names and
 values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
@@ -803,6 +854,14 @@ for example, any mapped columns or relationships.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.videos"><code class="docutils literal notranslate"><span class="pre">Product.videos</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.purchases"><code class="docutils literal notranslate"><span class="pre">Product.purchases</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Product.__init__"><code class="docutils literal notranslate"><span class="pre">Product.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart"><code class="docutils literal notranslate"><span class="pre">Cart</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.id_product"><code class="docutils literal notranslate"><span class="pre">Cart.id_product</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.id_user"><code class="docutils literal notranslate"><span class="pre">Cart.id_user</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.users"><code class="docutils literal notranslate"><span class="pre">Cart.users</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.products"><code class="docutils literal notranslate"><span class="pre">Cart.products</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Cart.__init__"><code class="docutils literal notranslate"><span class="pre">Cart.__init__()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software_shop_webapp.models.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul class="nav section-nav flex-column">
