@@ -4,7 +4,7 @@ from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from software_shop_webapp import db, app
 from software_shop_webapp.utilities.get_current_directory import *
-from software_shop_webapp.utilities.mock_data import nav_tabs, user
+from software_shop_webapp.utilities.mock_data import nav_tabs
 from software_shop_webapp.models import User
 from software_shop_webapp.model_queries import *
 import flask
