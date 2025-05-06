@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Магазин ПС{% endblock %}
-{% block subtitle %} Корзина {%endblock%}
+{% block subtitle %} Оплата заказа {%endblock%}
 {% block content %}
 <div class="container py-2 px-0">
-    <div class="card p-3" style="background-color: #c6c2d1;border-radius:15px;">
+    <div class="card p-3" style="background-color: #c2d1c6;border-radius:15px;">
     <div class="row">
         <!-- карточки продуктов -->
         {% if products %}
@@ -89,22 +89,22 @@
                             Итого:
                             </strong>
                         </h4>
-                        <form action="{{url_for('cart')}}" method="POST">
+                        <form action="{{url_for('checkout')}}" method="POST">
                             <span class="fs-4">
                                 <div class="col">
-                                    <button class="btn btn-danger m-1 m-auto" 
+                                    <button class="btn btn-warning m-1 m-auto" 
                                         type="submit"
                                         name="action"
-                                        value="clear_cart">
-                                        <i class="bi bi-trash"></i>
-                                        Очистить корзину
+                                        value="go_back">
+                                        <i class="bi bi-box-arrow-left"></i>
+                                        Вернуться к корзине
                                     </button>
-                                    <button class="btn btn-info m-1 m-auto" 
+                                    <button class="btn btn-success m-1 m-auto" 
                                         type="submit"
                                         name="action"
-                                        value="proceed_purchase">
-                                        <i class="bi bi-cart-check"></i>
-                                        Оформить заказ
+                                        value="pay">
+                                        <i class="bi bi-cash"></i>
+                                        Оплатить заказ
                                     </button>
                                 </div>
                             </span>

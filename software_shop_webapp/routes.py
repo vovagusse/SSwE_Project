@@ -25,8 +25,11 @@ def login_page() -> str:
             if f_user and check_password_hash(f_user.password, password=f_password):
                 login_user(f_user)
                 next_page = request.args.get("next")
+                # if (next_page == "add_to_cart"):
+                #     prod_id = request.args.get("product_id")
+                #     return redirect(url_for(next_page, product_id=prod_id))
                 if (next_page):
-                    return redirect(url_for(next_page))
+                    return redirect(next_page)
                 return redirect(url_for('index'))
             else:
                 flash("Логин или пароль введены неправильно")
@@ -231,9 +234,27 @@ def cart() -> str:
             return redirect(url_for("cart"))
         if action == "proceed_purchase":
             print("\n (!) [proceed_purchase] button clicked\n")
-            return redirect(url_for("cart"))
+            return redirect(url_for("checkout"))
         
     return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
+
+
+
+@app.route("/checkout", methods=["GET", "POST"])
+@login_required
+def checkout():
+    products = get_products_in_cart(current_user.user_id)
+    fix_price = lambda x: int(x.replace(",", ""))
+    summa = sum(fix_price(i.price) for i in products)
+    full_summa = sum(fix_price(i.full_price) for i in products)
+    if request.method == "POST":
+        action = request.form.get("action")
+        if action == "go_back":
+            return redirect(url_for("cart"))
+        if action == "pay":
+            print("\n (!) [pay] button clicked\n")
+            # return redirect(url_for("checkout"))
+    return render_template("/shopping_cart/checkout.html", products=products, summa=summa, full_summa=full_summa)
 
 
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])
@@ -247,7 +268,7 @@ def delete_from_cart() -> flask.Response:
     """
     # products = get_products_in_cart(current_user.user_id)
     if request.method == "POST":
-        prod_id = request.args['product_id']
+        prod_id = request.args.get('product_id')
         delete_product_from_cart(product_id=prod_id, user_id=current_user.user_id)
     return redirect(url_for("cart"))
 
