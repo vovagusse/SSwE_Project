@@ -151,6 +151,8 @@ def register_page() -> str:
     f_login = request.form.get("login") #stands for Form Login (Login taken from the Form)
     f_password = request.form.get("password") #stands for Form Password (Password taken from the Form)
     f_password2 = request.form.get("password2") #stands for Form Password (Password taken from the Form)
+    f_fullname = request.form.get("full_name") #stands for Form Password (Password taken from the Form)
+    f_username = request.form.get("username") #stands for Form Password (Password taken from the Form)
     if request.method=="POST":
         if not (f_login or f_password or f_password2):
             flash("Пожалуйста, заполните все поля!")
@@ -159,7 +161,10 @@ def register_page() -> str:
         else:
             # Everything is good!!!
             hash_pwd = generate_password_hash(f_password)
-            new_user = User(login=f_login, password=hash_pwd)
+            new_user = User(login=f_login,
+                            password=hash_pwd, 
+                            full_name=f_fullname,
+                            username=f_username)
             db.session.add(new_user)
             db.session.commit()
             

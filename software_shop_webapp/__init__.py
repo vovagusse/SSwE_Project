@@ -30,4 +30,4 @@ this_machine = s.getsockname()[0]
 s.close()
 print(f"my ip: {this_machine}")
 
-# app.run(debug=True, host=this_machine,port=8888)  
+app.run(debug=True, host=this_machine,port=8888)  
