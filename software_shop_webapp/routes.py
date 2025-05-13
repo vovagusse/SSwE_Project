@@ -243,6 +243,8 @@ def cart() -> str:
 @app.route("/checkout", methods=["GET", "POST"])
 @login_required
 def checkout():
+    """Веб-страница оплаты заказа. Нужна для непосредственно оплаты всего заказа.
+    """
     products = get_products_in_cart(current_user.user_id)
     fix_price = lambda x: int(x.replace(",", ""))
     summa = sum(fix_price(i.price) for i in products)
@@ -275,6 +277,8 @@ def delete_from_cart() -> flask.Response:
 
 @app.route("/products")
 def products() -> flask.Response:
+    """Перенаправляет на основную страницу сайта (``index``).
+    """
     return redirect(url_for('index'))
 
 
