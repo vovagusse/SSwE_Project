@@ -9,6 +9,9 @@ def get_products() -> list[Product]:
     q = Product.query.all()
     return q
 
+def get_product(product_id: int) -> Product:
+    q = Product.query.get({"product_id": product_id})
+    return q
 
 def get_products_in_cart(user_id: int) -> list[Product]:
     a = Product.query.select_from(
@@ -33,12 +36,72 @@ def add_product_to_cart(user_id: int, product_id: int) -> None:
     except IntegrityError:
         print(":(")
 
+
+def get_orders() -> list[Order]:
+    q = Order.query.all()
+    return q
+
+def get_order(order_id: int) -> Order:
+    a = Order.query.select_from(
+            Order
+        ).where(
+            Order.order_id == order_id
+        ).all()
+    return a
+
+def add_products_to_purchased(
+        user_id: int, 
+        products: List[Product], 
+        order_id: int
+    ) -> None:
+    if not get_order(order_id):
+        return
+    try:    
+        purchased = get_purchased_products(user_id)
+        values = []
+        summa = 0
+        for product in products:
+            if product in purchased:
+                continue
+            purchase_dict = {}
+            purchase_dict['id_user'] = user_id
+            purchase_dict['id_product'] = product.product_id
+            price = product.price
+            price = price.replace(",", "")
+            price=int(price)
+            print(price)
+            purchase_dict['cost_of_purchase'] = price
+            purchase_dict['id_order']=order_id
+            values.append(purchase_dict)
+            summa += price
+        q = insert(
+                Purchased
+            ).values(
+                values
+            )
+        print(q)
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print("integrity error on add_products_to_purchased() :(")
+
+
 def delete_product_from_cart(user_id: int, product_id: int) -> None:
     q = delete(
             Cart
         ).where(
             Cart.id_product==product_id,
             Cart.id_user==user_id
+        )
+    db.session.execute(q)
+    db.session.commit()
+
+
+def delete_order(order_id: int) -> None:
+    q = delete(
+            Order
+        ).where(
+            Order.order_id == order_id
         )
     db.session.execute(q)
     db.session.commit()
@@ -54,14 +117,38 @@ def delete_all_products_from_cart(user_id: int) -> None:
     db.session.commit()
 
 
-# def get_products_dict() -> list[dict]:
-#     ...
 
 
-def get_product(product_id: int) -> Product:
-    q = Product.query.get({"product_id": product_id})
-    return q
 
+# initial state = pending
+def create_order(
+        user_id: int,
+        amount: float
+    ) -> Order:
+    order = Order(
+        id_user=user_id,
+        amount=amount,
+        status="pending"
+    )
+    db.session.add(order)
+    db.session.commit()
+    return order
 
-# def get_product_dict(product_id: int) -> dict:
-#     ...
+# card number is assumed correct
+def process_order(card_number: str, order_id: int):
+    ord = get_order(order_id)
+    ord.card_number = card_number
+    ord.status = 'success'
+    db.session.commit()
+
+# returns all producs user has purchased
+def get_purchased_products(user_id: int) -> List[Product]:
+    a = Product.query.select_from(
+            Product
+        ).join(
+            Purchased, Product.product_id == Purchased.id_product
+        ).where(
+            Purchased.id_user == user_id
+        ).all()
+    return a
+

@@ -43,10 +43,20 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease;
 }
+.product-card-static {
+    background: white;
+    border-radius: 20px;
+    border-color: var(--text-color);
+    box-shadow: 0 5px 5px rgba(35, 25, 65, 0.15);
+    overflow: hidden;
+}
 .product-card:hover {
     transform: translateY(-10px);
     background-color: rgb(248, 246, 255);
     transform: scale(1.02);
+}
+.product-card-static:hover {
+    background-color: rgb(248, 246, 255);
 }
 .product-image {
     height: 200px;

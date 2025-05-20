@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, flash, send_from_directory, url_for
+from flask import render_template, redirect, request, flash, send_from_directory, url_for, jsonify, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -191,6 +191,16 @@ def product(product_id: int) -> str:
     return render_template("product.html", product=p, current_user=current_user)
 
 
+@app.route("/purchased/")
+def purchased() -> str:
+    p = get_purchased_products(current_user.user_id)
+    print("="*50)
+    print("(!) Purchased:")
+    pprint.pprint(p)
+    print("="*50)
+    return render_template("account/purchased.html", products=p, current_user=current_user)
+
+
 @app.route("/add_to_cart", methods=["GET", "POST"])
 @login_required
 def add_to_cart() -> str:
@@ -256,7 +266,62 @@ def checkout():
         if action == "pay":
             print("\n (!) [pay] button clicked\n")
             # return redirect(url_for("checkout"))
+            o = create_order(current_user.user_id, 0)
+            return redirect(url_for('payment', order_id=o.order_id))
     return render_template("/shopping_cart/checkout.html", products=products, summa=summa, full_summa=full_summa)
+
+
+@app.route('/payment')
+def payment():
+    products_from_cart = get_products_in_cart(current_user.user_id)
+    print(products_from_cart)
+    order_id = request.args.get("order_id")
+    order = get_order(order_id)
+    add_products_to_purchased(current_user.user_id, 
+                              products_from_cart,
+                              order_id)
+    return render_template('/payment/payment.html', order=order)
+
+
+@app.route('/payment/init', methods=['POST'])
+def init_payment():
+    try:
+        data = request.get_json()
+        user_id = current_user.user_id
+        amount = float(data['amount'])
+        
+        order = create_order(user_id, 0)
+        return jsonify({'order_id': order.order_id})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/payment/process/<int:order_id>', methods=['POST'])
+def process_payment(order_id: int):
+    try:
+        order = get_order(order_id)
+        if not order:
+            return jsonify({'error': 'Order not found'}), 404
+        
+        data = request.get_json()
+        card_number = data['card_number']
+        
+        if len(card_number) != 16 or not card_number.isdigit():
+            return jsonify({
+                'status': 'error',
+                'message': 'Invalid card number'
+            }), 400
+        
+        # Обновляем статус заказа
+        order.card_number = card_number
+        order.status = 'success'
+        db.session.commit()
+        
+        return jsonify({'status': 'success'})
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 400
 
 
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])

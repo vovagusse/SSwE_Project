@@ -17,10 +17,11 @@ login_manager = LoginManager(app) #: В этой строчке создаётс
 
 
 from software_shop_webapp import models, routes
-from software_shop_webapp.models import User
 
 
 with app.app_context(): 
+    # так можно удалить таблицу если она хреново придумана
+    # models.Purchased.__table__.drop(db.engine)
     db.create_all() #: В этой строке создаются все таблицы
 
 import socket

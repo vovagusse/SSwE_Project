@@ -33,6 +33,7 @@ class Cart(db.Model):
     users:      Mapped[List["User"]] = relationship()
     products:   Mapped[List["Product"]] = relationship()
 
+
 class Image(db.Model):
     __tablename__ = "image"
     
@@ -94,7 +95,9 @@ class Developer(db.Model):
 class Purchased(db.Model):
     __tablename__ = "purchased"
     
-    purchase_id: Mapped[int] = mapped_column(primary_key=True)
+    purchase_id: Mapped[int] = mapped_column(primary_key=True, 
+                                             nullable=False,
+                                             autoincrement=True)
     id_user:     Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
                                              nullable=False) 
     id_product:  Mapped[int] = mapped_column(ForeignKey("product.product_id"), 
@@ -103,6 +106,24 @@ class Purchased(db.Model):
         default=lambda: datetime.datetime.now()
     )
     cost_of_purchase: Mapped[float] = mapped_column(nullable=False)
+    id_order: Mapped[int] = mapped_column(ForeignKey("order.order_id", 
+                                                     ondelete="CASCADE"), 
+                                          nullable=False)
+    def __repr__(self):
+        s = self
+        return f"purchase_id:{s.purchase_id},\nid_user:{s.id_user},\ncost_of_purchase:{s.cost_of_purchase}"
+
+
+class Order(db.Model):
+    __tablename__ = 'order'
+    order_id: Mapped[int] = mapped_column(primary_key=True,
+                                          nullable=False,
+                                          autoincrement=True)
+    id_user:     Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
+                                             nullable=False) 
+    card_number = db.Column(db.String(16), nullable=True)
+    amount = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), nullable=False)
 
 
 @login_manager.user_loader

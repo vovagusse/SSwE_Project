@@ -1,0 +1,29 @@
+.payment-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .card-number-input {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        .amount-input {
+            font-size: 1.5rem;
+            text-align: right;
+            padding: 0.5rem 1rem;
+        }
+        .payment-status {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        .payment-status.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .payment-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
