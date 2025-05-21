@@ -19,16 +19,8 @@ login_manager = LoginManager(app) #: В этой строчке создаётс
 from software_shop_webapp import models, routes
 
 
-with app.app_context(): 
+with app.app_context():
     # так можно удалить таблицу если она хреново придумана
     # models.Purchased.__table__.drop(db.engine)
     db.create_all() #: В этой строке создаются все таблицы
 
-import socket
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.connect(("8.8.8.8", 80))
-this_machine = s.getsockname()[0]
-s.close()
-print(f"my ip: {this_machine}")
-
-app.run(debug=True, host=this_machine,port=8888)  

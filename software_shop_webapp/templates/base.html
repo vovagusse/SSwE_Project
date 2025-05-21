@@ -10,13 +10,13 @@
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS + Icons -->
     <link
-        rel="stylesheet" 
+        rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     >
-    <link 
-        rel="stylesheet" 
+    <link
+        rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
     <link rel="stylesheet" href="{{url_for('static', filename='css/funky_styles.css')}}">
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    
+
     <nav class="store-header navbar navbar-expand-lg bg-body-tertiary flex-column">
         <div class="container-fluid m-0 mx-2 p-0">
             <!-- Brand -->
@@ -33,13 +33,13 @@
                 <a class="navbar-brand m-0 p-0" href="{{url_for('index')}}">
                     <!-- <div class="col-md-6 mx-3"> -->
                         <h1 class="p-0 m-0">{{self.title()}}</h1>
-                        <p class="p-0 m-0">{{self.subtitle()}}</p> 
+                        <p class="p-0 m-0">{{self.subtitle()}}</p>
                     <!-- </div> -->
                 </a>
             </div>
-            
-            
-            
+
+
+
             <!-- Mobile toggler buttons container -->
             <div class="d-flex">
                 <!-- Mobile toggler search button -->
@@ -52,7 +52,7 @@
                         aria-label="Open search">
                     <i class="bi bi-search" style="font-size:x-large;"></i>
                 </button>
-                
+
                 <!-- Mobile toggler nav button -->
                 <button class="btn btn-outline-light navbar-toggler d-lg-none m-1"
                         type="button"
@@ -65,14 +65,14 @@
                     <!-- <span class="navbar-toggler-icon"></span> -->
                 </button>
             </div>
-            
+
             <!-- Mobile search form -->
             <div class="collapse navbar-collapse d-lg-none m-1" id="navbarSearch">
                 <form class="d-flex w-100 d-lg-none">
                     <div class="input-group" role="group">
-                        <input class="form-control d-lg-none" 
-                               type="search" 
-                               placeholder="Поиск программного средства..." 
+                        <input class="form-control d-lg-none"
+                               type="search"
+                               placeholder="Поиск программного средства..."
                                aria-label="Поиск">
                         <button class="btn btn-outline-light d-lg-none" type="submit">
                             <i class="bi bi-search" style="font-size:x-large;"></i>
@@ -81,7 +81,7 @@
                     </div>
                 </form>
             </div>
-            
+
             <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-lg-0">
@@ -89,9 +89,9 @@
                     <!-- Desktop search -->
                     <form class="d-flex ms-auto m-1 w-auto d-none d-lg-flex">
                         <div class="input-group" role="group">
-                            <input class="form-control me" 
-                                   type="search" 
-                                   placeholder="Поиск ПС..." 
+                            <input class="form-control me"
+                                   type="search"
+                                   placeholder="Поиск ПС..."
                                    aria-label="Поиск">
                             <button class="btn btn-outline-light" type="submit">
                                 <i class="bi bi-search"></i>
@@ -109,8 +109,8 @@
                     {% if current_user.is_authenticated %}
                     <!-- Личный кабинет -->
                     <div class="dropdown m-1">
-                        <button class="btn btn-outline-light col-12" 
-                            role="button" 
+                        <button class="btn btn-outline-light col-12"
+                            role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="bi bi-person"></i>
@@ -131,7 +131,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="{{url_for('logout')}}"  role="button">        
+                                <a class="dropdown-item" href="{{url_for('logout')}}"  role="button">
                                     <i class="bi bi-box-arrow-in-left"></i>
                                     Выйти из аккаунта
                                 </a>
@@ -143,7 +143,7 @@
                         <i class="bi bi-cart"></i>
                         Корзина
                     </a>
-                    
+
                     {% else %}
                     <!-- Если мол в аккаунт пользователь не зашёл то тогда вот -->
                     <a href="{{url_for('login_page')}}" class="btn btn-outline-light m-1" role="button">
@@ -155,16 +155,16 @@
             </div>
         </div>
     </nav>
-    
+
     <main class="container-fluid mt-0">
         <div class="row">
             <div class="col p-0 m-0">
-                {% block content %} 
+                {% block content %}
                 {% endblock %}
             </div>
         </div>
     </main>
-    
+
     <footer class="store-footer">
         <div class="container">
             <div class="row">
@@ -196,7 +196,7 @@
                         <li>
                             <a href="#"><u>ВКонтакте</u></a>
                         </li>
-                        <li><a href="#"> 
+                        <li><a href="#">
                             <i class="bi bi-telegram"></i>
                             <u>Telegram</u></a>
                         </li>
