@@ -16,10 +16,6 @@ class Product(db.Model):
     full_price: Mapped[int] = mapped_column(nullable=False, default=100)
     is_popular: Mapped[bool] = mapped_column(default=0)
     is_new:     Mapped[bool] = mapped_column(default=1)
-    files:      Mapped[List["File"]] = relationship()
-    images:     Mapped[List["Image"]] = relationship()
-    videos:     Mapped[List["Video"]] = relationship()
-    purchases:  Mapped[List["Purchased"]] = relationship()
 
 
 class Cart(db.Model):
@@ -42,7 +38,9 @@ class Image(db.Model):
                                             autoincrement=True)
     image_uri:  Mapped[str] = mapped_column(default="https://via.placeholder.com/400x300", 
                                             nullable=False)
-    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id"))  
+    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
+                                                       onupdate="restrict",
+                                                       ondelete="cascade"))  
 
 
 class File(db.Model):
@@ -53,7 +51,9 @@ class File(db.Model):
                                             autoincrement=True)
     file_uri:   Mapped[str] = mapped_column(default="D:\\\\files\\Program.7z",
                                             nullable=False)
-    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id")) 
+    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
+                                                       onupdate="restrict",
+                                                       ondelete="cascade"))  
 
 
 class Video(db.Model):
@@ -64,7 +64,9 @@ class Video(db.Model):
                                             autoincrement=True)
     video_uri:  Mapped[str] = mapped_column(default="https://via.placeholder.com/400x300", 
                                             nullable=False)
-    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id")) 
+    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
+                                                       onupdate="restrict",
+                                                       ondelete="cascade"))  
 
 
 class User(db.Model, UserMixin):
@@ -101,7 +103,7 @@ class Purchased(db.Model):
     id_user:     Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
                                              nullable=False) 
     id_product:  Mapped[int] = mapped_column(ForeignKey("product.product_id"), 
-                                             nullable=False) 
+                                             nullable=False, onupdate="restrict") 
     time_of_purchase: Mapped[datetime.datetime] = mapped_column(
         default=lambda: datetime.datetime.now()
     )
