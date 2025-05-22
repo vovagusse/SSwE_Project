@@ -1,5 +1,9 @@
 import pytest
 from unittest.mock import patch
+import os
+import sys
+sys.path.insert(0, os.path.abspath("../"))                     #Those two lines do
+# sys.path.insert(0, os.path.abspath("../../software_shop_webapp")) #Some Fucking Magic
 from software_shop_webapp import app
 
 @pytest.fixture

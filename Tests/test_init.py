@@ -2,9 +2,12 @@ import pytest
 import shutil
 import os
 from sqlalchemy import inspect
+import sys
+sys.path.insert(0, os.path.abspath("../"))                     #Those two lines do
+# sys.path.insert(0, os.path.abspath("../../software_shop_webapp")) #Some Fucking Magic
 from software_shop_webapp import app, db
 
-REAL_DB_PATH = 'C:\\Users\\Lenovo\\Documents\\GitHub\\SSwE_Project\\software_shop_webapp\\software_shop.db'
+REAL_DB_PATH = 'software_shop_webapp/software_shop.db'
 TEST_DB_PATH = 'test_app.db'
 
 @pytest.fixture(scope='session')

@@ -3,7 +3,7 @@ import shutil
 import os
 from software_shop_webapp import app, db
 
-REAL_DB_PATH = 'C:\\Users\\Lenovo\\Documents\\GitHub\\SSwE_Project\\software_shop_webapp\\software_shop.db'
+REAL_DB_PATH = 'software_shop_webapp\\software_shop.db'
 TEST_DB_PATH = 'test_app.db'
 
 @pytest.fixture(scope='session')
