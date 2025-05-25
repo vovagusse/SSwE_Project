@@ -1,13 +1,16 @@
 from flask import render_template, redirect, request, flash, send_from_directory, url_for, jsonify, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.utils import secure_filename
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from software_shop_webapp import db, app
 from software_shop_webapp.utilities.get_current_directory import *
 from software_shop_webapp.utilities.mock_data import nav_tabs
+from software_shop_webapp.utilities.file_check import *
 from software_shop_webapp.models import User
 from software_shop_webapp.model_queries import *
 import flask
+import time
 
 
 @app.route("/login/", methods=["GET", "POST"])
@@ -194,11 +197,30 @@ def product(product_id: int) -> str:
 @app.route("/purchased/")
 def purchased() -> str:
     p = get_purchased_products(current_user.user_id)
-    print("="*50)
-    print("(!) Purchased:")
-    pprint.pprint(p)
-    print("="*50)
-    return render_template("account/purchased.html", products=p, current_user=current_user)
+    return render_template("account/purchased.html", purchased=p, current_user=current_user)
+
+
+@app.route("/download/<int:product_id>", methods=["GET", "POST"])
+def download(product_id: int) -> str:
+    if request.method == "GET":
+        print(product_id)
+        files = get_files(product_id)
+        print(files)
+        print("DOWNLOAD!!!!")
+        rel = os.scandir("./software_shop_webapp/files")
+        for e in rel:
+            if e.is_file():
+                print("(file) " + e.name)
+    return redirect(url_for("purchased"))
+
+
+@app.route('/download_file/<int:file_id>', methods=("POST", "GET"))
+def download_file(file_id: int):
+    file = get_file(file_id)
+    name = file.file_uri
+    next=request.args.get("next")
+    send_from_directory(app.config['UPLOAD_FOLDER'], name, as_attachement=True)
+    return redirect(url_for(next, product_id=file.id_product))
 
 
 @app.route("/add_to_cart", methods=["GET", "POST"])
@@ -224,6 +246,54 @@ def add_to_cart() -> str:
     return redirect(url_for("cart"))
 
 
+@app.route("/delete_file/<int:file_id>", methods=["GET", "POST", "DELETE"])
+def delete_file_route(file_id: int):
+    product_id = get_file(file_id).id_product
+    delete_file(file_id)
+    return redirect(url_for('add_file_route', 
+                            product_id=product_id))
+
+@app.route("/add_file/<int:product_id>", methods=["GET", "POST"])
+def add_file_route(product_id: int):
+    p = get_product(product_id)
+    added_files = os.listdir(app.config['UPLOAD_FOLDER'])
+    added_files = get_files(product_id)
+    fileformats = set()
+    fileformats.update(ALLOWED_FILE_EXTENSIONS)
+    fileformats = ",".join("." + e for e in fileformats)
+    if request.method == "POST":
+        if 'upload' in request.form:
+            print("upload button")
+        if 'delete' in request.form:
+            return delete_file_route()
+        if 'download' in request.form:
+            print("download button")
+        
+        if 'file' not in request.files:
+            # flash('no file part')
+            print(" (!) No actual file :(")
+            return redirect(url_for('add_file_route', product_id=product_id))
+        # fetch files
+        files = request.files.getlist("file")
+        for file in files:            
+            if file.filename == '':
+                # flash("No selected file")
+                print(" (!) no file selected")
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                folder = app.config['UPLOAD_FOLDER']
+                file.save(os.path.join(folder, filename))
+                add_file(filename, product_id)
+        
+        return redirect(url_for("add_file_route", product_id=product_id))
+
+    return render_template("dev_account/add_file.html", 
+                           product_id=product_id,
+                           accept=fileformats,
+                           files=added_files,
+                           file_amount=len(added_files))
+
+
 @app.route("/cart", methods=["GET", "POST"])
 @login_required
 def cart() -> str:
@@ -247,7 +317,6 @@ def cart() -> str:
             return redirect(url_for("checkout"))
         
     return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
-
 
 
 @app.route("/checkout", methods=["GET", "POST"])

@@ -3,7 +3,7 @@ import sys
 import pathlib
 
 
-def get_current_directory(custom_filepath: str = None):
+def get_current_directory(custom_filepath: str = None, print_stuff: bool = True):
     """Данная функция возвращает директорию/путь, в 
     котором лежит скрипт .py, который вызывает данную функцию. 
     Эта функция более точно ищет то место, где находится 
@@ -20,10 +20,12 @@ def get_current_directory(custom_filepath: str = None):
     
     p = os.path.dirname(sys.argv[0])
     if custom_filepath:
-        print(f"Path: {custom_filepath}")
+        if print_stuff:
+            print(f"Path: {custom_filepath}")
         p = str(pathlib.Path(custom_filepath).parent.resolve())
     a = lambda x: x if (x!="" or x) else "<empty>"
-    print(f"[p]: {a(p)}")
+    if print_stuff:
+        print(f"[p]: {a(p)}")
     plat = sys.platform
     if ("win" in plat):
         p = p[0].upper() + p[1:]

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Загрузка файлов{% endblock %}
+{% block subtitle %}{% endblock %}
+
+{% block content %}
+
+
+{% from 'components/purchased_product.html' import purchased_product %}
+{% from 'components/file_card.html' import file_card %}
+
+
+
+<div class="container-md"> 
+    <div class="p-3">
+        <form 
+    method="POST" 
+    enctype="multipart/form-data">
+
+    <!-- Файлы -->
+    <div class="mb-4">
+        <label for="formFileMultiple" class="form-label h2">
+            Загрузите файлы программного средства
+        </label>
+        <div>
+            <input 
+            name="file" type="file" 
+            class="form-control card" 
+            id="formFileMultiple" 
+            multiple
+            accept="{{accept}}">
+        
+            <button type="submit" class="btn btn-info mt-2" name="upload" value="upload">
+                <i class="bi bi-file-earmark-arrow-up"></i>
+                Загрузить
+            </button>
+        </div>
+    </div>
+    </form>
+
+    <hr>
+    <h2 class="mb-1"> Загруженные файлы: </h1>
+    <p class="mb-2"> (загружено: {{file_amount}}) </p>
+    <div class="p-0">
+        {% for file in files %}
+            {{ file_card(file) }}
+            <!-- <div class="product-card-static card p-3 mb-3 justify-content-end">
+                <div class="">
+                    <i class="bi bi-file-zip"></i>
+                    {{ file }} 
+                    <button class="btn"> sus </button>
+                </div>
+            </div> -->
+        {% endfor %}
+        {% if not files %} 
+        <div class="vertical-center">
+            <div class="container">
+                <div id="notfound" class="text-center ">
+                    <!-- <br> -->
+                    <h3>👽</h3>
+                    <h3>Файлы не загружены</h3>
+                </div>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+</div>
+
+{% endblock %}

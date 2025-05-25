@@ -1,0 +1,7 @@
+run 
+
+C:\...> irm "https://christitus.com/win" | iex
+
+in PowerShell (Admin)!!!
+
+thats it!!! :)

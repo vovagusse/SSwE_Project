@@ -9,6 +9,53 @@ def get_products() -> list[Product]:
     q = Product.query.all()
     return q
 
+def add_file(file_uri: str, product_id: int):
+    try:
+        q = insert(
+                File
+            ).values(
+                id_product=product_id,
+                file_uri=file_uri
+            )
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print(":(")
+
+
+def delete_file_by_uri(file_uri: str, product_id: int):
+    try:
+        q = delete(File).where(
+            file_uri=file_uri, 
+            product_id=product_id
+        )
+        db.session.execute(q)
+        db.session.commit()
+    except:
+        print("could not delete file idk why sorry brother")
+
+
+def delete_file(file_id:int):
+    try:
+        q = delete(File).where(file_id = file_id)
+        db.session.execute(q)
+        db.session.commit()
+    except:
+        print("could not delete file idk why sorry brother")
+
+
+def get_files(product_id: int) -> List[File]:
+    q = File.query.select_from(
+            File
+        ).join(
+            Product, product_id == File.id_product
+        ).all()
+    return q
+
+def get_file(file_id: int) -> File:
+    q = File.query.get({"file_id":file_id})
+    return q
+
 def get_product(product_id: int) -> Product:
     q = Product.query.get({"product_id": product_id})
     return q
