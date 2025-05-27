@@ -6,18 +6,13 @@
         <div class="row row-cols-1">
             <div class="col d-flex justify-content-between align-items-center">
                 <!-- Заголовок -->
-                <a href="#{{file['file_uri']}}">
-                    <h4 class="product-title flex-grow-1">
-                        {{ file['file_uri'] }}
-                    </h4>
-                </a>
+                <h4 class="product-title flex-grow-1">
+                    {{ file['file_uri'] }}
+                </h4>
                 
-            
-                <!-- action="{{ url_for('download_file', file_id=file.file_id, next='add_file') }}"> -->
-                <!-- action="{{ url_for('delete_file_route', file_id=file.file_id, next='add_file') }}"> -->
                 <div>
                     <!-- Кнопочка скачивания файла -->
-                    <a href="{{ url_for('download_file', file_id=file.file_id) }}">
+                    <a href="{{ url_for('download_file', file_uri=file.file_uri, product_id=file.id_product, next='add_file_route') }}">
                         <button class="btn btn-info mt-auto p-2" type="submit">
                             <i class="bi bi-download"></i>
                             Скачать

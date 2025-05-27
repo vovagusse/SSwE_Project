@@ -23,11 +23,11 @@ def add_file(file_uri: str, product_id: int):
         print(":(")
 
 
-def delete_file_by_uri(file_uri: str, product_id: int):
+def delete_file_by_uri(file_uri_arg: str, product_id_arg: int):
     try:
-        q = delete(File).where(
-            file_uri=file_uri, 
-            product_id=product_id
+        q = File.__table__.delete().where(
+            File.file_uri == file_uri_arg, 
+            File.id_product == product_id_arg
         )
         db.session.execute(q)
         db.session.commit()
@@ -35,9 +35,18 @@ def delete_file_by_uri(file_uri: str, product_id: int):
         print("could not delete file idk why sorry brother")
 
 
-def delete_file(file_id:int):
+def delete_file(file_id:int, product_id: int = None):
     try:
-        q = delete(File).where(file_id = file_id)
+        q = 0;
+        if product_id:
+            q = delete(File).where(
+                file_id==file_id, 
+                product_id==product_id
+            )
+        else:
+            q = delete(File).where(
+                file_id==file_id
+            )
         db.session.execute(q)
         db.session.commit()
     except:

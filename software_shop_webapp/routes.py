@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, flash, send_from_directory, url_for, jsonify, Blueprint
+from flask import render_template, redirect, request, flash, send_from_directory, send_file, url_for, jsonify, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import abort
@@ -214,13 +214,25 @@ def download(product_id: int) -> str:
     return redirect(url_for("purchased"))
 
 
-@app.route('/download_file/<int:file_id>', methods=("POST", "GET"))
-def download_file(file_id: int):
-    file = get_file(file_id)
-    name = file.file_uri
-    next=request.args.get("next")
-    send_from_directory(app.config['UPLOAD_FOLDER'], name, as_attachement=True)
-    return redirect(url_for(next, product_id=file.id_product))
+@app.route('/download_file/<file_uri>', methods=("POST", "GET"))
+def download_file(file_uri: str):
+    # return "<h1> helo </h1>"
+    print()
+    print(request.args, f"\nfile_uri: '{file_uri}'")
+    if request.method == "GET":
+        print("get")
+    product_id = request.args.get('product_id')
+    name = file_uri
+    folder = app.config['UPLOAD_FOLDER']
+    next = request.args.get("next")
+    print(f"Folder: '{folder}'\nFile name: '{name}'")
+    path = os.path.join(folder, name)
+    print(path, os.path.exists(path))
+    print()
+    # send_file(os.path.join("..", path), as_attachment=False)
+    return send_file(os.path.join("..", path), as_attachment=True)
+
+    return redirect(url_for(next, product_id=product_id))
 
 
 @app.route("/add_to_cart", methods=["GET", "POST"])
@@ -248,36 +260,38 @@ def add_to_cart() -> str:
 
 @app.route("/delete_file/<int:file_id>", methods=["GET", "POST", "DELETE"])
 def delete_file_route(file_id: int):
-    product_id = get_file(file_id).id_product
-    delete_file(file_id)
+    file = get_file(file_id)
+    filename = file.file_uri
+    folder = app.config['UPLOAD_FOLDER']
+    path = os.path.join(folder, filename)
+    # Удаление файлика непосредственно:
+    os.remove(path)
+    product_id = file.id_product
+    print(f"\nDelete file route info:\n    file_id: {file_id}\n    product_id: {product_id}\n")
+    delete_file_by_uri(filename, product_id)
     return redirect(url_for('add_file_route', 
                             product_id=product_id))
 
 @app.route("/add_file/<int:product_id>", methods=["GET", "POST"])
 def add_file_route(product_id: int):
+    print("\n (!) Add file page loaded\n")
     p = get_product(product_id)
     added_files = os.listdir(app.config['UPLOAD_FOLDER'])
     added_files = get_files(product_id)
     fileformats = set()
     fileformats.update(ALLOWED_FILE_EXTENSIONS)
     fileformats = ",".join("." + e for e in fileformats)
-    if request.method == "POST":
-        if 'upload' in request.form:
-            print("upload button")
-        if 'delete' in request.form:
-            return delete_file_route()
-        if 'download' in request.form:
-            print("download button")
-        
+    if request.method == "POST":    
         if 'file' not in request.files:
             # flash('no file part')
             print(" (!) No actual file :(")
             return redirect(url_for('add_file_route', product_id=product_id))
         # fetch files
-        files = request.files.getlist("file")
-        for file in files:            
+        files_to_upload = request.files.getlist("file")
+        if not files_to_upload:
+            print("no files")
+        for file in files_to_upload:            
             if file.filename == '':
-                # flash("No selected file")
                 print(" (!) no file selected")
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)

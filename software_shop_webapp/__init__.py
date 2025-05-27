@@ -16,8 +16,8 @@ MY_DB = 'software_shop.db'
 MY_DB = str(__path__[0]) + os.path.sep + MY_DB
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{MY_DB}" #: В этой строчке задаётся название базы данных и тип подключения - SQLite
 app.config['UPLOAD_FOLDER'] = "software_shop_webapp/files"
-app.config['VIDEO_UPLOAD_FOLDER'] = "/files/videos"
-app.config['IMAGE_UPLOAD_FOLDER'] = "/files/images"
+app.config['VIDEO_UPLOAD_FOLDER'] = "software_shop_webapp/videos"
+app.config['IMAGE_UPLOAD_FOLDER'] = "software_shop_webapp/images"
 db = SQLAlchemy(app) #: В этой переменой создаётся подключение к БД с помощью SQLAlchemy
 login_manager = LoginManager(app) #: В этой строчке создаётся объект LoginManager для работы с авторизации
 
