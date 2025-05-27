@@ -9,6 +9,10 @@
     cool-image{border: solid 3px var(--secondary-color);
            border-radius: 5px;
 }
+.developer-text {
+    color:var(--accent-color);
+    text-decoration: wavy #26242d;
+}
 .my-scrollbar {
     margin-left:1rem;
     margin-right:1rem;

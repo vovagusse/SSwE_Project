@@ -1,4 +1,4 @@
-{% macro product_card(product) %}
+{% macro product_card(product, developer) %}
 <div class="product-card">
     <a href="{{url_for('product', product_id=product.product_id)}}">
         <!-- Картинка -->
@@ -23,6 +23,13 @@
                     <i class="bi bi-chevron-down"></i>
                 </button>
             </div>
+        </div>
+        <div id="{{developer.developer_name}}">
+            <i class="developer-text">
+                <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
+                    Разработчик: {{developer.developer_name}}
+                </a>
+            </i>
         </div>
         <div id="product-info-{{ product['product_id'] }}" class="collapse d-lg-block">
             <p class="product-description">{{ product['description'] }}</p>

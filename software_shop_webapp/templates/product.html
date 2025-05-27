@@ -48,7 +48,11 @@
                         <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
                     </div>
                 {% endif %}
-                
+                <div id="{{developer_name}}">
+                    <i class="developer-text">
+                        Разработчик: {{developer.developer_name}}
+                    </i>
+                </div>
                 <div class="product-description mt-4">
                     <h3>
                         <i>

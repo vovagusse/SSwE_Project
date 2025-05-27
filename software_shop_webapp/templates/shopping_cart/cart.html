@@ -14,7 +14,7 @@
         {% if products %}
             {% for p in products %}
             
-                {{ product_in_cart(p) }}
+                {{ product_in_cart(p, developers[p.id_developer]) }}
 
             {% endfor %}
         {% else %}

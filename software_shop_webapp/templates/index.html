@@ -39,7 +39,7 @@
                 {% for product in products %}
 
                 <!-- one card -->
-                {{ product_card(product) }}
+                {{ product_card(product, developers[product.id_developer]) }}
                 <!-- end of card -->
                 
                 {% endfor %}
@@ -55,7 +55,7 @@
                     {% if product['is_popular']|int == 1 %}
 
                     <!-- one card -->
-                    {{ product_card(product) }}
+                    {{ product_card(product, developers[product.id_developer]) }}
                     <!-- end of card -->
 
                     {% endif %}
@@ -72,7 +72,7 @@
                     {% if product['is_new']|int == 1 %}
 
                     <!-- one card -->
-                    {{ product_card(product) }}
+                    {{ product_card(product, developers[product.id_developer]) }}
                     <!-- end of card -->
 
                     {% endif %}
@@ -89,7 +89,7 @@
                     {% if (product['price'].replace(',', '')|int) < (product['full_price'].replace(',', '')|int) %}
 
                     <!-- one card -->
-                    {{ product_card(product) }}
+                    {{ product_card(product, developers[product.id_developer]) }}
                     <!-- end of card -->
 
                     {% endif %}

@@ -241,6 +241,14 @@ def register_page() -> str:
     return render_template("login/register.html", current_user=current_user)
 
 
+@app.route("/public_developer_profile/<int:developer_id>")
+def public_developer_profile(developer_id: int):
+    products = get_products_by_developer(developer_id)
+    developer = get_developer_by_id(developer_id)
+    return render_template("dev_account/public_developer_profile.html",
+                           products=products,
+                           developer=developer)
+
 @app.route("/product/<int:product_id>")
 def product(product_id: int) -> str:
     """Генерирует веб-страницу с продуктом на основе 
@@ -254,7 +262,10 @@ def product(product_id: int) -> str:
     :rtype: str
     """
     p = get_product(product_id)
-    return render_template("product.html", product=p, current_user=current_user)
+    developer = get_developer_by_id(p.id_developer)
+    return render_template("product.html", 
+                           product=p,
+                           developer=developer)
 
 
 @app.route("/purchased/")
@@ -505,6 +516,7 @@ def cart() -> str:
     :rtype: str
     """
     products = get_products_in_cart(current_user.user_id)
+    developers = get_developers_for_product(products)
     fix_price = lambda x: int(x.replace(",", ""))
     summa = sum(fix_price(i.price) for i in products)
     full_summa = sum(fix_price(i.full_price) for i in products)
@@ -516,8 +528,12 @@ def cart() -> str:
         if action == "proceed_purchase":
             print("\n (!) [proceed_purchase] button clicked\n")
             return redirect(url_for("checkout"))
-        
-    return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
+            
+    return render_template("shopping_cart/cart.html", 
+                           products=products,
+                           developers=developers, 
+                           summa=summa,
+                           full_summa=full_summa)
 
 @app.route("/checkout", methods=["GET", "POST"])
 @login_required
@@ -525,6 +541,7 @@ def checkout():
     """Веб-страница оплаты заказа. Нужна для непосредственно оплаты всего заказа.
     """
     products = get_products_in_cart(current_user.user_id)
+    developers = get_developers_for_product(products)
     fix_price = lambda x: int(x.replace(",", ""))
     summa = sum(fix_price(i.price) for i in products)
     full_summa = sum(fix_price(i.full_price) for i in products)
@@ -535,9 +552,13 @@ def checkout():
         if action == "pay":
             print("\n (!) [pay] button clicked\n")
             # return redirect(url_for("checkout"))
-            o = create_order(current_user.user_id, 0)
+            o = create_order(current_user.user_id, summa)
             return redirect(url_for('payment', order_id=o.order_id))
-    return render_template("/shopping_cart/checkout.html", products=products, summa=summa, full_summa=full_summa)
+    return render_template("/shopping_cart/checkout.html", 
+                           products=products, 
+                           developers=developers,
+                           summa=summa, 
+                           full_summa=full_summa)
 
 
 @app.route('/payment')
@@ -545,11 +566,15 @@ def payment():
     products_from_cart = get_products_in_cart(current_user.user_id)
     print(products_from_cart)
     order_id = request.args.get("order_id")
-    order = get_order(order_id)
+    my_order = get_order(order_id)
+    print(f"Order:\namount: {my_order.amount}\n\
+        card number: {my_order.card_number}\n\
+        order_id: {my_order.order_id}\n\
+        order_status: {my_order.status}")
     add_products_to_purchased(current_user.user_id, 
                               products_from_cart,
                               order_id)
-    return render_template('/payment/payment.html', order=order)
+    return render_template('/payment/payment.html', order=my_order)
 
 
 @app.route('/payment/init', methods=['POST'])
@@ -627,10 +652,12 @@ def index() -> str:
     :return: веб-страница в формате HTML
     :rtype: str
     """    
-    query = get_products()
+    products = get_products()
+    developers = get_developers_for_product(products)
     return render_template("index.html", 
                            nav_tabs=nav_tabs, 
-                           products=query, 
+                           products=products, 
+                           developers=developers,
                            current_user=current_user)
 
 

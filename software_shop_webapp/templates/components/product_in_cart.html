@@ -1,4 +1,4 @@
-{% macro product_in_cart(p) %}
+{% macro product_in_cart(p, developer) %}
 
 
 <div class="col-12 mb-3">
@@ -45,10 +45,18 @@
         </div>
         <!-- контейнер с расркытием всякой инфы о товаре -->
         <div class="collapse d-lg-block pt-0" id="{{ 'details-' + (p.product_id|string) }}">
-            <!-- <div class="bg-gradient-to-r from-secondary to-accent rounded-lg p-3"> -->
-                <p class="px-3 mb-2 text-black font-medium">
-                    <b>Описание:</b> {{ p.description }}</p>
-            <!-- </div> -->
+            <div class="px-3">
+                <div id="{{developer.developer_name}}">
+                    <i class="developer-text">
+                        <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
+                            Разработчик: {{developer.developer_name}}
+                        </a>
+                    </i>
+                </div>
+            </div>
+            <p class="px-3 mb-2 text-black font-medium">
+                <b>Описание:</b> {{ p.description }}
+            </p>
             <div class="px-3 pb-3">
                 <a class="btn btn-outline-info px-3 justify-content-between" 
                 href="{{url_for('product', product_id=p.product_id)}}">

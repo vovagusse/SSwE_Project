@@ -11,6 +11,27 @@ def get_products() -> list[Product]:
     q = Product.query.all()
     return q
 
+
+def get_developer_names_for_product(products: List[Product]) -> dict[int, str]:
+    developers = dict()
+    if products == None:
+        return None
+    for product in products:
+        p_id = product.product_id
+        dev_id = product.id_developer
+        developers[p_id] = get_developer(dev_id).developer_name
+    return developers
+
+def get_developers_for_product(products: List[Product]) -> dict[int, str]:
+    developers = dict()
+    if products == None:
+        return None
+    for product in products:
+        p_id = product.product_id
+        dev_id = product.id_developer
+        developers[p_id] = get_developer(dev_id)
+    return developers
+
 def get_product(product_id: int) -> Product:
     q = Product.query.get({"product_id": product_id})
     return q
@@ -22,6 +43,13 @@ def get_developer(user_id: int) -> Developer:
         Developer.id_user == user_id
     ).first()
     return q
+
+
+def get_developer_by_id(developer_id: int) -> Developer:
+    q = Developer.query.get(developer_id)
+    return q
+
+
 
 
 def add_developer(user_id: int, developer_name: str):
@@ -52,6 +80,15 @@ def get_products_in_cart(user_id: int) -> list[Product]:
         ).all()
     return a
 
+
+def get_products_by_developer(developer_id: int) -> list[Product]:
+    a = Product.query.select_from(
+            Product
+        ).where(
+            Product.id_developer == developer_id
+        ).all()
+    return a
+
 def add_product_to_cart(user_id: int, product_id: int) -> None:
     try:
         q = insert(
@@ -74,7 +111,7 @@ def get_order(order_id: int) -> Order:
             Order
         ).where(
             Order.order_id == order_id
-        ).all()
+        ).first()
     return a
 
 def add_products_to_purchased(

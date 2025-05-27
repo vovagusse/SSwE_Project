@@ -28,7 +28,7 @@ from software_shop_webapp import models, routes
 with app.app_context():
     # так можно удалить таблицу если она хреново придумана
     # models.Image.__table__.delete()
-    # models.Developer.__table__.drop(db.engine)
+    # models.Product.__table__.drop(db.engine)
     # models.Video.__table__.drop(db.engine)
     db.create_all() #: В этой строке создаются все таблицы
 
