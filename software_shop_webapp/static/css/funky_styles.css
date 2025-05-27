@@ -26,7 +26,7 @@
     padding-right:0.4rem;
 }
 .my-scrollbar-inside {
-    overflow-y: auto;
+    overflow-y: scroll;
     max-height: 300px;
     scrollbar-color: var(--accent-color) var(--background-color-dark);
 }

@@ -13,19 +13,15 @@
     <!-- Заголовок секции -->
     <div class="row justify-content-center">
         <div class="col-md-12">
-            
-            <h2>
-                Купленные ПС
-            </h2>
             {% if purchased %}
-            {% for product in purchased %}
-                <div class="my-scrollbar">
-                <div class="my-scrollbar-inside">
-                    {{ purchased_product(product) }}
-                </div>
-                </div>
-            {% endfor %}
-            {% else %}
+            <!-- <div class="my-scrollbar">
+                <div class="my-scrollbar-inside"> -->
+                    {% for product in purchased %}
+                        {{ purchased_product(product, developers[product.id_developer] ) }}
+                    {% endfor %}
+                <!-- </div>
+            </div> -->
+                    {% else %}
             <div class="vertical-center">
                 <div class="container">
                     <div id="notfound" class="text-center ">

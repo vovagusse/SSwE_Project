@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата заказа{% endblock %}
+{% block subtitle %}Ошибка{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Ошибка оплаты</h2>
+      <p>{{ error }}</p>
+      <a href="{{ url_for('payment', order_id=order_id) }}" class="btn btn-info mt-3">Попробовать снова</a>
+      <a href="{{ url_for('cancel_order', order_id=order_id) }}" class="btn btn-secondary mt-3">Отменить заказ</a>
+    </div>
+  </section>
+{% endblock %}
