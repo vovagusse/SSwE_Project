@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Загрузка картинок{% endblock %}
+{% block subtitle %}{% endblock %}
+
+{% block content %}
+
+{% from 'components/image_card.html' import image_card %}
+
+
+
+<div class="container-md"> 
+    <div class="p-3">
+        <form 
+            method="POST" 
+            enctype="multipart/form-data">
+
+            <!-- Файлы -->
+            <div class="mb-4">
+                <label for="formimageMultiple" class="form-label h2">
+                    Загрузите картинки программного средства
+                </label>
+                <div>
+                    <input 
+                    name="file" type="file" 
+                    class="form-control card product-card-static"
+                    style="border-radius: 8px;" 
+                    id="formimageMultiple" 
+                    multiple
+                    accept="{{accept}}">
+                
+                    <button type="submit" class="btn btn-info mt-2" name="upload" value="upload">
+                        <i class="bi bi-file-earmark-arrow-up"></i>
+                        Загрузить
+                    </button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <h2 class="mb-1"> Загруженные картинки: </h1>
+            {% if images %}
+            <p class="mb-2"> (загружено: {{image_amount}}) </p>
+            {% endif %}
+        <div class="p-0 m-0 ">
+            {% if images %}
+            <div class='my-scrollbar'>
+                <div class='my-scrollbar-inside'>
+                    {% for image in images %}
+                        {{ image_card(image) }}
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %} 
+            <div class="vertical-center">
+                <div class="container">
+                    <div id="notfound" class="text-center ">
+                        <!-- <br> -->
+                        <h3>👽</h3>
+                        <h3>Картинки не загружены</h3>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+
+        <hr>
+
+        <a href="#">
+            <button class="mb-1 btn btn-info">
+                
+                <i class="bi bi-box-arrow-left"></i>
+                Вернуться к редактированию ПС
+            </button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

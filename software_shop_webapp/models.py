@@ -9,13 +9,14 @@ from flask_login import UserMixin
 class Product(db.Model):
     __tablename__ = "product"
     
-    product_id: Mapped[int] = mapped_column(primary_key=True)
-    title:      Mapped[str] = mapped_column(nullable=False, default="Abajaba Pro")
-    description:Mapped[str] = mapped_column(nullable=False, default="Lorem ipsum abajaba")
-    price:      Mapped[int] = mapped_column(nullable=False, default=100)
-    full_price: Mapped[int] = mapped_column(nullable=False, default=100)
-    is_popular: Mapped[bool] = mapped_column(default=0)
-    is_new:     Mapped[bool] = mapped_column(default=1)
+    product_id:   Mapped[int] = mapped_column(primary_key=True)
+    title:        Mapped[str] = mapped_column(nullable=False, default="Abajaba Pro")
+    description:  Mapped[str] = mapped_column(nullable=False, default="Lorem ipsum abajaba")
+    price:        Mapped[int] = mapped_column(nullable=False, default=100)
+    full_price:   Mapped[int] = mapped_column(nullable=False, default=100)
+    is_popular:   Mapped[bool] = mapped_column(default=0)
+    is_new:       Mapped[bool] = mapped_column(default=1)
+    id_developer: Mapped[int] = mapped_column(ForeignKey("developer.developer_id"), nullable=False) 
 
 
 class Cart(db.Model):
@@ -30,18 +31,6 @@ class Cart(db.Model):
     products:   Mapped[List["Product"]] = relationship()
 
 
-class Image(db.Model):
-    __tablename__ = "image"
-    
-    image_id:   Mapped[int] = mapped_column(primary_key=True, 
-                                            nullable=False, 
-                                            autoincrement=True)
-    image_uri:  Mapped[str] = mapped_column(default="https://via.placeholder.com/400x300", 
-                                            nullable=False)
-    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
-                                                       onupdate="restrict",
-                                                       ondelete="cascade"))  
-
 
 class File(db.Model):
     __tablename__ = "file"
@@ -50,6 +39,19 @@ class File(db.Model):
                                             nullable=False, 
                                             autoincrement=True)
     file_uri:   Mapped[str] = mapped_column(default="D:\\\\files\\Program.7z",
+                                            nullable=False)
+    id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
+                                                       onupdate="restrict",
+                                                       ondelete="cascade"))  
+
+
+class Image(db.Model):
+    __tablename__ = "image"
+    
+    image_id:   Mapped[int] = mapped_column(primary_key=True, 
+                                            nullable=False, 
+                                            autoincrement=True)
+    image_uri:  Mapped[str] = mapped_column(default="https://via.placeholder.com/400x300", 
                                             nullable=False)
     id_product: Mapped[int] = mapped_column(ForeignKey("product.product_id", 
                                                        onupdate="restrict",
@@ -72,14 +74,16 @@ class Video(db.Model):
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     
-    user_id:   Mapped[int] = mapped_column(primary_key=True, 
-                                           nullable=False, 
-                                           autoincrement=True)
-    login:     Mapped[str] = mapped_column(unique=True, nullable=False) #Логин
-    password:  Mapped[str] = mapped_column(nullable=False) #Пароль
+    user_id:      Mapped[int]  = mapped_column(primary_key=True, 
+                                               nullable=False, 
+                                               autoincrement=True)
+    login:        Mapped[str]  = mapped_column(unique=True, nullable=False) #Логин
+    password:     Mapped[str]  = mapped_column(nullable=False) #Пароль
     #Остальные данные
-    full_name: Mapped[str] = mapped_column(nullable=True) #Полное ФИО
-    username:  Mapped[str] = mapped_column(nullable=True) #Псевдоним или отображаемое другим пользователям имя
+    full_name:    Mapped[str]  = mapped_column(nullable=True) #Полное ФИО
+    username:     Mapped[str]  = mapped_column(nullable=True) #Псевдоним или отображаемое другим пользователям имя
+    is_developer: Mapped[bool] = mapped_column(nullable=True, 
+                                               default=False)
     def get_id(self):
         return self.user_id
 
@@ -87,11 +91,12 @@ class User(db.Model, UserMixin):
 class Developer(db.Model):
     __tablename__ = "developer"
     
-    developer_id: Mapped[int] = mapped_column(primary_key=True, 
-                                              nullable=False, 
-                                              autoincrement=True)
-    id_user:      Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
-                                              nullable=False) 
+    developer_id:   Mapped[int] = mapped_column(primary_key=True, 
+                                                nullable=False, 
+                                                autoincrement=True)
+    developer_name: Mapped[str] = mapped_column(nullable=False)
+    id_user:        Mapped[int] = mapped_column(ForeignKey("user.user_id"), 
+                                                nullable=False) 
 
 
 class Purchased(db.Model):

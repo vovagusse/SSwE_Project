@@ -1,18 +1,28 @@
 {% macro file_card(file) %}
 
-<div class="product-card-static card mb-3">
+<div class="product-card-static card m-2">
     <!-- Информация -->
     <div class="product-info p-3">
         <div class="row row-cols-1">
             <div class="col d-flex justify-content-between align-items-center">
                 <!-- Заголовок -->
                 <h4 class="product-title flex-grow-1">
+                    {% set file_extension = file.file_uri.split('.')[-1] %}
+                    {% if file_extension == "pdf"%}
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    {% elif file_extension in ("zip", "7z", "tar") %}
+                        <i class="bi bi-file-earmark-zip"></i>
+                    {% elif file_extension == "txt "%}
+                        <i class="bi bi-filetype-txt"></i>
+                    {% else %}
+                        <i class="bi bi-filetype-txt"></i>
+                    {% endif %}
                     {{ file['file_uri'] }}
                 </h4>
                 
                 <div>
                     <!-- Кнопочка скачивания файла -->
-                    <a href="{{ url_for('download_file', file_uri=file.file_uri, product_id=file.id_product, next='add_file_route') }}">
+                    <a href="{{ url_for('download_file', file_uri=file.file_uri) }}">
                         <button class="btn btn-info mt-auto p-2" type="submit">
                             <i class="bi bi-download"></i>
                             Скачать

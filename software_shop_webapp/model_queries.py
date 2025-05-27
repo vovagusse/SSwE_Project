@@ -5,17 +5,35 @@ from software_shop_webapp import db
 import pprint
 
 
+
+
 def get_products() -> list[Product]:
     q = Product.query.all()
     return q
 
-def add_file(file_uri: str, product_id: int):
+def get_product(product_id: int) -> Product:
+    q = Product.query.get({"product_id": product_id})
+    return q
+
+def get_developer(user_id: int) -> Developer:
+    q = Developer.query.select_from(
+        Developer
+    ).where(
+        Developer.id_user == user_id
+    ).first()
+    return q
+
+
+def add_developer(user_id: int, developer_name: str):
     try:
+        Developer.id_user
+        Developer.developer_id
+        Developer.developer_name
         q = insert(
-                File
+                Developer
             ).values(
-                id_product=product_id,
-                file_uri=file_uri
+                id_user=user_id,
+                developer_name=developer_name
             )
         db.session.execute(q)
         db.session.commit()
@@ -23,51 +41,6 @@ def add_file(file_uri: str, product_id: int):
         print(":(")
 
 
-def delete_file_by_uri(file_uri_arg: str, product_id_arg: int):
-    try:
-        q = File.__table__.delete().where(
-            File.file_uri == file_uri_arg, 
-            File.id_product == product_id_arg
-        )
-        db.session.execute(q)
-        db.session.commit()
-    except:
-        print("could not delete file idk why sorry brother")
-
-
-def delete_file(file_id:int, product_id: int = None):
-    try:
-        q = 0;
-        if product_id:
-            q = delete(File).where(
-                file_id==file_id, 
-                product_id==product_id
-            )
-        else:
-            q = delete(File).where(
-                file_id==file_id
-            )
-        db.session.execute(q)
-        db.session.commit()
-    except:
-        print("could not delete file idk why sorry brother")
-
-
-def get_files(product_id: int) -> List[File]:
-    q = File.query.select_from(
-            File
-        ).join(
-            Product, product_id == File.id_product
-        ).all()
-    return q
-
-def get_file(file_id: int) -> File:
-    q = File.query.get({"file_id":file_id})
-    return q
-
-def get_product(product_id: int) -> Product:
-    q = Product.query.get({"product_id": product_id})
-    return q
 
 def get_products_in_cart(user_id: int) -> list[Product]:
     a = Product.query.select_from(
@@ -91,7 +64,6 @@ def add_product_to_cart(user_id: int, product_id: int) -> None:
         db.session.commit()
     except IntegrityError:
         print(":(")
-
 
 def get_orders() -> list[Order]:
     q = Order.query.all()
@@ -141,7 +113,6 @@ def add_products_to_purchased(
     except IntegrityError:
         print("integrity error on add_products_to_purchased() :(")
 
-
 def delete_product_from_cart(user_id: int, product_id: int) -> None:
     q = delete(
             Cart
@@ -152,7 +123,6 @@ def delete_product_from_cart(user_id: int, product_id: int) -> None:
     db.session.execute(q)
     db.session.commit()
 
-
 def delete_order(order_id: int) -> None:
     q = delete(
             Order
@@ -162,7 +132,6 @@ def delete_order(order_id: int) -> None:
     db.session.execute(q)
     db.session.commit()
 
-
 def delete_all_products_from_cart(user_id: int) -> None:
     q = delete(
             Cart
@@ -171,10 +140,7 @@ def delete_all_products_from_cart(user_id: int) -> None:
         )
     db.session.execute(q)
     db.session.commit()
-
-
-
-
+    
 
 # initial state = pending
 def create_order(
@@ -207,4 +173,127 @@ def get_purchased_products(user_id: int) -> List[Product]:
             Purchased.id_user == user_id
         ).all()
     return a
+
+
+
+# Файлы, видео и фото
+
+# 1) Файлы
+
+def add_file(file_uri: str, product_id: int):
+    try:
+        q = insert(
+                File
+            ).values(
+                id_product=product_id,
+                file_uri=file_uri
+            )
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print(":(")
+
+def delete_file_by_uri(file_uri_arg: str, product_id_arg: int):
+    try:
+        q = File.__table__.delete().where(
+            File.file_uri == file_uri_arg, 
+            File.id_product == product_id_arg
+        )
+        db.session.execute(q)
+        db.session.commit()
+    except:
+        print("could not delete file idk why sorry brother")
+
+def get_files(product_id: int) -> List[File]:
+    q = File.query.select_from(
+            File
+        ).join(
+            Product, product_id == File.id_product
+        ).all()
+    return q
+
+def get_file(file_id: int) -> File:
+    q = File.query.get({"file_id":file_id})
+    return q
+
+
+# 2) Изображения
+
+def add_image(image_uri: str, product_id: int):
+    q = insert(
+            Image
+        ).values(
+            id_product=product_id,
+            image_uri=image_uri
+        )
+    print(q)
+    try:
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print(":(")
+
+def delete_image_by_uri(image_uri_arg: str, product_id_arg: int):
+    try:
+        q = Image.__table__.delete().where(
+            Image.image_uri == image_uri_arg, 
+            Image.id_product == product_id_arg
+        )
+        db.session.execute(q)
+        db.session.commit()
+    except:
+        print("could not delete file idk why sorry brother")
+
+def get_images(product_id: int) -> List[Image]:
+    q = Image.query.select_from(
+            Image
+        ).join(
+            Product, product_id == Image.id_product
+        ).all()
+    return q
+
+def get_image(image_id: int) -> Image:
+    q = Image.query.get({"image_id":image_id})
+    return q
+
+
+
+# 3) Видео
+
+def add_video(video_uri: str, product_id: int):
+    try:
+        q = insert(
+                Video
+            ).values(
+                id_product=product_id,
+                video_uri=video_uri
+            )
+        db.session.execute(q)
+        db.session.commit()
+    except IntegrityError:
+        print(":(")
+
+def delete_video_by_uri(video_uri_arg: str, product_id_arg: int):
+    try:
+        q = Video.__table__.delete().where(
+            Video.video_uri == video_uri_arg, 
+            Video.id_product == product_id_arg
+        )
+        db.session.execute(q)
+        db.session.commit()
+    except:
+        print("could not delete file idk why sorry brother")
+
+def get_videos(product_id: int) -> List[Video]:
+    q = Video.query.select_from(
+            Video
+        ).join(
+            Product, product_id == Video.id_product
+        ).all()
+    return q
+
+def get_video(video_id: int) -> Video:
+    q = Video.query.get({"video_id":video_id})
+    return q
+
 

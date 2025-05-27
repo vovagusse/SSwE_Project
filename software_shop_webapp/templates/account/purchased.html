@@ -13,9 +13,39 @@
     <!-- Заголовок секции -->
     <div class="row justify-content-center">
         <div class="col-md-12">
+            
+            <h2>
+                Купленные ПС
+            </h2>
+            {% if purchased %}
             {% for product in purchased %}
-                {{ purchased_product(product) }}
+                <div class="my-scrollbar">
+                <div class="my-scrollbar-inside">
+                    {{ purchased_product(product) }}
+                </div>
+                </div>
             {% endfor %}
+            {% else %}
+            <div class="vertical-center">
+                <div class="container">
+                    <div id="notfound" class="text-center ">
+                        <!-- <br> -->
+                        <h3>👽</h3>
+                        <h3>Вы ничего не купили</h3>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            <hr>
+            <h2>
+                Вернуться к странице профиля
+            </h2>
+            <a href="{{url_for('account')}}">
+                <button class="btn btn-info">
+                    <i class="bi bi-box-arrow-left"></i>
+                    Вернуться
+                </button>
+            </a>
         </div>
     </div>
 </div>

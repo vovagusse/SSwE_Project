@@ -4,9 +4,27 @@
     --accent-color: #4834ff;
     --text-color: #26242d;
     --text-color-gray: rgb(132, 128, 159);
-    --background-color: #eceef8;}
+    --background-color: #eceef8;
+    --background-color-dark: #D4D5DE;}
     cool-image{border: solid 3px var(--secondary-color);
            border-radius: 5px;
+}
+.my-scrollbar {
+    margin-left:1rem;
+    margin-right:1rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--accent-color);
+    padding: 0em;
+    border-radius:20px;
+    background-color:var(--background-color-dark);
+    overflow:hidden;
+    padding-right:0.4rem;
+}
+.my-scrollbar-inside {
+    overflow-y: auto;
+    max-height: 300px;
+    scrollbar-color: var(--accent-color) var(--background-color-dark);
 }
 body {
     min-height: 100vh;

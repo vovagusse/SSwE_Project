@@ -5,9 +5,12 @@
 
 {% block content %}
 <div class="container py-4">
+    <!-- <div class="row justify-content-center"> -->
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="product-card-static card shadow-sm">
+            <!-- <div class="my-scrollbar"> -->
+            <!-- <div class="my-scrollbar-inside p-2" style="max-height: 900px;"> -->
                 <!-- <div class="card-header bg-white">
                     <h3 class="mb-0"><b>Редактирование учётной записи</b></h3>
                 </div> -->
@@ -25,7 +28,7 @@
                             <div class="mb-3">
                                 <label for="full_name" class="form-label">Полное имя</label>
                                 <input type="text" 
-                                       id="full_name" 
+                                id="full_name" 
                                        name="full_name" 
                                        class="form-control {% if 'full_name' in form_errors %}is-invalid{% endif %}"
                                        value="{{ current_user.full_name }}"
@@ -54,6 +57,82 @@
                             </button>
                         </div>
                         
+                        <div class="mb-4">
+                        <h5>
+                            <b>
+                            Учётная запись разработчика
+                            </b>
+                        </h5>
+                        <div class="m-2 p-3 card">
+                        {% if not current_user.is_developer %}
+                        <!-- Секция регистрации как разработчик -->
+                        <div class="mb-4">
+                            <h6 class="mb-3">
+                                <b>
+                                    Регистрация учётной записи разработчика
+                                </b>
+                            </h6>
+                            <div class="mb-3">
+                                <label for="developer_name" class="form-label">Имя учётной записи разработчика</label>
+                                <input type="text" 
+                                       id="developer_name" 
+                                       name="developer_name" 
+                                       class="form-control {% if 'developer_name' in form_errors %}is-invalid{% endif %}"
+                                       value=""
+                                       placeholder="Введите полное имя">
+                                {% if 'developer_name' in form_errors %}
+                                    <div class="invalid-feedback">{{ form_errors['developer_name'] }}</div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" name="create_developer_account" class="btn btn-primary">
+                                <i class="bi bi-check"></i>
+                                Создать учётную запись
+                            </button>
+                        </div>
+                        {% else %}
+                        <!-- Секция редактирования профиля разработчика-->
+                        <div class="mb-4">
+                            <h6 class="mb-3">
+                                <b>
+                                    Редактирование имени разработчика
+                                </b>
+                            </h6>
+                            <div class="mb-3">
+                                <label for="developer_name" class="form-label">Имя разработчика</label>
+                                <input type="text" 
+                                       id="developer_name" 
+                                       name="developer_name" 
+                                       class="form-control {% if 'developer_name' in form_errors %}is-invalid{% endif %}"
+                                       value="{{ developer.developer_name }}"
+                                       placeholder="Введите имя пользователя">
+                                {% if 'login' in form_errors %}
+                                    <div class="invalid-feedback">{{ form_errors['developer_name'] }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <button type="submit" name="edit_developer_profile" class="btn btn-primary">
+                                <i class="bi bi-check"></i>
+                                Изменить имя разработчика
+                            </button>
+                        </div>
+                        <!-- Секция удаления аккаунта разработчика -->
+                        <div class="pt-3 border-top">
+                            <h6 class="mb-3">
+                                <b>
+                                    Удаление учётной записи разработчика
+                                </b>
+                            </h6>
+                            <div class="alert alert-warning">
+                                <p>Вы уверены, что хотите удалить свой <u><i>аккаунт разработчика</i></u>? Это действие нельзя отменить.</p>
+                                <button type="submit" name="delete_developer_account" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                    Удалить аккаунт разработчика
+                                </button>
+                            </div>
+                        </div>
+                        {% endif %}
+                        </div>
+                        </div>
                         <!-- Секция изменения пароля -->
                         <div class="mb-4 pt-3 border-top">
                             <h5 class="mb-3"><b>Изменение пароля</b></h5>
@@ -101,6 +180,7 @@
                     </form>
                 </div>
             </div>
+            <!-- </div> -->
         </div>
     </div>
 </div>

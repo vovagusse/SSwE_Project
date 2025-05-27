@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, flash, send_from_directory, send_file, url_for, jsonify, Blueprint
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user, current_user, AnonymousUserMixin
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -79,6 +79,13 @@ def account_settings():
             logout_user()  # Выходим из системы
             flash('Ваш аккаунт успешно удален', 'success')
             return redirect(url_for('index'))
+        if 'delete_developer_account' in request.form and current_user.is_developer:
+            developer = get_developer(current_user.user_id)
+            db.session.delete(developer)            
+            current_user.is_developer = False
+            db.session.commit()
+            flash('Ваш аккаунт разработчика успешно удален', 'success')
+            return redirect(url_for('account_settings'))
         elif 'edit_profile' in request.form:
             # Получаем данные из формы
             full_name = request.form.get('full_name', '').strip()
@@ -108,7 +115,7 @@ def account_settings():
                 return render_template("account/account_settings.html", 
                                     current_user=current_user, 
                                     form_errors=form_errors,
-                                    message=None)
+                                    message="Произошла ошибка во время смены имени пользователя")
             
             # Обновляем данные пользователя
             current_user.full_name = full_name
@@ -117,7 +124,55 @@ def account_settings():
             
             # Флеш-сообщение об успехе
             flash('Профиль успешно обновлен', 'success')
-            return redirect(url_for('account'))  
+            return redirect(url_for('account_settings'))  
+        elif 'edit_developer_profile' in request.form and current_user.is_developer:
+            # Получаем данные из формы
+            dev = get_developer(current_user.user_id)
+            f_developer_name = request.form.get('developer_name', '').strip()
+            
+            # Словарь для хранения ошибок
+            form_errors = {}
+            
+            # Валидация полей
+            if not f_developer_name:
+                form_errors['developer_name'] = 'Имя разработчика не может быть пустым'
+            elif len(f_developer_name) > 100:
+                form_errors['developer_name'] = 'Имя разработчика не может быть длиннее 100 символов'
+                
+            # Проверка уникальности имени пользователя
+            if f_developer_name and f_developer_name != dev.developer_name:
+                if Developer.query.filter_by(developer_name=f_developer_name).first():
+                    form_errors['developer_name'] = 'Это имя разработчика уже занято'
+            
+            # Если есть ошибки, передаем их в шаблон
+            if form_errors:
+                return render_template("account/account_settings.html", 
+                                    current_user=current_user, 
+                                    form_errors=form_errors,
+                                    developer=dev,
+                                    message="Произошла ошибка во время смены имени разработчика")
+            
+            # Обновляем данные пользователя
+            dev.developer_name = f_developer_name
+            db.session.commit()
+            return redirect(url_for('account_settings'))  
+        elif "create_developer_account" in request.form and not current_user.is_developer:
+            # Получаем данные из формы
+            developer_name = request.form.get('developer_name', '').strip()
+            print("\n                 DEV NAME: ",developer_name, "\n")
+            form_errors = {}
+            if Developer.query.filter_by(developer_name=developer_name).first():
+                form_errors['developer_name'] = "Это имя разрабоотчика уже занято"
+            
+            if form_errors: 
+                return render_template("account/account_settings.html",
+                                        current_user=current_user, 
+                                        form_errors=form_errors,
+                                        message="Произошла ошибка во время создания профиля разработчика")
+            add_developer(current_user.user_id, developer_name)
+            current_user.is_developer=True
+            db.session.commit()
+            return redirect(url_for("account_settings"))
         elif 'change_password' in request.form:
             old_password = request.form.get('old_password')
             new_password = request.form.get('new_password')
@@ -138,8 +193,16 @@ def account_settings():
             current_user.password = generate_password_hash(new_password)
             db.session.commit()
             flash('Пароль успешно изменен', 'success')
-            return redirect(url_for('account', user_id=current_user.user_id))
+            return redirect(url_for('account_settings'))
     # GET запрос - просто показываем форму    
+    if current_user.is_developer:
+        developer = get_developer(current_user.user_id)
+        return render_template("account/account_settings.html", 
+                                current_user=current_user, 
+                                form_errors={}, 
+                                message=None, 
+                                developer=developer)
+
     return render_template("account/account_settings.html", 
                            current_user=current_user, 
                            form_errors={}, 
@@ -195,44 +258,44 @@ def product(product_id: int) -> str:
 
 
 @app.route("/purchased/")
+@login_required
 def purchased() -> str:
     p = get_purchased_products(current_user.user_id)
     return render_template("account/purchased.html", purchased=p, current_user=current_user)
 
-
 @app.route("/download/<int:product_id>", methods=["GET", "POST"])
+@login_required
 def download(product_id: int) -> str:
     if request.method == "GET":
         print(product_id)
         files = get_files(product_id)
-        print(files)
-        print("DOWNLOAD!!!!")
-        rel = os.scandir("./software_shop_webapp/files")
-        for e in rel:
-            if e.is_file():
-                print("(file) " + e.name)
+        folder = app.config['UPLOAD_FOLDER']
+        for file in files:
+            path = os.path.join(app.config['UPLOAD_FOLDER'], file.file_uri)
+            send_file(os.path.join("..", path), as_attachment=True)
+            
     return redirect(url_for("purchased"))
 
-
 @app.route('/download_file/<file_uri>', methods=("POST", "GET"))
+@login_required
 def download_file(file_uri: str):
-    # return "<h1> helo </h1>"
-    print()
-    print(request.args, f"\nfile_uri: '{file_uri}'")
-    if request.method == "GET":
-        print("get")
-    product_id = request.args.get('product_id')
-    name = file_uri
-    folder = app.config['UPLOAD_FOLDER']
-    next = request.args.get("next")
-    print(f"Folder: '{folder}'\nFile name: '{name}'")
-    path = os.path.join(folder, name)
-    print(path, os.path.exists(path))
-    print()
-    # send_file(os.path.join("..", path), as_attachment=False)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], file_uri)
     return send_file(os.path.join("..", path), as_attachment=True)
 
-    return redirect(url_for(next, product_id=product_id))
+# IMAGE_UPLOAD_FOLDER
+# VIDEO_UPLOAD_FOLDER
+
+@login_required
+@app.route('/download_image/<image_uri>', methods=("POST", "GET"))
+def download_image(image_uri: str):
+    path = os.path.join(app.config['IMAGE_UPLOAD_FOLDER'], image_uri)
+    return send_file(os.path.join("..", path), as_attachment=True)
+
+@login_required
+@app.route('/download_video/<video_uri>', methods=("POST", "GET"))
+def download_video(video_uri: str):
+    path = os.path.join(app.config['VIDEO_UPLOAD_FOLDER'], video_uri)
+    return send_file(os.path.join("..", path), as_attachment=True)
 
 
 @app.route("/add_to_cart", methods=["GET", "POST"])
@@ -259,20 +322,61 @@ def add_to_cart() -> str:
 
 
 @app.route("/delete_file/<int:file_id>", methods=["GET", "POST", "DELETE"])
+@login_required
 def delete_file_route(file_id: int):
     file = get_file(file_id)
     filename = file.file_uri
     folder = app.config['UPLOAD_FOLDER']
     path = os.path.join(folder, filename)
     # Удаление файлика непосредственно:
-    os.remove(path)
-    product_id = file.id_product
-    print(f"\nDelete file route info:\n    file_id: {file_id}\n    product_id: {product_id}\n")
-    delete_file_by_uri(filename, product_id)
+    try:
+        os.remove(path)
+    except:
+        print("File was deleted or renamed")
+    finally:
+        product_id = file.id_product
+        delete_file_by_uri(filename, product_id)
     return redirect(url_for('add_file_route', 
                             product_id=product_id))
 
+@app.route("/delete_image/<int:image_id>", methods=["GET", "POST", "DELETE"])
+@login_required
+def delete_image_route(image_id: int):
+    image = get_image(image_id)
+    filename = image.image_uri
+    folder = app.config['IMAGE_UPLOAD_FOLDER']
+    path = os.path.join(folder, filename)
+    # Удаление картинки непосредственно:
+    try: 
+        os.remove(path)
+    except FileNotFoundError:
+        print('Image was deleted or renamed')
+    finally:
+        product_id = image.id_product
+        delete_image_by_uri(filename, product_id)
+    return redirect(url_for('add_image_route', 
+                            product_id=product_id))
+
+@app.route("/delete_video/<int:video_id>", methods=["GET", "POST", "DELETE"])
+@login_required
+def delete_video_route(video_id: int):
+    video = get_video(video_id)
+    filename = video.video_uri
+    folder = app.config['VIDEO_UPLOAD_FOLDER']
+    path = os.path.join(folder, filename)
+    # Удаление видео непосредственно:
+    try: 
+        os.remove(path)
+    except FileNotFoundError:
+        print('Video was deleted or renamed')
+    finally:
+        product_id = video.id_product
+        delete_video_by_uri(filename, product_id)
+    return redirect(url_for('add_video_route', 
+                            product_id=product_id))
+
 @app.route("/add_file/<int:product_id>", methods=["GET", "POST"])
+@login_required
 def add_file_route(product_id: int):
     print("\n (!) Add file page loaded\n")
     p = get_product(product_id)
@@ -307,6 +411,89 @@ def add_file_route(product_id: int):
                            files=added_files,
                            file_amount=len(added_files))
 
+@app.route("/add_image/<int:product_id>", methods=["GET", "POST"])
+@login_required
+def add_image_route(product_id: int):
+    print("\n (!) Add image page loaded\n")
+    p = get_product(product_id)
+    # added_files = os.listdir(app.config['IMAGE_UPLOAD_FOLDER'])
+    added_images = get_images(product_id)
+    fileformats = set()
+    fileformats.update(ALLOWED_IMAGE_EXTENSIONS)
+    fileformats = ",".join("." + e for e in fileformats)
+    print(added_images)
+    if request.method == "POST":    
+        if 'file' not in request.files:
+            # flash('no file part')
+            print(" (!) No actual file :(")
+            return redirect(url_for('add_image_route', product_id=product_id))
+        # fetch files
+        files_to_upload = request.files.getlist("file")
+        print("Files to upload:", files_to_upload)
+        if not files_to_upload:
+            print("no files")
+        for file in files_to_upload:            
+            if file.filename == '':
+                print(" (!) no file selected")
+            if file and allowed_image(file.filename):
+                filename = secure_filename(file.filename)
+                folder = app.config['IMAGE_UPLOAD_FOLDER']
+                path = os.path.join(folder, filename)
+                print(path)
+                file.save(path)
+                add_image(filename, product_id)
+        
+        return redirect(url_for("add_image_route", product_id=product_id))
+
+    return render_template("dev_account/add_image.html", 
+                           product_id=product_id,
+                           accept=fileformats,
+                           images=added_images,
+                           file_amount=len(added_images))
+
+
+@app.route("/add_video/<int:product_id>", methods=["GET", "POST"])
+@login_required
+def add_video_route(product_id: int):
+    if (current_user):
+        print(current_user.is_developer)
+    print("\n (!) Add video page loaded\n")
+    p = get_product(product_id)
+    # added_files = os.listdir(app.config['IMAGE_UPLOAD_FOLDER'])
+    added_videos = get_videos(product_id)
+    fileformats = set()
+    fileformats.update(ALLOWED_VIDEO_EXTENSIONS)
+    fileformats = ",".join("." + e for e in fileformats)
+    print("\nAdded videos:", added_videos, "\n")
+    if request.method == "POST":    
+        if 'file' not in request.files:
+            # flash('no file part')
+            print(" (!) No actual file :(")
+            return redirect(url_for('add_image_route', product_id=product_id))
+        # fetch files
+        files_to_upload = request.files.getlist("file")
+        print("Files to upload:", files_to_upload)
+        if not files_to_upload:
+            print("no files")
+        for file in files_to_upload:            
+            if file.filename == '':
+                print(" (!) no file selected")
+            if file and allowed_video(file.filename):
+                filename = secure_filename(file.filename)
+                folder = app.config['VIDEO_UPLOAD_FOLDER']
+                path = os.path.join(folder, filename)
+                print(path)
+                file.save(path)
+                add_video(filename, product_id)
+        
+        return redirect(url_for("add_video_route", product_id=product_id))
+
+    return render_template("dev_account/add_video.html", 
+                           product_id=product_id,
+                           accept=fileformats,
+                           videos=added_videos,
+                           file_amount=len(added_videos))
+
 
 @app.route("/cart", methods=["GET", "POST"])
 @login_required
@@ -331,7 +518,6 @@ def cart() -> str:
             return redirect(url_for("checkout"))
         
     return render_template("shopping_cart/cart.html", products=products, summa=summa, full_summa=full_summa)
-
 
 @app.route("/checkout", methods=["GET", "POST"])
 @login_required
@@ -489,3 +675,8 @@ def redirect_to_signin(response):
     if response.status_code == 401:
         return redirect(url_for('login_page') + "?next=" + request.url)
     return response
+
+# @app.before_request
+# def anonymous_user_mixin():
+#     if type(current_user) == type(AnonymousUserMixin):
+#         redirect_to_signin()
