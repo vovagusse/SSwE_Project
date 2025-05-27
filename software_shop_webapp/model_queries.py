@@ -11,7 +11,6 @@ def get_products() -> list[Product]:
     q = Product.query.all()
     return q
 
-
 def get_developer_names_for_product(products: List[Product]) -> dict[int, str]:
     developers = dict()
     if products == None:
@@ -44,13 +43,9 @@ def get_developer(user_id: int) -> Developer:
     ).first()
     return q
 
-
 def get_developer_by_id(developer_id: int) -> Developer:
     q = Developer.query.get(developer_id)
     return q
-
-
-
 
 def add_developer(user_id: int, developer_name: str):
     try:
@@ -68,8 +63,6 @@ def add_developer(user_id: int, developer_name: str):
     except IntegrityError:
         print(":(")
 
-
-
 def get_products_in_cart(user_id: int) -> list[Product]:
     a = Product.query.select_from(
             Product
@@ -79,7 +72,6 @@ def get_products_in_cart(user_id: int) -> list[Product]:
             Cart.id_user == user_id
         ).all()
     return a
-
 
 def get_products_by_developer(developer_id: int) -> list[Product]:
     a = Product.query.select_from(
@@ -101,18 +93,6 @@ def add_product_to_cart(user_id: int, product_id: int) -> None:
         db.session.commit()
     except IntegrityError:
         print(":(")
-
-def get_orders() -> list[Order]:
-    q = Order.query.all()
-    return q
-
-def get_order(order_id: int) -> Order:
-    a = Order.query.select_from(
-            Order
-        ).where(
-            Order.order_id == order_id
-        ).first()
-    return a
 
 def add_products_to_purchased(
         user_id: int, 
@@ -160,15 +140,6 @@ def delete_product_from_cart(user_id: int, product_id: int) -> None:
     db.session.execute(q)
     db.session.commit()
 
-def delete_order(order_id: int) -> None:
-    q = delete(
-            Order
-        ).where(
-            Order.order_id == order_id
-        )
-    db.session.execute(q)
-    db.session.commit()
-
 def delete_all_products_from_cart(user_id: int) -> None:
     q = delete(
             Cart
@@ -178,6 +149,43 @@ def delete_all_products_from_cart(user_id: int) -> None:
     db.session.execute(q)
     db.session.commit()
     
+# Заказы и прочее
+
+def get_orders() -> list[Order]:
+    q = Order.query.all()
+    return q
+
+def get_order(order_id: int) -> Order:
+    a = Order.query.select_from(
+            Order
+        ).where(
+            Order.order_id == order_id
+        ).first()
+    return a
+
+def delete_order(order_id: int) -> None:
+    q = delete(
+            Order
+        ).where(
+            Order.order_id == order_id
+        )
+    db.session.execute(q)
+    db.session.commit()
+
+
+def delete_order_and_purchased(order_id: int) -> None:
+    # Удаляем связанные записи в Purchased
+    purchased = Purchased.query.filter_by(id_order=order_id).first()
+    if purchased:
+        db.session.delete(purchased)
+    
+    # Удаляем сам заказ
+    order = Order.query.get(order_id)
+    if order:
+        db.session.delete(order)
+    
+    db.session.commit()
+
 
 # initial state = pending
 def create_order(

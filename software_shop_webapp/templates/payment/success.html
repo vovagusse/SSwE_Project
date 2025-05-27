@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата заказа{% endblock %}
+{% block subtitle %}{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Оплата успешно проведена!</h2>
+      <p>Спасибо за покупку.</p>
+      <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Вернуться на главную</a>
+    </div>
+  </section>
+{% endblock %}

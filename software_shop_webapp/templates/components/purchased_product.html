@@ -1,10 +1,11 @@
 {% macro purchased_product(p, developer) %}
 
 
-<div class="col-12 mb-3">
-    <div class="product-card card">
+<div class="col-12 m-2">
+    <div class="product-card-static card">
         <!-- верхняя часть карточки с названием и кнопочками -->
-        <div class="d-flex align-items-center p-3">
+        <!-- <div class="d-flex align-items-center p-3"> -->
+        <div class="d-flex p-3">
             <div class="flex-grow-1">
                 <h3 class="product-title mb-1">
                     <strong>
@@ -45,12 +46,14 @@
         </div>
         <!-- контейнер с расркытием всякой инфы о товаре -->
         <div class="collapse d-lg-block pt-0" id="{{ 'details-' + (p.product_id|string) }}">
-            <div id="{{developer.developer_name}}">
-                <i class="developer-text">
-                    <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
-                        Разработчик: {{developer.developer_name}}
-                    </a>
-                </i>
+            <div class="px-3">
+                <div id="{{developer.developer_name}}">
+                    <i class="developer-text">
+                        <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
+                            Разработчик: {{developer.developer_name}}
+                        </a>
+                    </i>
+                </div>
             </div>
             <p class="px-3 mb-2 text-black font-medium">
                 <b>Описание:</b> {{ p.description }}

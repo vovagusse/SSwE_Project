@@ -11,6 +11,10 @@ from software_shop_webapp.models import User
 from software_shop_webapp.model_queries import *
 import flask
 import time
+from glob import glob
+from io import BytesIO
+from zipfile import ZipFile
+import os
 
 
 @app.route("/login/", methods=["GET", "POST"])
@@ -272,20 +276,28 @@ def product(product_id: int) -> str:
 @login_required
 def purchased() -> str:
     p = get_purchased_products(current_user.user_id)
-    return render_template("account/purchased.html", purchased=p, current_user=current_user)
+    developers = get_developers_for_product(p)
+    return render_template("account/purchased.html", 
+                           purchased=p, 
+                           developers=developers)
+
 
 @app.route("/download/<int:product_id>", methods=["GET", "POST"])
 @login_required
 def download(product_id: int) -> str:
-    if request.method == "GET":
-        print(product_id)
-        files = get_files(product_id)
-        folder = app.config['UPLOAD_FOLDER']
+    print(product_id)
+    files = get_files(product_id)
+    folder = app.config['UPLOAD_FOLDER']
+    archive_name = f"{get_product(product_id).title}.zip"
+    stream = BytesIO()
+    with ZipFile(stream, "w") as zf:
         for file in files:
-            path = os.path.join(app.config['UPLOAD_FOLDER'], file.file_uri)
-            send_file(os.path.join("..", path), as_attachment=True)
+            path = os.path.join(folder, file.file_uri)
+            zf.write(path, os.path.basename(file.file_uri))
+    stream.seek(0)
+    return send_file(stream, as_attachment=True, download_name=archive_name)
             
-    return redirect(url_for("purchased"))
+   
 
 @app.route('/download_file/<file_uri>', methods=("POST", "GET"))
 @login_required
@@ -561,61 +573,79 @@ def checkout():
                            full_summa=full_summa)
 
 
-@app.route('/payment')
+@app.route('/payment', methods=["POST", "GET"])
 def payment():
     products_from_cart = get_products_in_cart(current_user.user_id)
     print(products_from_cart)
     order_id = request.args.get("order_id")
     my_order = get_order(order_id)
-    print(f"Order:\namount: {my_order.amount}\n\
+    print(f"Order:\n        amount: {my_order.amount}\n\
         card number: {my_order.card_number}\n\
         order_id: {my_order.order_id}\n\
         order_status: {my_order.status}")
     add_products_to_purchased(current_user.user_id, 
                               products_from_cart,
                               order_id)
+    if request.method == "POST":
+        try:
+            # Получаем данные из формы
+            data = request.form
+            order_id = request.args.get('order_id')
+            
+            # Получаем существующий заказ
+            order = get_order(order_id)
+            if not order:
+                return render_template('payment/error.html', error='Заказ не найден')
+                
+            # Проверяем данные карты
+            card_number = data['card_number']
+            if len(card_number) != 16 or not card_number.isdigit():
+                return redirect(url_for('/error', order_id=order.order_id, error='Неверный номер карты'))
+                
+            # Симуляция проверки карты (в реальном приложении здесь должна быть
+            # интеграция с платежной системой)
+            if card_number != '4242424242424242':  # Тестовая карта
+                return redirect(url_for('/error', order_id=order.order_id, error='Ошибка оплаты'))
+                
+            # Обновляем статус заказа
+            process_order(card_number, order_id)
+            
+            return redirect(url_for('success'))
+        except Exception as e:
+            flash(f"Оплата не прошла! {str(e)}")
+            return redirect(url_for('error', order_id=order.order_id))
+    
     return render_template('/payment/payment.html', order=my_order)
 
 
-@app.route('/payment/init', methods=['POST'])
-def init_payment():
-    try:
-        data = request.get_json()
-        user_id = current_user.user_id
-        amount = float(data['amount'])
-        
-        order = create_order(user_id, 0)
-        return jsonify({'order_id': order.order_id})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+@app.route('/success')
+def success():
+    order_id = request.args.get("order_id")
+    return render_template('payment/success.html')
 
-@app.route('/payment/process/<int:order_id>', methods=['POST'])
-def process_payment(order_id: int):
+
+@app.route('/error')
+def error():
+    order_id = request.args.get("order_id")
+    error = request.args.get("error")
+    
+    return render_template('payment/error.html')
+
+@app.route("/cancel_order")
+def cancel_order():
+    order_id = request.args.get("order_id")
+    if not order_id:
+        flash("Ошибка: заказ не найден")
+        return redirect(url_for("cart"))
+    
     try:
-        order = get_order(order_id)
-        if not order:
-            return jsonify({'error': 'Order not found'}), 404
-        
-        data = request.get_json()
-        card_number = data['card_number']
-        
-        if len(card_number) != 16 or not card_number.isdigit():
-            return jsonify({
-                'status': 'error',
-                'message': 'Invalid card number'
-            }), 400
-        
-        # Обновляем статус заказа
-        order.card_number = card_number
-        order.status = 'success'
-        db.session.commit()
-        
-        return jsonify({'status': 'success'})
+        delete_order_and_purchased(order_id)
+        flash("Заказ успешно отменен")
+        return redirect(url_for("cart"))
     except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 400
+        flash(f"Ошибка при отмене заказа: {str(e)}")
+        return redirect(url_for("cart"))
+
 
 
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])
