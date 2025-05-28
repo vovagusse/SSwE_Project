@@ -1,31 +1,43 @@
-import pytest
-import datetime
 import os
 import sys
+import pytest
+import datetime
 from sqlite3 import IntegrityError
-sys.path.insert(0, os.path.abspath("../"))                     #Those two lines do
-# sys.path.insert(0, os.path.abspath("../../software_shop_webapp")) #Some Fucking Magic
+
+sys.path.insert(0, os.path.abspath("../"))
+# sys.path.insert(0, os.path.abspath("../../software_shop_webapp"))  # Альтернативный путь при необходимости
+
+from software_shop_webapp import db
 from software_shop_webapp.models import (
     Product, User, Cart, Image, File, Video,
     Developer, Purchased, Order
 )
-from software_shop_webapp import db
 
+# ---------- Тесты моделей ----------
 
 def test_product_creation(app_context):
+    """Создание и удаление продукта"""
     user = User.query.get(5001)
     if not user:
         user = User(user_id=5001, login="super_admin", password="password", is_developer=True)
         db.session.add(user)
         db.session.commit()
+
     developer = Developer.query.get(5001)
     if not developer:
         developer = Developer(developer_id=5001, developer_name="admin-dev", id_user=user.user_id)
         db.session.add(developer)
         db.session.commit()
-    product=Product.query.get(5001)
+
+    product = Product.query.get(5001)
     if not product:
-        product = Product(product_id=5001, title="Test Product", price=50, full_price=60, id_developer=developer.developer_id)
+        product = Product(
+            product_id=5001,
+            title="Test Product",
+            price=50,
+            full_price=60,
+            id_developer=developer.developer_id
+        )
         db.session.add(product)
         db.session.commit()
 
@@ -41,9 +53,16 @@ def test_product_creation(app_context):
 
 
 def test_user_creation(app_context):
+    """Создание и удаление пользователя"""
     user = User.query.get(5001)
     if not user:
-        user = User(user_id=5001, login="super_admin", password="password", full_name="Test User", is_developer=False)
+        user = User(
+            user_id=5001,
+            login="super_admin",
+            password="password",
+            full_name="Test User",
+            is_developer=False
+        )
         db.session.add(user)
         db.session.commit()
 
@@ -57,22 +76,25 @@ def test_user_creation(app_context):
 
 
 def test_cart_creation(app_context):
+    """Добавление продукта в корзину"""
     user = User.query.get(5001)
     if not user:
         user = User(user_id=5001, login="super_admin", password="password", full_name="Test User", is_developer=False)
         db.session.add(user)
         db.session.commit()
+
     developer = Developer.query.get(5001)
     if not developer:
         developer = Developer(developer_id=5001, developer_name="admin-dev", id_user=user.user_id)
         db.session.add(developer)
         db.session.commit()
-    product=Product.query.get(5001)
+
+    product = Product.query.get(5001)
     if not product:
         product = Product(product_id=5001, title="Test Product", price=50, full_price=60, id_developer=developer.developer_id)
         db.session.add(product)
         db.session.commit()
-    
+
     cart_item = Cart(id_user=user.user_id, id_product=product.product_id)
     db.session.add(cart_item)
     db.session.commit()
@@ -86,12 +108,15 @@ def test_cart_creation(app_context):
     db.session.delete(user)
     db.session.commit()
 
+
 def test_developer_creation(app_context):
+    """Создание разработчика"""
     user = User.query.get(5001)
     if not user:
         user = User(user_id=5001, login="super_admin", password="password", full_name="Test User", is_developer=False)
         db.session.add(user)
         db.session.commit()
+
     developer = Developer.query.get(5001)
     if not developer:
         developer = Developer(developer_id=5001, developer_name="admin-dev", id_user=user.user_id)
@@ -107,25 +132,34 @@ def test_developer_creation(app_context):
 
 
 def test_order_and_purchased_creation(app_context):
+    """Создание заказа и покупки"""
     user = User.query.get(5001)
     if not user:
         user = User(user_id=5001, login="super_admin", password="password", full_name="Test User", is_developer=False)
         db.session.add(user)
         db.session.commit()
+
     developer = Developer.query.get(5001)
     if not developer:
         developer = Developer(developer_id=5001, developer_name="admin-dev", id_user=user.user_id)
         db.session.add(developer)
         db.session.commit()
-    product=Product.query.get(5001)
+
+    product = Product.query.get(5001)
     if not product:
         product = Product(product_id=5001, title="Test Product", price=50, full_price=60, id_developer=developer.developer_id)
         db.session.add(product)
         db.session.commit()
-    # Order.order_id
+
     order = Order.query.get(5001)
     if not order:
-        order = Order(order_id=5001, id_user=user.user_id, card_number="1234567890123456", amount=150, status="completed")
+        order = Order(
+            order_id=5001,
+            id_user=user.user_id,
+            card_number="1234567890123456",
+            amount=150,
+            status="completed"
+        )
         db.session.add(order)
         db.session.commit()
 
