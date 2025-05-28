@@ -61,9 +61,9 @@
                         class="form-control"    
                         name="description"
                         placeholder="Введите описание вашего программного средства"
-                        rows="3">
-                        {{product.description if product else ''}}
-                    </textarea>
+                        rows="3"
+                        value="{{product.description | trim if product else ''}}"
+                        >{{product.description | trim if product else ''}}</textarea>
                     <hr>
                     <!-- кноп очки -->
                     <div class="product-actions mt-4">

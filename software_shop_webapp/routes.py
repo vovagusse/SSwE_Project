@@ -275,8 +275,8 @@ def add_product():
         
         title = request.form.get("title")
         description = request.form.get("description")
-        price = request.form.get("price")
-        full_price = request.form.get("full_price")
+        price = int(request.form.get("price"))
+        full_price = int(request.form.get("full_price"))
         developer_id = developer.developer_id
         is_new = True
         is_popular = False
@@ -364,8 +364,8 @@ def edit_product(product_id: int):
         
         title = request.form.get("title")
         description = request.form.get("description")
-        price = request.form.get("price")
-        full_price = request.form.get("full_price")
+        price = int(request.form.get("price"))
+        full_price = int(request.form.get("full_price"))
         developer_id = developer.developer_id
         is_new = True
         is_popular = False
@@ -373,6 +373,7 @@ def edit_product(product_id: int):
         # Валидация данных
         necessary_args = title, full_price
         not_all_args_filled = not all(necessary_args)
+        print(price, full_price, price<=full_price, full_price - price) 
         not_good_price = not (price <= full_price)
         bad_title_length = len(title) > 100
         if bad_title_length or not_all_args_filled or not_good_price:
@@ -424,8 +425,13 @@ def product(product_id: int) -> str:
     """
     p = get_product(product_id)
     developer = get_developer_by_id(p.id_developer)
+    images = get_images(p.product_id)
+    videos = get_videos(p.product_id)
     return render_template("product.html", 
                            product=p,
+                           images=images,
+                           videos=videos,
+                           len_images=len(images),
                            developer=developer)
 
 

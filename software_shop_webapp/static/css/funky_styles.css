@@ -13,15 +13,79 @@
     color:var(--accent-color);
     text-decoration: wavy #26242d;
 }
+
+/* галерея картинок */
+.image-gallery {
+    /* красивая граница */
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--accent-color);
+    background-color:var(--background-color-dark);
+    border-radius: 20px;
+    scrollbar-color: var(--accent-color) var(--background-color-dark);
+
+    /* Для мобильных устройств */
+    overflow-x: scroll;
+    /* overflow: hidden; */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+    overflow-y: hidden;
+    max-height: 300px;
+    scroll-padding-inline-start: 20px;
+    scroll-padding-inline-end: 20px;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+
+}
+.image-gallery img {
+    /* flex-shrink: 0;
+    -webkit-flex-shrink:0; */
+    min-height: 20%;
+    max-height: 50%;
+    min-width: 50%;
+    max-width: 70%;
+    /* object-fit: contain; */
+}
+
+.image-gallery .main-image {
+    /* Для мобильных устройств */
+    display: inline-block;
+    vertical-align: middle;
+    /* justify-content: center; */
+    scroll-snap-align: start;
+    margin:1rem;
+}
+
+/* Для десктопа */
+@media (min-width: 768px) {
+    .image-gallery {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 600px;
+        scroll-snap-type: y mandatory;
+        white-space: normal;
+    }
+    
+    .image-gallery .main-image {
+        display: block;
+        scroll-snap-align: start;
+    }
+}
+
+
+
+
 .my-scrollbar {
     margin-left:1rem;
     margin-right:1rem;
     border-style: solid;
     border-width: 2px;
     border-color: var(--accent-color);
+    background-color:var(--background-color-dark);
     padding: 0em;
     border-radius:20px;
-    background-color:var(--background-color-dark);
     overflow:hidden;
     padding-right:0.4rem;
 }

@@ -3,7 +3,13 @@
     <a href="{{url_for('product', product_id=product.product_id)}}">
         <!-- Картинка -->
         <div class="product-image d-lg-block d-none">
-            <img src="../../images/{{image.image_uri}}" alt="{{ image.image_uri }}">
+            {% if image %}
+            <img 
+                src="{{ url_for('static', filename='images/' + image.image_uri) }}" 
+                alt="{{ image.image_id }}">
+            {% else %}
+            <img src="" alt="{{ image.image_id }}">
+            {% endif %}
         </div>
     </a>
     <!-- Информация -->
@@ -11,7 +17,9 @@
         <div class="row row-cols-1">
             <div class="col d-flex justify-content-between align-items-center">
                 <!-- Заголовок -->
+                <a href="{{url_for('product', product_id=product.product_id)}}">
                 <h2 class="product-title flex-grow-1"><b>{{ product['title'] }}</b></h2>
+                </a>
                 <!-- Кнопочка переключения -->
                 <button class="btn btn-outline-secondary d-lg-none d-md-block"
                         type="button"
