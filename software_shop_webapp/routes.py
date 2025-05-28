@@ -597,6 +597,7 @@ def add_file_route(product_id: int):
 
     return render_template("dev_account/add_file.html", 
                            product_id=product_id,
+                           product_title=p.title,
                            accept=fileformats,
                            files=added_files,
                            file_amount=len(added_files))
@@ -638,6 +639,7 @@ def add_image_route(product_id: int):
     return render_template("dev_account/add_image.html", 
                            product_id=product_id,
                            accept=fileformats,
+                           product_title=p.title,
                            images=added_images,
                            file_amount=len(added_images))
 
@@ -681,6 +683,7 @@ def add_video_route(product_id: int):
     return render_template("dev_account/add_video.html", 
                            product_id=product_id,
                            accept=fileformats,
+                           product_title=p.title,
                            videos=added_videos,
                            file_amount=len(added_videos))
 

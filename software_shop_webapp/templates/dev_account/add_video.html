@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Загрузка видео{% endblock %}
-{% block subtitle %}{% endblock %}
+{% block subtitle %}Программное средство: "{{product_title}}" {% endblock %}
 
 {% block content %}
 
@@ -18,7 +18,7 @@
             <!-- Файлы -->
             <div class="mb-4">
                 <label for="formvideoMultiple" class="form-label h2">
-                    Загрузите видео программного средства
+                    Загрузите видео для программного средства "{{product_title}}":
                 </label>
                 <div>
                     <input 

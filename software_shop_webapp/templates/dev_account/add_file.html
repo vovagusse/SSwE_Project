@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Загрузка файлов{% endblock %}
-{% block subtitle %}{% endblock %}
+{% block subtitle %}Программное средство: "{{product_title}}" {% endblock %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
         <!-- Файлы -->
             <div class="mb-4">
                 <label for="formFileMultiple" class="form-label h2">
-                    Загрузите файлы программного средства
+                    Загрузите файлы программного средства "{{product_title}}":
                 </label>
                 <div>
                     <input 
