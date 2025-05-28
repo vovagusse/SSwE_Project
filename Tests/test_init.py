@@ -3,12 +3,16 @@ import shutil
 import os
 from sqlalchemy import inspect
 import sys
-sys.path.insert(0, os.path.abspath("../"))                     #Those two lines do
-# sys.path.insert(0, os.path.abspath("../../software_shop_webapp")) #Some Fucking Magic
-from software_shop_webapp import app, db
 
-REAL_DB_PATH = 'software_shop_webapp/software_shop.db'
-TEST_DB_PATH = 'test_app.db'
+# Корень проекта
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+REAL_DB_PATH = os.path.abspath(os.path.join(BASE_DIR, "../software_shop_webapp/software_shop.db"))
+TEST_DB_PATH = os.path.join(BASE_DIR, "test_app.db")
+
+# Добавим путь к модулю приложения
+sys.path.insert(0, os.path.abspath(os.path.join(BASE_DIR, "../")))
+
+from software_shop_webapp import app, db
 
 @pytest.fixture(scope='session')
 def client():

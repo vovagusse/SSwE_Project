@@ -86,35 +86,6 @@ def test_cart_creation(app_context):
     db.session.delete(user)
     db.session.commit()
 
-
-# def test_image_file_video_creation(app_context):
-#     product = Product(title="Media Product")
-#     db.session.add(product)
-#     db.session.commit()
-#
-#     image = Image(image_uri="http://example.com/img.png", id_product=product.product_id)
-#     file = File(file_uri="D:\\files\\test.zip", id_product=product.product_id)
-#     video = Video(video_uri="http://example.com/video.mp4", id_product=product.product_id)
-#
-#     db.session.add_all([image, file, video])
-#     db.session.commit()
-#
-#     assert image.image_id is not None
-#     assert image.id_product == product.product_id
-#
-#     assert file.file_id is not None
-#     assert file.id_product == product.product_id
-#
-#     assert video.video_id is not None
-#     assert video.id_product == product.product_id
-#
-#     db.session.delete(image)
-#     db.session.delete(file)
-#     db.session.delete(video)
-#     db.session.delete(product)
-#     db.session.commit()
-
-
 def test_developer_creation(app_context):
     user = User.query.get(5001)
     if not user:
