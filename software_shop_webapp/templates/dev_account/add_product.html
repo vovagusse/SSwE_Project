@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %} Магазин ПС {% endblock %}
+{% block subtitle %} {{subtitle_text}} {%endblock%}
+{% block content %}
+
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-auto">
+            <div class="product-info mx-auto">
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+                <form method="POST">
+                    <h3>
+                        <strong>
+                            Ввод данных
+                        </strong>
+                    </h3>
+                    <!-- инпут формы -->
+                    <label for="title" class="col-form-label">
+                        Название:
+                        <span style="color:red"><b>*</b></span>
+                    </label>
+                    <input 
+                        class="mb-2 form-control"
+                        type="text"
+                        name="title"
+                        placeholder="Введите название программного средства"
+                        value="{{product.title if product else ''}}"
+                        >
+
+                    <hr>
+                    <labdel for="full-price" class="my-2 col-form-label"> 
+                        Цена без скидки:
+                        <span style="color:red"><b>*</b></span>
+                    </label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="full_price"
+                        placeholder="Введите цену продукта без скидки"
+                        value="{{product.full_price if product else ""}}"
+                        >
+                    <label for="price" class="col-form-label"> 
+                        Цена по скидке:
+                    </label>
+                    <input 
+                        type="number"
+                        class="form-control mb-2"
+                        name="price"
+                        placeholder="Введите цену продукта со скидкой"
+                        value="{{product.price if product else ''}}"
+                        >
+                    <hr>
+                    <label for="description" class="col-form-label">
+                            Описание:
+                    </label>
+                    <textarea
+                        type="text"
+                        class="form-control"    
+                        name="description"
+                        placeholder="Введите описание вашего программного средства"
+                        rows="3">
+                        {{product.description if product else ''}}
+                    </textarea>
+                    <hr>
+                    <!-- кноп очки -->
+                    <div class="product-actions mt-4">
+                        <div>
+                            <h3>
+                                <strong>
+                                    Добавление файлов
+                                </strong>
+                            </h3>
+                            <div class="row-cols-auto">
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-info m-1" 
+                                    name="action"
+                                    value="add_file">
+                                    <i class="bi bi-plus"></i> 
+                                    <i class="bi bi-filetype-txt"></i>
+                                    Добавить файлы
+                                </button>
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-info m-1" 
+                                    name="action"
+                                    value="add_image">
+                                    <i class="bi bi-plus"></i>
+                                    <i class="bi bi-card-image"></i> 
+                                    Добавить изображения
+                                </button>
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-info m-1" 
+                                    name="action"
+                                    value="add_video">
+                                    <i class="bi bi-plus"></i> 
+                                    <i class="bi bi-camera-video"></i>
+                                    Добавить видео
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row-cols-auto">
+                            <h3>
+                                <strong>
+                                    Завершение редактирования
+                                </strong>
+                            </h3>
+                            <button 
+                                type="submit" 
+                                class="btn btn-danger m-1" 
+                                name="action"
+                                value="cancel">
+                                <i class="bi bi-x-circle"></i> 
+                                Отменить создание
+                            </button>
+                            <button 
+                                type="submit" 
+                                class="btn btn-info m-1" 
+                                name="action"
+                                value="save">
+                                <i class="bi bi-floppy"></i> 
+                                Сохранить
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

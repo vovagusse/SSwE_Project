@@ -124,11 +124,39 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item" href="{{url_for('purchased')}}"  role="button">
+                                    <i class="bi bi-bag"></i>
+                                    Купленные программные средства
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item" href="{{url_for('account_settings')}}"  role="button">
                                     <i class="bi bi-gear"></i>
                                     Настройки аккаунта
                                 </a>
                             </li>
+                            {% if current_user.is_developer %}
+                                <!-- Вы - Разработчик!!! -->
+                                {% set developer_id = '' | get_developer_id %}
+                                <hr>
+                                <li class="ms-3 mb-1">
+                                    <i>
+                                    Опции для разработчика:
+                                    </i>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{url_for('public_developer_profile', developer_id=developer_id)}}"  role="button">
+                                        <i class="bi bi-code-square"></i>
+                                        Профиль разработчика
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{url_for('add_product', developer_id=developer_id)}}"  role="button">
+                                        <i class="bi bi-plus"></i>
+                                        Загрузить новое программное средство
+                                    </a>
+                                </li>
+                            {% endif %}
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{url_for('logout')}}"  role="button">

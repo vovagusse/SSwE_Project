@@ -13,11 +13,11 @@
                     </strong>
                 </h3>
                 <!-- price (can have discount) -->
-                {% if p.price.replace(',', '')|int  >= p.full_price.replace(',', '')|int %}
+                {% if p.price >= p.full_price %}
                 <div class="mt-auto product-price">
                     {{ p.full_price }} ₽
                 </div>
-                {% elif  p.price.replace(',', '')|int < p.full_price.replace(',', '')|int %}
+                {% elif  p.price < p.full_price %}
                 <div class="mt-auto product-price">
                     {{ p.price }} ₽
                     <del class="product-price-on-sale">

@@ -12,11 +12,11 @@
     <div class="row">
         <!-- карточки продуктов -->
         {% if products %}
+            <!-- <div style="overflow-y: auto; max-height: 350px; border-radius:20px; scrollbar-color:var(--accent-color) #c6c2d1;"> -->
             {% for p in products %}
-            
                 {{ product_in_cart(p, developers[p.id_developer]) }}
-
             {% endfor %}
+            <!-- </div> -->
         {% else %}
             <div class="text-center py-5">
                 <h3>Корзина пуста</h3>

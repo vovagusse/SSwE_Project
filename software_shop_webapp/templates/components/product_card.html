@@ -1,9 +1,9 @@
-{% macro product_card(product, developer) %}
+{% macro product_card(product, developer, image) %}
 <div class="product-card">
     <a href="{{url_for('product', product_id=product.product_id)}}">
         <!-- Картинка -->
         <div class="product-image d-lg-block d-none">
-            <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+            <img src="../../images/{{image.image_uri}}" alt="{{ image.image_uri }}">
         </div>
     </a>
     <!-- Информация -->
@@ -34,9 +34,9 @@
         <div id="product-info-{{ product['product_id'] }}" class="collapse d-lg-block">
             <p class="product-description">{{ product['description'] }}</p>
         </div>
-        {% if product['price'].replace(',', '')|int >= product['full_price'].replace(',', '')|int %}
+        {% if product['price'] >= product['full_price'] %}
         <div class="mt-auto product-price">{{ product["full_price"] }} ₽</div>
-        {% elif product['price'].replace(',', '')|int < product['full_price'].replace(',', '')|int %}
+        {% elif product['price'] < product['full_price'] %}
         <div class="mt-auto product-price">
             {{ product["price"] }} ₽
             <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>

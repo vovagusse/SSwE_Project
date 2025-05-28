@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% set is_developer = current_user.is_developer %}
+{% if is_developer %}
+    {% set my_title = "Ваши программные средства:" %}
+    {% set my_subtitle  = "" %}
+{% else %}
+    {% set my_title = "Профиль разработчика "+developer.developer_name %}
+    {% set my_subtitle = "" %}
+{% endif %}
+
+
+{% block title %} {{my_title}} {% endblock %}
+{% block subtitle %} {{my_subtitle}} {%endblock%}
+{% block content %}
+
+
+{% from 'components/product_dev_profile.html' import product_dev_profile %}
+
+
+<!-- <div class="my-scrollbar mx-4 mt-3">  -->
+    <!-- <div class="">  -->
+    {% for product in products %}
+        {{ product_dev_profile(product, is_developer) }} 
+    {% endfor %}
+    <!-- </div> -->
+<!-- </div> -->
+
+{% endblock %}

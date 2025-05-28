@@ -1,0 +1,24 @@
+<h1>
+    <b> 
+        Разработчик: {{ developer.developer_name }} 
+    </b>
+</h1>
+<h3>
+    <b>
+        Программные средства разработчика:
+    </b>
+</h3>
+<hr>
+{% for product in products %}
+    <div style="margin:15px; padding:10px; border-style: solid; border-radius: 15px; border-color:grey; border-width: 5px;">
+        <div>
+            {{ product.title }} <br>
+            {{ product.price }} 
+        </div>
+        <a href="{{url_for('product', product_id=product.product_id)}}">
+            <button> 
+                Перейти к продкуту
+            </button>
+        </a>
+    </div>
+{% endfor %}

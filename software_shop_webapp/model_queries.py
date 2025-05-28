@@ -21,7 +21,7 @@ def get_developer_names_for_product(products: List[Product]) -> dict[int, str]:
         developers[p_id] = get_developer(dev_id).developer_name
     return developers
 
-def get_developers_for_product(products: List[Product]) -> dict[int, str]:
+def get_developers_for_product(products: List[Product]) -> dict[int, Developer]:
     developers = dict()
     if products == None:
         return None
@@ -30,6 +30,20 @@ def get_developers_for_product(products: List[Product]) -> dict[int, str]:
         dev_id = product.id_developer
         developers[p_id] = get_developer(dev_id)
     return developers
+
+
+def get_first_image_for_product(products: List[Product]) -> dict[int, Image]:
+    images = dict()
+    if products == None:
+        return None
+    for product in products:
+        p_id = product.product_id
+        img = get_images(p_id)
+        if img:
+            images[p_id] = img[0]
+            continue
+        images[p_id] = None
+    return images
 
 def get_product(product_id: int) -> Product:
     q = Product.query.get({"product_id": product_id})

@@ -1,10 +1,11 @@
-{% macro product_in_cart(p, developer) %}
+{% macro product_dev_profile(p, do_show_download) %}
 
 
-<div class="col-12 mb-3">
-    <div class="product-card card">
+<div class="col-12 m-2">
+    <div class="product-card-static card">
         <!-- верхняя часть карточки с названием и кнопочками -->
-        <div class="d-flex align-items-center p-3">
+        <!-- <div class="d-flex align-items-center p-3"> -->
+        <div class="d-flex p-3">
             <div class="flex-grow-1">
                 <h3 class="product-title mb-1">
                     <strong>
@@ -12,11 +13,11 @@
                     </strong>
                 </h3>
                 <!-- price (can have discount) -->
-                {% if p['price']  >= p['full_price'] %}
+                {% if p.price >= p.full_price %}
                 <div class="mt-auto product-price">
                     {{ p.full_price }} ₽
                 </div>
-                {% elif  p['price'] < p['full_price'] %}
+                {% elif  p.price < p.full_price %}
                 <div class="mt-auto product-price">
                     {{ p.price }} ₽
                     <del class="product-price-on-sale">
@@ -26,13 +27,23 @@
                 {% endif %}
             </div>
             <div class="ms-auto d-flex align-items-center gap-2">
-                <!-- кнопка удаления товара из корзины -->
-                <form method="POST" action="{{url_for('delete_from_cart', product_id=p.product_id)}}">
-                    <button class="btn btn-outline-danger px-2 " type="submit">
-                        <i class="bi bi-trash"></i>
-                        <p class="d-none d-lg-inline">Удалить</p>
+                {% if do_show_download %}
+                <a href="{{ url_for('edit_product', product_id=p.product_id) }}">
+                <button class="btn btn-outline-info px-2 ">
+                    <i class="bi bi-pencil"></i>
+                    <p class="d-none d-lg-inline">
+                        Редактировать
+                    </p>
+                </button>
+                </a>
+                <!-- кнопка скачивания -->
+                <form method="GET" action="{{url_for('download', product_id=p.product_id)}}">
+                    <button class="btn btn-outline-info px-2 " type="submit">
+                        <i class="bi bi-download"></i>
+                        <p class="d-none d-lg-inline">Скачать</p>
                     </button>
                 </form>
+                {% endif %}
                 <!-- кнопка раскрытия всякой информации о товаре -->
                 <button class="btn btn-outline-secondary d-lg-none d-md-block" type="button"
                         data-bs-toggle="collapse"
@@ -45,15 +56,6 @@
         </div>
         <!-- контейнер с расркытием всякой инфы о товаре -->
         <div class="collapse d-lg-block pt-0" id="{{ 'details-' + (p.product_id|string) }}">
-            <div class="px-3">
-                <div id="{{developer.developer_name}}">
-                    <i class="developer-text">
-                        <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
-                            Разработчик: {{developer.developer_name}}
-                        </a>
-                    </i>
-                </div>
-            </div>
             <p class="px-3 mb-2 text-black font-medium">
                 <b>Описание:</b> {{ p.description }}
             </p>
@@ -67,7 +69,5 @@
         </div>
     </div>
 </div>
-
-
 
 {% endmacro %}

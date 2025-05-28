@@ -17,6 +17,11 @@ from zipfile import ZipFile
 import os
 
 
+@app.template_filter('get_developer_id')
+def get_developer_id_filter(var: str):
+    return get_developer(current_user.user_id).developer_id
+
+
 @app.route("/login/", methods=["GET", "POST"])
 def login_page() -> str:
     """Страница авторизации пользователя.
@@ -245,6 +250,10 @@ def register_page() -> str:
     return render_template("login/register.html", current_user=current_user)
 
 
+@app.route("/developer_profile/<int:developer_id>")
+def developer_profile(developer_id: int):
+    return redirect(url_for("public_developer_profile", developer_id=developer_id))
+
 @app.route("/public_developer_profile/<int:developer_id>")
 def public_developer_profile(developer_id: int):
     products = get_products_by_developer(developer_id)
@@ -252,6 +261,154 @@ def public_developer_profile(developer_id: int):
     return render_template("dev_account/public_developer_profile.html",
                            products=products,
                            developer=developer)
+
+
+@app.route("/add_product/", methods=["POST", "GET"])
+@login_required
+def add_product():
+    if (not current_user.is_developer):
+        return redirect(url_for('index'))
+    developer = get_developer(current_user.user_id)
+    
+    if request.method == "POST":
+        button_name = request.form.get('action')
+        
+        title = request.form.get("title")
+        description = request.form.get("description")
+        price = request.form.get("price")
+        full_price = request.form.get("full_price")
+        developer_id = developer.developer_id
+        is_new = True
+        is_popular = False
+        if not price:
+            price = full_price
+            
+            
+        # Валидация данных
+        necessary_args = title, full_price
+        not_all_args_filled = not all(necessary_args)
+        not_good_price = not (price <= full_price)
+        bad_title_length = len(title) > 100
+        if bad_title_length or not_all_args_filled or not_good_price:
+            if (bad_title_length):
+                flash("Слишком длинное название!")
+            if not_all_args_filled:
+                flash("Не все обязательные параметры были заполнены!")
+            if not_good_price:
+                flash("Цена по скидке не должна превосходить цену без скидки!")
+            return redirect(url_for("add_product"))
+        
+        if button_name == "add_file":
+            print("add_file")
+            product = Product(title=title,
+                          description=description,
+                          full_price=full_price,
+                          price=price,
+                          id_developer=developer_id,
+                          is_new=is_new,
+                          is_popular=is_popular)
+            db.session.commit()
+            return redirect(url_for("add_file_route", product_id=product.product_id))
+        elif button_name == "add_video":
+            print("add_video")
+            product = Product(title=title,
+                          description=description,
+                          full_price=full_price,
+                          price=price,
+                          id_developer=developer_id,
+                          is_new=is_new,
+                          is_popular=is_popular)
+            db.session.commit()
+            return redirect(url_for("add_video_route", product_id=product.product_id))
+        elif button_name == "add_image":
+            print("add_image")
+            product = Product(title=title,
+                          description=description,
+                          full_price=full_price,
+                          price=price,
+                          id_developer=developer_id,
+                          is_new=is_new,
+                          is_popular=is_popular)
+            db.session.commit()
+            return redirect(url_for("add_image_route", product_id=product.product_id))
+        elif button_name == "save":
+            print("save")
+            product = Product(title=title,
+                          description=description,
+                          full_price=full_price,
+                          price=price,
+                          id_developer=developer_id,
+                          is_new=is_new,
+                          is_popular=is_popular)
+            db.session.add(product)
+            db.session.commit()
+            print(product.product_id)
+            return redirect(url_for("edit_product", product_id=product.product_id))
+        elif button_name == "cancel":
+            return redirect(url_for('index'))
+    return render_template("dev_account/add_product.html",
+                           developer=developer, 
+                           subtitle_text="Добавление нового программного средства")
+
+
+@app.route("/edit_product/<int:product_id>", methods=["POST", "GET"])
+@login_required
+def edit_product(product_id: int):
+    if (not current_user.is_developer):
+        return redirect(url_for('index'))
+    product = get_product(product_id)
+    developer = get_developer(current_user.user_id)
+    
+    if request.method == "POST":
+        button_name = request.form.get('action')
+        
+        title = request.form.get("title")
+        description = request.form.get("description")
+        price = request.form.get("price")
+        full_price = request.form.get("full_price")
+        developer_id = developer.developer_id
+        is_new = True
+        is_popular = False
+
+        # Валидация данных
+        necessary_args = title, full_price
+        not_all_args_filled = not all(necessary_args)
+        not_good_price = not (price <= full_price)
+        bad_title_length = len(title) > 100
+        if bad_title_length or not_all_args_filled or not_good_price:
+            if (bad_title_length):
+                flash("Слишком длинное название!")
+            if not_all_args_filled:
+                flash("Не все обязательные параметры были заполнены!")
+            if not_good_price:
+                flash("Цена по скидке не должна превосходить цену без скидки!")
+            # return redirect(url_for("add_product"))
+            return redirect(url_for("edit_product", product_id=product.product_id))
+        
+        if button_name == "add_file":
+            return redirect(url_for("add_file_route", product_id=product.product_id))
+        elif button_name == "add_video":
+            return redirect(url_for("add_video_route", product_id=product.product_id))
+        elif button_name == "add_image":
+            return redirect(url_for("add_image_route", product_id=product.product_id))
+        elif button_name == "save":
+            ineq1 = product.title != title
+            ineq2 = product.description != description
+            ineq3 = product.full_price != full_price
+            ineq4 = product.price != price
+            if (ineq1): product.title = title
+            if (ineq2): product.description = description
+            if (ineq3): product.full_price = full_price
+            if (ineq4): product.price = price
+            if any((ineq1, ineq2, ineq3, ineq4)):
+                db.session.commit()
+            return redirect(url_for("edit_product", product_id=product.product_id))
+        elif button_name == "cancel":
+            return redirect(url_for('index'))
+    return render_template("dev_account/add_product.html",
+                           developer=developer,
+                           subtitle_text="Редактирование программного средства",
+                           product=product)
 
 @app.route("/product/<int:product_id>")
 def product(product_id: int) -> str:
@@ -293,7 +450,11 @@ def download(product_id: int) -> str:
     with ZipFile(stream, "w") as zf:
         for file in files:
             path = os.path.join(folder, file.file_uri)
-            zf.write(path, os.path.basename(file.file_uri))
+            if (os.path.exists(path)):
+                zf.write(path, os.path.basename(file.file_uri))
+            else:
+                print("File not found! Deleting from database...")
+                delete_file_by_uri(file, product_id)
     stream.seek(0)
     return send_file(stream, as_attachment=True, download_name=archive_name)
             
@@ -518,6 +679,8 @@ def add_video_route(product_id: int):
                            file_amount=len(added_videos))
 
 
+# Оплата
+
 @app.route("/cart", methods=["GET", "POST"])
 @login_required
 def cart() -> str:
@@ -529,9 +692,8 @@ def cart() -> str:
     """
     products = get_products_in_cart(current_user.user_id)
     developers = get_developers_for_product(products)
-    fix_price = lambda x: int(x.replace(",", ""))
-    summa = sum(fix_price(i.price) for i in products)
-    full_summa = sum(fix_price(i.full_price) for i in products)
+    summa = sum(i.price for i in products)
+    full_summa = sum(i.full_price for i in products)
     if request.method == "POST":
         action = request.form.get("action")
         if action == "clear_cart":
@@ -647,7 +809,6 @@ def cancel_order():
         return redirect(url_for("cart"))
 
 
-
 @app.route("/delete_from_cart", methods=["DELETE", "POST"])
 @login_required
 def delete_from_cart() -> flask.Response:
@@ -683,10 +844,13 @@ def index() -> str:
     :rtype: str
     """    
     products = get_products()
+    images = get_first_image_for_product(products)
     developers = get_developers_for_product(products)
+    print(images.values())
     return render_template("index.html", 
                            nav_tabs=nav_tabs, 
                            products=products, 
+                           images=images,
                            developers=developers,
                            current_user=current_user)
 

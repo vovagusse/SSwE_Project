@@ -34,23 +34,19 @@
                 <h1><strong>
                     {{product.title}}
                 </strong></h1>
-                {% if 
-                    product['price'].replace(',', '')|int 
-                    >= product['full_price'].replace(',', '')|int 
-                %}
+                {% if product['price'] >= product['full_price'] %}
                     <div class="mt-auto product-price">Цена: {{ product["full_price"] }} ₽</div>
-                {% elif 
-                    product['price'].replace(',', '')|int 
-                    < product['full_price'].replace(',', '')|int 
-                %}
+                {% elif product['price'] < product['full_price'] %}
                     <div class="mt-auto product-price"> 
                         Цена: {{ product["price"] }} ₽
                         <del class="product-price-on-sale">{{ product["full_price"] }} ₽</del>
                     </div>
                 {% endif %}
-                <div id="{{developer_name}}">
+                <div id="{{developer.developer_name}}">
                     <i class="developer-text">
-                        Разработчик: {{developer.developer_name}}
+                        <a href="{{url_for('public_developer_profile', developer_id=developer.developer_id)}}">
+                            Разработчик: {{developer.developer_name}}
+                        </a>
                     </i>
                 </div>
                 <div class="product-description mt-4">
