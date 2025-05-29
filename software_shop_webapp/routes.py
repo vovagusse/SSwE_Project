@@ -726,8 +726,8 @@ def checkout():
     products = get_products_in_cart(current_user.user_id)
     developers = get_developers_for_product(products)
     fix_price = lambda x: int(x.replace(",", ""))
-    summa = sum(fix_price(i.price) for i in products)
-    full_summa = sum(fix_price(i.full_price) for i in products)
+    summa = sum(i.price for i in products)
+    full_summa = sum(i.full_price for i in products)
     if request.method == "POST":
         action = request.form.get("action")
         if action == "go_back":
