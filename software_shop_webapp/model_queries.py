@@ -126,7 +126,6 @@ def add_products_to_purchased(
             purchase_dict['id_user'] = user_id
             purchase_dict['id_product'] = product.product_id
             price = product.price
-            price = price.replace(",", "")
             price=int(price)
             print(price)
             purchase_dict['cost_of_purchase'] = price
