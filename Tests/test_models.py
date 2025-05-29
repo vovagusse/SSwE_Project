@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath("../"))
 from software_shop_webapp import db
 from software_shop_webapp.models import (
     Product, User, Cart, Image, File, Video,
-    Developer, Purchased, Order
+    Developer, Purchased, Order, load_user
 )
 
 # ---------- Тесты моделей ----------
@@ -187,5 +187,128 @@ def test_order_and_purchased_creation(app_context):
     db.session.delete(order)
     db.session.delete(product)
     db.session.delete(developer)
+    db.session.delete(user)
+    db.session.commit()
+
+
+def test_file_creation(app_context):
+    """Создание и удаление файла"""
+    # Создаем необходимые сущности
+    user = User.query.get(5002)
+    if not user:
+        user = User(user_id=5002, login="file_user", password="password")
+        db.session.add(user)
+        db.session.commit()
+
+    developer = Developer.query.get(5002)
+    if not developer:
+        developer = Developer(developer_id=5002, developer_name="file-dev", id_user=user.user_id)
+        db.session.add(developer)
+        db.session.commit()
+
+    product = Product.query.get(5002)
+    if not product:
+        product = Product(product_id=5002, title="File Product", price=100, full_price=120, id_developer=developer.developer_id)
+        db.session.add(product)
+        db.session.commit()
+
+    file = File(file_uri="D:\\files\\TestFile.7z", id_product=product.product_id)
+    db.session.add(file)
+    db.session.commit()
+
+    assert file.file_id is not None
+    assert file.file_uri == "D:\\files\\TestFile.7z"
+    assert file.id_product == product.product_id
+
+    db.session.delete(file)
+    db.session.delete(product)
+    db.session.delete(developer)
+    db.session.delete(user)
+    db.session.commit()
+
+
+def test_image_creation(app_context):
+    """Создание и удаление изображения"""
+    user = User.query.get(5003)
+    if not user:
+        user = User(user_id=5003, login="image_user", password="password")
+        db.session.add(user)
+        db.session.commit()
+
+    developer = Developer.query.get(5003)
+    if not developer:
+        developer = Developer(developer_id=5003, developer_name="image-dev", id_user=user.user_id)
+        db.session.add(developer)
+        db.session.commit()
+
+    product = Product.query.get(5003)
+    if not product:
+        product = Product(product_id=5003, title="Image Product", price=110, full_price=130, id_developer=developer.developer_id)
+        db.session.add(product)
+        db.session.commit()
+
+    image = Image(image_uri="https://example.com/image.png", id_product=product.product_id)
+    db.session.add(image)
+    db.session.commit()
+
+    assert image.image_id is not None
+    assert image.image_uri == "https://example.com/image.png"
+    assert image.id_product == product.product_id
+
+    db.session.delete(image)
+    db.session.delete(product)
+    db.session.delete(developer)
+    db.session.delete(user)
+    db.session.commit()
+
+
+def test_video_creation(app_context):
+    """Создание и удаление видео"""
+    user = User.query.get(5004)
+    if not user:
+        user = User(user_id=5004, login="video_user", password="password")
+        db.session.add(user)
+        db.session.commit()
+
+    developer = Developer.query.get(5004)
+    if not developer:
+        developer = Developer(developer_id=5004, developer_name="video-dev", id_user=user.user_id)
+        db.session.add(developer)
+        db.session.commit()
+
+    product = Product.query.get(5004)
+    if not product:
+        product = Product(product_id=5004, title="Video Product", price=120, full_price=140, id_developer=developer.developer_id)
+        db.session.add(product)
+        db.session.commit()
+
+    video = Video(video_uri="https://example.com/video.mp4", id_product=product.product_id)
+    db.session.add(video)
+    db.session.commit()
+
+    assert video.video_id is not None
+    assert video.video_uri == "https://example.com/video.mp4"
+    assert video.id_product == product.product_id
+
+    db.session.delete(video)
+    db.session.delete(product)
+    db.session.delete(developer)
+    db.session.delete(user)
+    db.session.commit()
+
+
+def test_load_user(app_context):
+    """Проверка загрузчика пользователя load_user"""
+    user = User.query.get(5005)
+    if not user:
+        user = User(user_id=5005, login="loadusertest", password="password")
+        db.session.add(user)
+        db.session.commit()
+
+    loaded_user = load_user(user.user_id)
+    assert loaded_user is not None
+    assert loaded_user.user_id == user.user_id
+    assert loaded_user.login == "loadusertest"
+
     db.session.delete(user)
     db.session.commit()
