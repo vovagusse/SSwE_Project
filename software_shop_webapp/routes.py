@@ -828,9 +828,9 @@ def delete_from_cart() -> flask.Response:
     :rtype: flask.Response
     """
     # products = get_products_in_cart(current_user.user_id)
-    if request.method == "POST":
-        prod_id = request.args.get('product_id')
-        delete_product_from_cart(product_id=prod_id, user_id=current_user.user_id)
+    prod_id = request.args.get('product_id')
+    print(current_user.user_id, current_user.login)
+    delete_product_from_cart(product_id=prod_id, user_id=current_user.user_id)
     return redirect(url_for("cart"))
 
 
