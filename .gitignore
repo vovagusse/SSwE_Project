@@ -5,9 +5,7 @@ utilities/my_private_key.py
 utilities/__pycache__/**
 docs/build
 software_shop_webapp/__pycache__
-software_shop_webapp/files
-software_shop_webapp/images
-software_shop_webapp/videos
+software_shop_webapp/files/*
 software_shop_webapp/utilities/__pycache__
 software_shop_webapp/utilities/my_private_key
 tracebacks.py
